@@ -6,7 +6,7 @@ class CreateRides < ActiveRecord::Migration[5.2]
       t.time :post_time
       t.string :destination
       t.time :scheduled_time
-      t.integer :canceld_by
+      t.integer :canceled_by
       t.boolean :finished
       t.integer :rider_review_level
       t.string :rider_review
@@ -16,7 +16,5 @@ class CreateRides < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_foreign_key :rides, :users, column: :rider_id, primary_key: :id
-    add_foreign_key :rides, :users, column: :driver_id, primary_key: :id
   end
 end

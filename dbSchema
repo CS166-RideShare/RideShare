@@ -1,0 +1,18 @@
+User
+  name:string
+  email:string
+  is_driver:boolean
+
+Ride
+  rider_id:integer
+  driver_id:integer
+  post_time:time
+  destination:string
+  scheduled_time:time
+  canceled_by:integer
+  finished:boolean
+  rider_review_level:integer
+  rider_review:string
+  driver_review_level:integer
+  driver_review:string
+  review_handled:boolean
