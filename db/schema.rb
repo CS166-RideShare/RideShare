@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_02_132319) do
+ActiveRecord::Schema.define(version: 2018_10_11_033849) do
 
   create_table "rides", force: :cascade do |t|
     t.integer "rider_id"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_132319) do
     t.time "post_time"
     t.string "destination"
     t.time "scheduled_time"
-    t.integer "canceld_by"
+    t.integer "canceled_by"
     t.boolean "finished"
     t.integer "rider_review_level"
     t.string "rider_review"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2018_10_02_132319) do
     t.boolean "is_driver"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
