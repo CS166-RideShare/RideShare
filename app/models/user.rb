@@ -8,11 +8,6 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
-  def rides
-    Ride.where(rider_id: @id)
-  end
-
-  def drives
-    Ride.where(driver_id: @id)
-  end
+  has_many :rides, class_name: "Ride", foreign_key: :rider_id
+  has_many :drives, class_name: "Ride", foreign_key: :driver_id
 end
