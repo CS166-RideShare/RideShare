@@ -64,10 +64,10 @@ $gray-medium-light: #eaeaea;
     float: left;
     width: 100%;
     margin-top: 45px;
-    border: solid;
-    border-color: gray;
+    border: 2px solid lightgray;
     border-radius: 4px;
     background-color: $gray-medium-light;
+    padding: 10px;
     @include box_sizing;
 }
 
@@ -83,10 +83,6 @@ input, textarea, select, .uneditable-input {
 
 input {
     height: auto !important;
-}
-
-#signup_submit {
-  display: block;
 }
 
 #error_explanation {

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/home', to: 'main_pages#home'
 
   get  '/signup',  to: 'user#new'
   post '/signup',  to: 'user#create'
