@@ -1,20 +1,27 @@
 <% provide(:title, 'Main page') %>
 
-<div class="row align-items-end">
-  <div class="col-2 offset-1">
+<div class="row align-items-start">
+  <div class="col-md-2 offset-1">
     <div class="card" style="width: 8rem;">
       <%= image_tag("rails.png",
         id: "user_avatar", class: "card-img-top", alt: "User avatar") %>
-      <a href="#" id="avatar_drop" class="btn btn-primary">Menu</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="avatar_drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Profile</a>
+          <a class="dropdown-item" href="#">Ride records</a>
+          <a class="dropdown-item" href="#">Log out</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-8">
+  <div class="col-8 col-1">
     <%= form_for(:destination, url: '#') do |f| %>
       <%= f.text_field :position,
       class: 'form-control', placeholder: 'Where would you like to go?' %>
     <% end %>
-  </div>
-    <div class="col-1">
   </div>
 </div>
 
