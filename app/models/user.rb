@@ -10,4 +10,11 @@ class User < ApplicationRecord
 
   has_many :rides, class_name: "Ride", foreign_key: :rider_id
   has_many :drives, class_name: "Ride", foreign_key: :driver_id
+
+  # Returns the hash digest of the given string. by csy
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+               BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
