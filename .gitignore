@@ -29,3 +29,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+.idea/.generators
+.idea/.rakeTasks
+.idea/misc.xml
+.idea/modules.xml
+.idea/RideShare.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/inspectionProfiles/Project_Default.xml
