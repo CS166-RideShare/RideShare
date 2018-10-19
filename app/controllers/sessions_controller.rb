@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :check_login, only: [:new, :create, :destroy]
+
   def new
   end
 
