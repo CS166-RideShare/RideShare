@@ -12,9 +12,9 @@
               Menu
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Profile</a>
+              <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
               <a class="dropdown-item" href="#">Ride records</a>
-              <a class="dropdown-item" href="#">Log out</a>
+              <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete %>
             </div>
           </div>
         </div>
@@ -81,5 +81,3 @@
     </div>
   </div>
 </div>
-
-
