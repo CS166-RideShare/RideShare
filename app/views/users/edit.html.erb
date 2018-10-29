@@ -9,5 +9,7 @@
     </section>
   </aside>
 </div>
-
-<div class="row">
+<%= semantic_form_for @user do |f| %>
+  <%= f.inputs :name, :email, :is_driver %>
+  <%= f.actions :submit, :cancel %>
+<% end %>

@@ -1,39 +1,33 @@
 <% provide(:title, 'Main page') %>
 <div class="view">
-  <div class="row justify-content-center jumbotron">
-    <p>
-      here is a map!
-    </p>
-  </div>
+
   <div class="mask flex-center">
     <div class="row align-items-start">
       <div class="col-md-2 offset-1">
-        <div class="card" style="width: 8rem;">
-          <%= image_tag("rails.png",
-            id: "user_avatar", class: "card-img-top", alt: "User avatar") %>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="avatar_drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menu
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Ride records</a>
-              <a class="dropdown-item" href="#">Log out</a>
-            </div>
-          </div>
-        </div>
+        <%= render 'avatar_card' %>
       </div>
       <div class="col-8 col-1">
         <%= form_for(:destination, url: '#') do |f| %>
           <%= f.text_field :position,
-          class: 'form-control', placeholder: 'Where would you like to go?' %>
+                           class: 'form-control', placeholder: 'Where would you like to go?' %>
         <% end %>
       </div>
     </div>
-
+    <div class="row justify-content-center">
+      <div id="map">
+      </div>
+      <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content"></div>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-3 offset-3">
-        <a href="#" class="btn btn-primary btn-block">Get a ride</a>
+        <%= link_to "Get a ride!", request_path, {:remote => true,
+                                                  'data-toggle' =>  "modal",
+                                                  'data-target' => '#modal-window',
+                                                  class: 'btn btn-primary btn-block'} %>
       </div>
       <div class="col-3 col-3">
         <a href="#" class="btn btn-primary btn-block">Set a drive</a>
@@ -41,3 +35,5 @@
     </div>
   </div>
 </div>
+
+<!-- <%= render 'map_scripts' %> -->
