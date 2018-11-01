@@ -5,5 +5,5 @@
   Hold on a moment and we'll get your ride ready!
 </div>
 <div class="modal-footer">
-  <%= link_to "Cancel this ride", '#' %>
+  <%= link_to "Cancel this ride", request_path(rid: @riderequest.id), remote: true, method: :delete %>
 </div>

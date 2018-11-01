@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/request', to: 'rides#new_request'
   post '/request', to: 'rides#create_request'
+  delete '/request', to: 'rides#cancel_request'
 
   resources :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
