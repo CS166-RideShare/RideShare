@@ -3,56 +3,13 @@
 <div id="map">
 </div>
 
-<<<<<<< HEAD
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content"></div>
-=======
-  <div class="mask flex-center">
-    <div class="row align-items-start">
-      <div class="col-md-2 offset-1">
-        <div class="card" style="width: 8rem;">
-          <%= image_tag("logo.png",
-                        id: "user_avatar", class: "card-img-top", alt: "User avatar") %>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="avatar_drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Menu
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
-              <a class="dropdown-item" href="#">Ride records</a>
-              <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-8 col-1">
-        <%= form_for(:destination, url: '#') do |f| %>
-          <%= f.text_field :position,
-                           class: 'form-control', placeholder: 'Where would you like to go?' %>
-        <% end %>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div id="map">
-      </div>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <div class="row">
-      <div class="col-3 offset-3">
-        <a href="#" class="btn btn-primary btn-block">Get a ride</a>
-      </div>
-      <div class="col-3 col-3">
-        <a href="#" class="btn btn-primary btn-block">Set a drive</a>
-      </div>
-    </div>
->>>>>>> master
   </div>
 </div>
 
 <div class="view">
-
-<<<<<<< HEAD
   <div class="row align-items-start">
     <div class="col-md-2 offset-1">
       <%= render 'avatar_card' %>
@@ -64,21 +21,6 @@
       <% end %>
     </div>
   </div>
-=======
-<script>
-    // Note: This example requires that you consent to location sharing when
-    // prompted by your browser. If you see the error "The Geolocation service
-    // failed.", it means you probably did not give permission for the browser to
-    // locate you.
-    var map, infoWindow;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: 42.3677767, lng: -71.257782},
-            disableDefaultUI: true,
-            zoom: 6
-        });
-        infoWindow = new google.maps.InfoWindow;
->>>>>>> master
 
   <div class="row">
     <div class="col-3 offset-3">
