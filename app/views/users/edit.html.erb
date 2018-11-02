@@ -9,5 +9,7 @@
     </section>
   </aside>
 </div>
-<%= link_to "Edit", edit_user_path(@user) %>
-<%= link_to "Back to main", home_path %>
+<%= semantic_form_for @user, method: :patch do |f| %>
+  <%= f.inputs :name, :email, :is_driver %>
+  <%= f.actions :submit, :cancel %>
+<% end %>

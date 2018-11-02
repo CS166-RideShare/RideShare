@@ -1,4 +1,6 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
+  skip_before_action :check_login, only: [:new, :create]
+
   def show
     @user = User.find(params[:id])
   end
@@ -23,11 +25,12 @@ class UserController < ApplicationController
       # add by csy
       log_in @user
       flash[:success] = "Welcome to Brandeis Ride Share!"
-      redirect_to home_path
+      redirect_to root_path
     else
       render 'new'
     end
   end
+  
   private
 
     def user_signup_params

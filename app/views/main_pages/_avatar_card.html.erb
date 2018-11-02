@@ -1,0 +1,14 @@
+<div class="card" style="width: 8rem;">
+  <%= image_tag("logo.png",
+                id: "user_avatar", class: "card-img-top", alt: "User avatar") %>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="avatar_drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Menu
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <%= link_to "Profile", user_path(current_user.id), class: "dropdown-item" %>
+      <a class="dropdown-item" href="#">Ride records</a>
+      <%= link_to "Log out", logout_path, class: "dropdown-item", method: :delete %>
+    </div>
+  </div>
+</div>

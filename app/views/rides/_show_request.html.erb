@@ -1,0 +1,13 @@
+<div class="modal-header">
+  Someone is asking a ride
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body">
+  <%= @riderequest.rider %>
+  <%= @riderequest.destination %>
+</div>
+<div class="modal-footer">
+  <%= link_to "Accept", request_path(rid: @riderequest.id), remote: true, method: :patch, class: 'btn btn-primary btn-block' %>
+  <%= link_to "No", request_path(post_time: @riderequest.created_at),
+                    {remote: true, class: 'btn btn-primary btn-block'} %>
+</div>

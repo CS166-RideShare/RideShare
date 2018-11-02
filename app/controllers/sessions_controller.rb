@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :check_login, only: [:new, :create, :destroy]
+
   def new
   end
 
@@ -7,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       flash[:success] = "Welcome to Brandeis Ride Share!"
-      redirect_to home_path
+      redirect_to root_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

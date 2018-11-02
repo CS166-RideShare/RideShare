@@ -1,8 +1,13 @@
 <% provide(:title, 'Main page') %>
+
 <div id="map">
 </div>
-<div class="view">
 
+<<<<<<< HEAD
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+=======
   <div class="mask flex-center">
     <div class="row align-items-start">
       <div class="col-md-2 offset-1">
@@ -41,13 +46,25 @@
         <a href="#" class="btn btn-primary btn-block">Set a drive</a>
       </div>
     </div>
+>>>>>>> master
   </div>
 </div>
 
-<script async defer
-        src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBB0imXtZ5Rr0x4A57NO4Un665BEQCpCoU&callback=initMap" >
-</script>
+<div class="view">
 
+<<<<<<< HEAD
+  <div class="row align-items-start">
+    <div class="col-md-2 offset-1">
+      <%= render 'avatar_card' %>
+    </div>
+    <div class="col-8 col-1">
+      <%= form_for(:destination, url: '#') do |f| %>
+        <%= f.text_field :position,
+                         class: 'form-control', placeholder: 'Where would you like to go?' %>
+      <% end %>
+    </div>
+  </div>
+=======
 <script>
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
@@ -61,33 +78,19 @@
             zoom: 6
         });
         infoWindow = new google.maps.InfoWindow;
+>>>>>>> master
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
+  <div class="row">
+    <div class="col-3 offset-3">
+      <%= link_to "Get a ride!", request_new_path, {remote: true,
+                                                    class: 'btn btn-primary btn-block'} %>
+    </div>
+    <div class="col-3 col-3">
+      <%= link_to "Set a drive", request_path, {remote: true,
+                                                class: 'btn btn-primary btn-block'} %>
+    </div>
+  </div>
 
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Location found.');
-                infoWindow.open(map);
-                map.setCenter(pos);
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-    }
+</div>
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-    }
-</script>
+<!-- <%= render 'map_scripts' %> -->
