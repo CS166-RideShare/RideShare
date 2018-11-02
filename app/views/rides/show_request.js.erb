@@ -1,0 +1,7 @@
+<% if @riderequest.nil? %>
+  <% page = 'no_request' %>
+<% else %>
+  <% page = 'show_request' %>
+<% end %>
+$("#modal-window").find(".modal-content").html("<%= j (render page) %>");
+$("#modal-window").modal('show');

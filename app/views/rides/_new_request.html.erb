@@ -2,7 +2,7 @@
   Request a ride
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<%= simple_form_for(@riderequest, url: request_path, method: :post, remote: true) do |f| %>
+<%= simple_form_for(@riderequest, url: request_new_path, method: :post, remote: true) do |f| %>
   <div class="modal-body">
     <%= f.input :destination %>
     <%= f.input :scheduled_time %>

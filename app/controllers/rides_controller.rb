@@ -21,13 +21,29 @@ class RidesController < ApplicationController
     riderequest.destroy
   end
 
-  def check_request
+  def show_request
+    if params[:post_time]
+      session[:last_denied] = params[:post_time]
+    end
+    if session[:last_denied]
+      puts "----------------------"
+      puts session[:last_denied]
+      @riderequest = Ride.available
+                         .order(:created_at)
+                         .find_by("created_at > ?", session[:last_denied])
+      puts "----------------------"
+      puts @riderequest.created_at
+    else
+      @riderequest = Ride.available.order(:created_at).first
+    end
   end
 
   def take_request
-  end
-
-  def deny_request
+    Ride.transaction do
+      request = Ride.find(params[:rid])
+      raise ActiveRecord::Rollback unless request.driver_id.nil?
+      request.update!(driver_id: current_user.id)
+    end
   end
 
   private
