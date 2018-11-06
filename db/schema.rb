@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_033849) do
+ActiveRecord::Schema.define(version: 2018_11_02_192758) do
 
   create_table "rides", force: :cascade do |t|
     t.integer "rider_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_033849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
