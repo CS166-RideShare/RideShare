@@ -7,8 +7,4 @@ class WebNotificationsChannel < ApplicationCable::Channel
   def unsubscribed
     stop_all_streams
   end
-
-  def what_is_this
-    "what is this???"
-  end
 end
