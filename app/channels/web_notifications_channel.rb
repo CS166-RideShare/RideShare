@@ -1,9 +1,14 @@
 class WebNotificationsChannel < ApplicationCable::Channel
-  def subscribed
-    # stream_from "some_channel"
+  def subscribed(data)
+    stop_all_streams
+    stream_from "request_channel/#{data['request_id']}"
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    stop_all_streams
+  end
+
+  def what_is_this
+    "what is this???"
   end
 end

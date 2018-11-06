@@ -40,10 +40,19 @@ class RidesController < ApplicationController
 
   def take_request
     request = Ride.find(params[:rid])
-    Ride.transaction do
+    success = Ride.transaction do
       request.lock!
       raise ActiveRecord::Rollback unless request.driver_id.nil?
       request.update!(driver_id: current_user.id)
+      true
+    end
+    if success
+      ActionCable.server.broadcast "request_channel/#{request.id}",
+                                   accepted: ApplicationController.render(partial: 'rides/request_accepted',
+                                                                          locals: { driver_name: current_user.name })
+      render 'take_request'
+    else
+      redirect_to request_path, format: :js
     end
   end
 
