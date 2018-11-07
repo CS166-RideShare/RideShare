@@ -4,7 +4,9 @@
 </div>
 <div class="modal-body">
   <%= @riderequest.rider %>
-  <%= @riderequest.destination %>
+  <%= @riderequest.pickup_time %>
+  <%= @riderequest.starting_address %>
+  <%= @riderequest.destination_address %>
 </div>
 <div class="modal-footer">
   <%= link_to "Accept", request_path(rid: @riderequest.id), remote: true, method: :patch, class: 'btn btn-primary btn-block' %>

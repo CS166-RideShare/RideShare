@@ -1,14 +1,10 @@
-<script async defer
-        src= "https://maps.googleapis.com/maps/api/js?key=<%= get_map_key %>&callback=initMap" >
-</script>
-
 <script>
     // Note: This example requires that you consent to location sharing when
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
-    var map, infoWindow;
-    
+    var map, infoWindow, geocoder, curMarker
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: -34.397, lng: 150.644},
@@ -16,6 +12,7 @@
             zoom: 6
         });
         infoWindow = new google.maps.InfoWindow;
+        geocoder = new google.maps.Geocoder();
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -36,7 +33,101 @@
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
         }
+
+        new AutocompleteDirectionsHandler(map, geocoder);
     }
+
+    function AutocompleteDirectionsHandler(map, geocoder) {
+        this.map = map;
+        this.geocoder = geocoder;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'DRIVING';
+        var originInput = document.getElementById('starting_input');
+        var destinationInput = document.getElementById('destination_input');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
+
+        this.setupPlaceChangedListener(originInput, originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationInput, destinationAutocomplete, 'DEST');
+        this.setupEnterPressListener(originInput, 'ORIG')
+        this.setupEnterPressListener(destinationInput, 'DEST')
+
+        var me = this;
+        document.getElementById('go_button').addEventListener('click',function() {
+           me.route()
+        });
+      }
+
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(input, autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+        });
+      };
+
+      AutocompleteDirectionsHandler.prototype.setupEnterPressListener = function(input, mode) {
+        var me = this;
+        input.addEventListener('keypress', function(e){
+          if (e.keyCode == 13) {
+            var address = input.value;
+            me.geocoder.geocode({'address': address}, function(results, status) {
+              if (status === 'OK') {
+                me.map.setCenter(results[0].geometry.location);
+                if(curMarker!=null) {
+                  curMarker.setMap(null);
+                }
+                curMarker = new google.maps.Marker({
+                  map: me.map,
+                  position: results[0].geometry.location
+                });
+                placeId = results[0].place_id;
+                if (mode === 'ORIG') {
+                  me.originPlaceId = placeId;
+                } else {
+                  me.destinationPlaceId = placeId;
+                }
+                input.value = results[0].formatted_address;
+              } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+              }
+            });
+          }
+        });
+      }
+
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+          return;
+        }
+        var me = this;
+        this.directionsService.route({
+          origin: {'placeId': this.originPlaceId},
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+            curMarker.setMap(null);
+            me.directionsDisplay.setDirections(response);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
@@ -45,4 +136,8 @@
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
     }
+</script>
+
+<script async defer
+        src= "https://maps.googleapis.com/maps/api/js?key=<%= get_map_key %>&libraries=places&callback=initMap" >
 </script>

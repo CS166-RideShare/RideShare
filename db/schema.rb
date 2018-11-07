@@ -10,21 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_192758) do
+ActiveRecord::Schema.define(version: 2018_11_07_221429) do
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "ride_id"
+    t.integer "rider_review_level"
+    t.text "rider_review"
+    t.integer "driver_review_level"
+    t.text "driver_review"
+    t.boolean "review_handled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "rides", force: :cascade do |t|
     t.integer "rider_id"
     t.integer "driver_id"
-    t.time "post_time"
-    t.string "destination"
-    t.time "scheduled_time"
+    t.string "starting_id"
+    t.string "destination_id"
+    t.string "starting_address"
+    t.string "destination_address"
+    t.time "pickup_time"
     t.integer "canceled_by"
     t.boolean "finished"
-    t.integer "rider_review_level"
-    t.string "rider_review"
-    t.integer "driver_review_level"
-    t.integer "driver_review"
-    t.boolean "review_handled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,7 +40,13 @@ ActiveRecord::Schema.define(version: 2018_11_02_192758) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "license_number"
     t.boolean "is_driver"
+    t.integer "gender"
+    t.text "introduction"
+    t.string "vehicle_make"
+    t.string "vehicle_model"
+    t.string "vehicle_plate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"

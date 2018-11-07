@@ -60,6 +60,6 @@ class RidesController < ApplicationController
 
     def request_params
       params.require(:ride).permit(:destination,
-                                   :scheduled_time)
+                                   :pickup_time)
     end
 end

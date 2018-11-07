@@ -15,10 +15,9 @@
       <%= render 'avatar_card' %>
     </div>
     <div class="col-8 col-1">
-      <%= form_for(:destination, url: '#') do |f| %>
-        <%= f.text_field :position,
-                         class: 'form-control', placeholder: 'Where would you like to go?' %>
-      <% end %>
+      <input class="form-control" placeholder="Where would you like to start?" type="text" id="starting_input">
+      <input class="form-control" placeholder="Where would you like to go?" type="text" id="destination_input">
+      <button id="go_button" class="btn btn-primary" type="button"> Go! </button>
     </div>
   </div>
 
@@ -35,4 +34,4 @@
 
 </div>
 
-<!-- <%= render 'map_scripts' %> -->
+<%= render 'map_scripts' %>

@@ -4,8 +4,9 @@
 </div>
 <%= simple_form_for(@riderequest, url: request_new_path, method: :post, remote: true) do |f| %>
   <div class="modal-body">
-    <%= f.input :destination %>
-    <%= f.input :scheduled_time %>
+    <%= f.input :starting_address %>
+    <%= f.input :destination_address %>
+    <%= f.input :pickup_time %>
   </div>
   <div class="modal-footer">
     <%= f.button :submit, class: 'btn btn-primary' %>
