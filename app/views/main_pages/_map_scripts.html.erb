@@ -26,6 +26,20 @@
                 infoWindow.setContent('Location found.');
                 infoWindow.open(map);
                 map.setCenter(pos);
+
+                geocoder.geocode({'location': pos}, function(results, status) {
+                  if (status === 'OK') {
+                    if (results[0]) {
+                      map.setZoom(15);
+                      document.getElementById('starting_input').value=results[0].formatted_address;
+                    } else {
+                      window.alert('No results found');
+                    }
+                  } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                  }
+                });
+
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });

@@ -1,36 +1,25 @@
 <% provide(:title, 'Main page') %>
 
-<div id="map">
-</div>
-
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content"></div>
   </div>
 </div>
 
-<div class="view">
-  <div class="row align-items-start">
-    <div class="col-md-2 offset-1">
-      <%= render 'avatar_card' %>
-    </div>
-    <div class="col-8 col-1">
-      <input class="form-control" placeholder="Where would you like to start?" type="text" id="starting_input">
-      <input class="form-control" placeholder="Where would you like to go?" type="text" id="destination_input">
-      <button id="go_button" class="btn btn-primary" type="button"> Go! </button>
-    </div>
-  </div>
+<div class="floating view">
+  <div id="map"></div>
 
-  <div class="row">
-    <div class="col-3 offset-3">
-      <%= link_to "Get a ride!", request_new_path, {remote: true,
-                                                    class: 'btn btn-primary btn-block'} %>
-    </div>
-    <div class="col-3 col-3">
-      <%= link_to "Set a drive", request_path, {remote: true,
+  <%= render 'avatar_card' %>
+
+  <input class="form-control" placeholder="Where would you like to start?" type="text" id="starting_input">
+  <input class="form-control" placeholder="Where would you like to go?" type="text" id="destination_input">
+  <button id="go_button" class="btn btn-primary" type="button"> Go! </button>
+
+  <%= link_to "Get a ride!", request_new_path, {remote: true,
                                                 class: 'btn btn-primary btn-block'} %>
-    </div>
-  </div>
+
+  <%= link_to "Set a drive", request_path, {remote: true,
+                                            class: 'btn btn-primary btn-block'} %>
 
 </div>
 
