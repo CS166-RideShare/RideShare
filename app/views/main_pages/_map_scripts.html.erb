@@ -91,6 +91,9 @@
                 if(curMarker!=null) {
                   curMarker.setMap(null);
                 }
+                if(me.directionsDisplay!=null) {
+                  me.directionsDisplay.setMap(null);
+                }
                 curMarker = new google.maps.Marker({
                   map: me.map,
                   position: results[0].geometry.location
