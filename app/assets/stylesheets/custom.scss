@@ -1,7 +1,7 @@
 /* universal */
 
 body {
-    padding-top: 60px;
+    height: 0px;
 }
 
 section {
@@ -14,6 +14,7 @@ textarea {
 
 .center {
     text-align: center;
+    margin: auto;
 }
 
 .center h1 {
@@ -51,35 +52,34 @@ p {
 
 $gray-medium-light: #eaeaea;
 
-@mixin box_sizing {
-    -moz-box-sizing:    border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing:         border-box;
-}
+//@mixin box_sizing {
+//    -moz-box-sizing:    border-box;
+//    -webkit-box-sizing: border-box;
+//    box-sizing:         border-box;
+//}
 
 /* miscellaneous */
 
-.debug_dump {
-    clear: both;
-    float: left;
-    width: 100%;
-    margin-top: 45px;
-    border: 2px solid lightgray;
-    border-radius: 4px;
-    background-color: $gray-medium-light;
-    padding: 10px;
-    @include box_sizing;
-}
+//.debug_dump {
+//    clear: both;
+//    float: left;
+//    width: 100%;
+//    margin-top: 45px;
+//    border: 2px solid lightgray;
+//    border-radius: 4px;
+//    background-color: $gray-medium-light;
+//    padding: 10px;
+//}
 
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
-    border: 1px solid #bbb;
-    width: 100%;
-    margin-bottom: 15px;
-    @include box_sizing;
-}
+//input, textarea, select, .uneditable-input {
+//    border: 1px solid #bbb;
+//    width: 100%;
+//    margin-bottom: 15px;
+//    @include box_sizing;
+//}
 
 input {
     height: auto !important;
@@ -112,4 +112,19 @@ input {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+.logo {
+    z-index: -10;
+    position: absolute;
+}
+
+.menu {
+    z-index: -10;
+    position: absolute;
+    top: 168px;
+}
+
+.top-space {
+    top: 10px;
 }
