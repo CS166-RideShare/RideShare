@@ -71,7 +71,30 @@
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
           if (!place.place_id) {
+            console.log("null place_id")
+            return;
           }
+          me.geocoder.geocode({'placeId': place.place_id}, function(results, status) {
+            if (status === 'OK') {
+              if (results[0]) {
+                me.map.setZoom(15);
+                me.map.setCenter(results[0].geometry.location);
+                if(curMarker!=null) {
+                  curMarker.setMap(null);
+                }
+                curMarker = new google.maps.Marker({
+                  map: me.map,
+                  position: results[0].geometry.location
+                });
+                infowindow.setContent(results[0].formatted_address);
+                infowindow.open(map, marker);
+              } else {
+                window.alert('No results found');
+              }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });
           if (mode === 'ORIG') {
             me.originPlaceId = place.place_id;
           } else {
@@ -87,6 +110,7 @@
             var address = input.value;
             me.geocoder.geocode({'address': address}, function(results, status) {
               if (status === 'OK') {
+                me.map.setZoom(15);
                 me.map.setCenter(results[0].geometry.location);
                 if(curMarker!=null) {
                   curMarker.setMap(null);
