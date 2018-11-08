@@ -125,6 +125,7 @@
         }, function(response, status) {
           if (status === 'OK') {
             curMarker.setMap(null);
+            me.directionsDisplay.setMap(me.map);
             me.directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
