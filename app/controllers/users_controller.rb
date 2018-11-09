@@ -40,6 +40,6 @@ class UsersController < ApplicationController
     end
 
     def user_info_params
-      params.require(:user).permit(:name, :email, :is_driver)
+      params.require(:user).permit(:name, :email, :is_driver, :profile_image)
     end
 end

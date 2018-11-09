@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>RideShare</title>
+    <%= favicon_link_tag 'car.PNG' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,12 +12,13 @@
   </head>
 
   <body>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-      <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+    <%= yield %>
+    <div>
+
+      <%#= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
