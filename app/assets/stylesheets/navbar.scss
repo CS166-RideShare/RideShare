@@ -1,3 +1,6 @@
-.navbar .navbar-collapse.collapse.in {
-  display: none !important;
+.input-group-prepend {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
 }

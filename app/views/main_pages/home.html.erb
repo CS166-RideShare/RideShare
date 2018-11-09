@@ -14,6 +14,19 @@
     <span class="slider round"></span>
   </label>
 
+  <div class="input-group mb-3">
+    <input class="form-control" type="text" id="destination_input" placeholder="Where would you like to go?">
+    <div class="input-group-append">
+      <%= link_to "Go!", request_new_path, {remote: true, class: 'btn btn-primary btn-block'} %>
+    </div>
+  </div>
+
+
+
+  <div>
+
+  </div>
+
   <%= render 'avatar_button' %>
 
 </nav>
@@ -37,7 +50,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1">Where would you like to go?</span>
   </div>
-  <input class="form-control" type="text" id="destination_input">
+
 </div>
 <div class="center top-space w-10">
   <button id="go_button" class="btn btn-primary" type="button"> Get route </button>
@@ -45,10 +58,7 @@
 
 
 <div class="fixed-bottom d-flex justify-content-center">
-  <div class="p-2 bd-highlight">
-    <%= link_to "Get a ride!", request_new_path, {remote: true,
-                                                  class: 'btn btn-primary btn-block'} %>
-  </div>
+
   <div class="p-2 bd-highlight">
     <%= link_to "Set a drive", request_path, {remote: true,
                                               class: 'btn btn-primary btn-block'} %>
