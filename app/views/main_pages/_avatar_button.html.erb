@@ -1,4 +1,50 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="/">
+    <%= image_tag("logo.png",
+                  width: "40", height: "40",
+                  class: "d-inline-block align-top",
+                  alt: "RideShare Logo") %>
+    RideShare
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+      <li class="nav-item active">
+        <div class="input-group">
+          <input class="form-control" type="text" id="destination_input" placeholder="Where would you like to go?">
+          <div class="input-group-append">
+            <%= link_to "Go!", request_new_path, {remote: true, class: 'btn btn-primary btn-block'} %>
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item active">
+        Am I driving?
+        <label class="switch">
+          <input id="user-role" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </li>
+
+    </ul>
+  </div>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= image_tag("logo.png", id: "user_avatar", alt: "User avatar") %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
+      <a class="list-group-item list-group-item-action" href="#">Ride records</a>
+      <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
+    </div>
+  </li>
+
+</nav>
+
+<!-- <nav class="navbar navbar-dark bg-dark">
   <label class="navbar-brand">
     <%= image_tag("logo.png",
                   width: "30", height: "30",
@@ -6,27 +52,38 @@
                   alt: "RideShare Logo") %>
     RideShare
   </label>
-  <label class="switch">
-    <input id="user-role" type="checkbox">
-    <span class="slider round"></span>
-  </label>
 
-  <div class="input-group mb-3">
-    <input class="form-control" type="text" id="destination_input" placeholder="Where would you like to go?">
-    <div class="input-group-append">
-      <%= link_to "Go!", request_new_path, {remote: true, class: 'btn btn-primary btn-block'} %>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item active">
+        <label class="switch">
+          <input id="user-role" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </li>
+
+      <li class="nav-item">
+        <div class="input-group mb-3">
+          <input class="form-control" type="text" id="destination_input" placeholder="Where would you like to go?">
+          <div class="input-group-append">
+            <%= link_to "Go!", request_new_path, {remote: true, class: 'btn btn-primary btn-block'} %>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <a class="nav-link" href="#collapseMenu" id="navbarDropdownMenuLink" role="button" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+
+    </a>
   </div>
-  <a class="nav-link" href="#collapseMenu" id="navbarDropdownMenuLink" role="button" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-    <%= image_tag("logo.png", id: "user_avatar",
-                  class: "card-img-top", alt: "User avatar") %>
-  </a>
-</nav>
-
+</nav> -->
+<!--
 <div class="collapse menu" id="collapseMenu">
   <div class="list-group w-15">
     <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
     <a class="list-group-item list-group-item-action" href="#">Ride records</a>
     <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
   </div>
-</div>
+</div> -->
