@@ -1,0 +1,11 @@
+<a class="nav-link dropdown-toggle" href="#collapseExample" id="navbarDropdownMenuLink" role="button" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+  <%= image_tag("logo.png", id: "user_avatar",
+                class: "card-img-top", alt: "User avatar") %>
+</a>
+<div class="collapse" id="collapseExample">
+  <div class="list-group w-15">
+    <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
+    <a class="list-group-item list-group-item-action" href="#">Ride records</a>
+    <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
+  </div>
+</div>
