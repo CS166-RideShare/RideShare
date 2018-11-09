@@ -1,0 +1,12 @@
+<div class="user_info">
+  <h1>
+    <% if @user.profile_image.attached? %>
+      <%= image_tag(@user.profile_image, :size => "200x150") %>
+    <% end %>
+    <%= @user.name %>
+  </h1>
+
+  <div class = "col-md-2">
+    <%= render partial: "upload_button" %>
+  </div>
+</div>

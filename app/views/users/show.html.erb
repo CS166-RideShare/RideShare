@@ -1,21 +1,23 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <% if @user.profile_image.attached? %>
-          <%= image_tag(@user.profile_image, :size => "200x150") %>
-        <% end %>
-        <%= @user.name %>
-      </h1>
-
-      <div class = "col-md-2">
-        <%= render partial: "upload_button" %>
-      </div>
-    </section>
-  </aside>
+<div class="top-menu">
+  <%= render 'main_pages/avatar_button' %>
 </div>
-
-
-<%= link_to "Edit", edit_user_path(@user) %>
-<%= link_to "Back to main", root_path %>
+<div class="row">
+  <aside class="col-md-4 side-menu">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </aside>
+  <%= render 'profile' %>
+</div>
