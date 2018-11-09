@@ -9,4 +9,29 @@
   <div class = "col-md-2">
     <%= render partial: "upload_button" %>
   </div>
+
+  <div class="input-group input-group-sm mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+      <span class="input-group-text" id="inputGroup-sizing-sm"><%= @user.email %>></span>
+    </div>
+  </div>
+
+  <div class="card" id = "email">
+    <div class="card-body">
+      <%= @user.email %>
+    </div>
+  </div>
+
+  <div class="card" id = "phone">
+    <div class="card-body">
+      eg: 6177633765
+    </div>
+  </div>
+
+  <div class="card" id = "username">
+    <div class="card-body">
+      <%= @user.name %>
+    </div>
+  </div>
 </div>
