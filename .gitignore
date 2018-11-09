@@ -39,3 +39,4 @@
 .idea/inspectionProfiles/Project_Default.xml
 /app/helpers/keys_helper.rb
 .idea/inspectionProfiles/profiles_settings.xml
+test/integration/users_signup_test.rb
