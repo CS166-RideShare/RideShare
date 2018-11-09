@@ -3,21 +3,32 @@
   <%= render 'main_pages/avatar_button' %>
 </div>
 <div class="row">
-  <aside class="col-md-4 side-menu">
-    <ul class="nav flex-column">
+  <aside class="col-md-2 side-menu">
+    <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Active</a>
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill"  role="tab" href="#profile">My profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" href="#trips">My trips</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" href="#payments">Payment method</a>
       </li>
     </ul>
   </aside>
-  <%= render 'profile' %>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel">
+      My trips
+      <%= render 'profile' %>
+    </div>
+    <div class="tab-pane fade" id="trips" role="tabpanel">
+      My trips
+      <%= render 'trips' %>
+    </div>
+    <div class="tab-pane fade" id="payments" role="tabpanel">
+      Payment method
+      <%= render 'payment' %>
+    </div>
+  </div>
+
 </div>
