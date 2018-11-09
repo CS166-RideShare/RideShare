@@ -1,6 +1,14 @@
-.input-group-prepend {
-  position: absolute;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
+.logo {
+    z-index: -10;
+    position: absolute;
+}
+
+.menu {
+    z-index: 10;
+    position: absolute;
+    right: 0px;
+}
+
+.top-space {
+    top: 10px;
 }

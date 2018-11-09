@@ -1,35 +1,9 @@
 <% provide(:title, 'Share Your Ride!') %>
 
-<nav class="navbar navbar-dark bg-dark">
-  <label class="navbar-brand">
-    <%= image_tag("logo.png",
-                  width: "30", height: "30",
-                  class: "d-inline-block align-top",
-                  alt: "RideShare Logo") %>
-    RideShare
-  </label>
-
-  <label class="switch">
-    <input id="user-role" type="checkbox">
-    <span class="slider round"></span>
-  </label>
-
-  <div class="input-group mb-3">
-    <input class="form-control" type="text" id="destination_input" placeholder="Where would you like to go?">
-    <div class="input-group-append">
-      <%= link_to "Go!", request_new_path, {remote: true, class: 'btn btn-primary btn-block'} %>
-    </div>
-  </div>
-
-
-
-  <div>
-
-  </div>
-
+<div class="top-menu">
   <%= render 'avatar_button' %>
+</div>
 
-</nav>
 
 <div id="map"></div>
 
