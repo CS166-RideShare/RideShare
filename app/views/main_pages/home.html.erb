@@ -1,11 +1,32 @@
-<% provide(:title, 'Main page') %>
+<% provide(:title, 'Share Your Ride!') %>
+
+<nav class="navbar navbar-dark bg-dark">
+  <label class="navbar-brand">
+    <%= image_tag("logo.png",
+                  width: "30", height: "30",
+                  class: "d-inline-block align-top",
+                  alt: "RideShare Logo") %>
+    RideShare
+  </label>
+
+  <label class="switch">
+    <input id="user-role" type="checkbox">
+    <span class="slider round"></span>
+  </label>
+
+  <%= render 'avatar_button' %>
+
+</nav>
+
+<div id="map"></div>
 
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content"></div>
   </div>
 </div>
-<%= render 'avatar_card' %>
+
+
 <div class="top-space center w-50 input-group mb-3">
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon1">Choose your starting point:</span>
@@ -34,4 +55,4 @@
   </div>
 </div>
 
-<%= render 'map_scripts' %>
+<!-- <%= render 'map_scripts' %> -->

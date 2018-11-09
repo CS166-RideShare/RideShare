@@ -14,6 +14,8 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import "formtastic";
-@import "custom.scss";
+@import "custom";
 @import "signup";
-@import "main_pages.scss";
+@import "main_pages";
+@import "switch";
+@import "navbar"
