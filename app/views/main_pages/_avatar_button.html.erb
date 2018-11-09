@@ -1,8 +1,22 @@
-<a class="nav-link dropdown-toggle" href="#collapseExample" id="navbarDropdownMenuLink" role="button" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
-  <%= image_tag("logo.png", id: "user_avatar",
-                class: "card-img-top", alt: "User avatar") %>
-</a>
-<div class="collapse" id="collapseExample">
+<nav class="navbar navbar-dark bg-dark">
+  <label class="navbar-brand">
+    <%= image_tag("logo.png",
+                  width: "30", height: "30",
+                  class: "d-inline-block align-top",
+                  alt: "RideShare Logo") %>
+    RideShare
+  </label>
+  <label class="switch">
+    <input id="user-role" type="checkbox">
+    <span class="slider round"></span>
+  </label>
+  <a class="nav-link" href="#collapseMenu" id="navbarDropdownMenuLink" role="button" data-toggle="collapse" aria-haspopup="true" aria-expanded="false">
+    <%= image_tag("logo.png", id: "user_avatar",
+                  class: "card-img-top", alt: "User avatar") %>
+  </a>
+</nav>
+
+<div class="collapse menu" id="collapseMenu">
   <div class="list-group w-15">
     <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
     <a class="list-group-item list-group-item-action" href="#">Ride records</a>

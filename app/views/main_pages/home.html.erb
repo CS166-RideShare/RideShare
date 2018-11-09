@@ -1,22 +1,9 @@
 <% provide(:title, 'Share Your Ride!') %>
 
-<nav class="navbar navbar-dark bg-dark">
-  <label class="navbar-brand">
-    <%= image_tag("logo.png",
-                  width: "30", height: "30",
-                  class: "d-inline-block align-top",
-                  alt: "RideShare Logo") %>
-    RideShare
-  </label>
-
-  <label class="switch">
-    <input id="user-role" type="checkbox">
-    <span class="slider round"></span>
-  </label>
-
+<div class="top-menu">
   <%= render 'avatar_button' %>
+</div>
 
-</nav>
 
 <div id="map"></div>
 
