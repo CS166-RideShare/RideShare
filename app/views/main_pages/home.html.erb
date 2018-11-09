@@ -8,29 +8,34 @@
     <div class="modal-content"></div>
   </div>
 </div>
+<%= render 'avatar_card' %>
+<div class="top-space center w-50 input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Choose your starting point:</span>
+  </div>
+  <input class="form-control" type="text" id="starting_input">
+</div>
+<div class="top-space center w-50 input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1">Where would you like to go?</span>
+  </div>
+  <input class="form-control" type="text" id="destination_input">
+</div>
+<div class="center top-space w-10">
+  <button id="go_button" class="btn btn-primary" type="button"> Get route </button>
+</div>
 
-<div class="view">
-  <div class="row align-items-start">
-    <div class="col-md-2 offset-1">
-      <%= render 'avatar_card' %>
-    </div>
-    <div class="col-8 col-1">
-      <input class="form-control" placeholder="Where would you like to start?" type="text" id="starting_input">
-      <input class="form-control" placeholder="Where would you like to go?" type="text" id="destination_input">
-      <button id="go_button" class="btn btn-primary" type="button"> Go! </button>
-    </div>
+
+<div class="fixed-bottom d-flex justify-content-center">
+  <div class="p-2 bd-highlight">
+    <%= link_to "Get a ride!", request_new_path, {remote: true,
+                                                  class: 'btn btn-primary btn-block'} %>
+  </div>
+  <div class="p-2 bd-highlight">
+    <%= link_to "Set a drive", request_path, {remote: true,
+                                              class: 'btn btn-primary btn-block'} %>
   </div>
 
-  <div class="row">
-    <div class="col-3 offset-3">
-      <%= link_to "Get a ride!", request_new_path, {remote: true,
-                                                    class: 'btn btn-primary btn-block'} %>
-    </div>
-    <div class="col-3 col-3">
-      <%= link_to "Set a drive", request_path, {remote: true,
-                                                class: 'btn btn-primary btn-block'} %>
-    </div>
-  </div>
 
 </div>
 
