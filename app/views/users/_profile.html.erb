@@ -1,37 +1,60 @@
-<div class="user_info">
-  <h1>
-    <% if @user.profile_image.attached? %>
-      <%= image_tag(@user.profile_image, :size => "200x150") %>
-    <% end %>
-    <%= @user.name %>
-  </h1>
+<!DOCTYPE html>
+<html>
+<head>
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--  <style>-->
+<!--    * {-->
+<!--      box-sizing: border-box;-->
+<!--    }-->
+<!--    .column {-->
+<!--    float: left;-->
+<!--    width: 33.33%;-->
+<!--    padding: 10px;-->
+<!--    height: 300px;-->
+<!--    }-->
 
-  <div class = "col-md-2">
-    <%= render partial: "upload_button" %>
-  </div>
+<!--    /* Clear floats after the columns */-->
+<!--    .row:after {-->
+<!--      content: "";-->
+<!--      display: table;-->
+<!--      clear: both;-->
+<!--    }-->
+<!--  </style>-->
+</head>
+ <body>
+  <div class="row">
+      <div class="user_info mx-auto">
+        <h1>
+          <% if @user.profile_image.attached? %>
+            <%= image_tag(@user.profile_image, :size => "200x150") %>
+          <% end %>
+          <%= @user.name %>
+        </h1>
 
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
-      <span class="input-group-text" id="inputGroup-sizing-sm"><%= @user.email %>></span>
+        <div class = "col-md-2">
+          <%= render partial: "upload_button" %>
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+            <p class="text-monospace"><%= @user.email %></p>
+          </div>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Phone</span>
+            <p class="text-monospace">eg:6177633765</p>
+          </div>
+        </div>
+
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
+            <p class="text-monospace"><%=@user.name %></p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="card" id = "email">
-    <div class="card-body">
-      <%= @user.email %>
-    </div>
-  </div>
-
-  <div class="card" id = "phone">
-    <div class="card-body">
-      eg: 6177633765
-    </div>
-  </div>
-
-  <div class="card" id = "username">
-    <div class="card-body">
-      <%= @user.name %>
-    </div>
-  </div>
-</div>
+ </body>
+</html>
