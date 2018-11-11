@@ -1,0 +1,12 @@
+<script>
+  var userRole = document.getElementById('user-role')
+  var rideButton = document.getElementById('ride_button')
+
+  function changeUserRole() {
+    if(userRole.checked) {
+      rideButton.dataset.target="#drive-set-window";
+    } else {
+      rideButton.dataset.target="#ride-request-window";
+    }
+  }
+</script>

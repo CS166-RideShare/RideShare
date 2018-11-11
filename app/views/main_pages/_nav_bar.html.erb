@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <a class="navbar-brand" href="/">
+    <%= image_tag("logo.png",
+                  width: "40", height: "40",
+                  class: "d-inline-block align-top",
+                  alt: "RideShare Logo") %>
+    RideShare
+  </a>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+
+
+
+      <li class="nav-item active">
+        <label class="switch">
+          Am I driving?
+          <input id="user-role" type="checkbox", onclick="changeUserRole();">
+          <span class="slider round"></span>
+        </label>
+      </li>
+
+    </ul>
+  </div>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= image_tag("logo.png", id: "user_avatar", alt: "User avatar") %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
+      <a class="list-group-item list-group-item-action" href="#">Ride records</a>
+      <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
+    </div>
+  </li>
+
+</nav>

@@ -1,15 +1,32 @@
 <div class="modal-header">
-  Someone is asking a ride
+  Someone is asking for a ride
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<div class="modal-body">
-  <%= @riderequest.rider %>
-  <%= @riderequest.pickup_time %>
-  <%= @riderequest.starting_address %>
-  <%= @riderequest.destination_address %>
-</div>
-<div class="modal-footer">
-  <%= link_to "Accept", request_path(rid: @riderequest.id), remote: true, method: :patch, class: 'btn btn-primary btn-block' %>
-  <%= link_to "No", request_path(post_time: @riderequest.created_at),
-                    {remote: true, class: 'btn btn-primary btn-block'} %>
-</div>
+<%= form_tag request_path, method: :get, remote: true
+             html: { class: "form-group" } do %>
+  <div class="modal-body">
+    <%= hidden_field_tag 'drive[starting_id]', @drive[:starting_id] %>
+    <%= hidden_field_tag 'drive[destination_id]', @drive[:destination_id] %>
+    <%= hidden_field_tag 'drive[duration]', @drive[:duration] %>
+    <%= text_field_tag 'drive[starting_address]', @drive[:starting_address],
+                       class: 'form-control', readonly: true %>
+    <%= text_field_tag 'drive[destination_addressd]', @drive[:destination_address],
+                       class: 'form-control', readonly: true %>
+    <%= time_field_tag 'drive[scheduled_time]', @drive[:scheduled_time],
+                       class: 'form-control', readonly: true %>
+
+    <%= hidden_field_tag 'rid', @riderequest.id %>
+    <%= hidden_field_tag 'request[created_at]', @riderequest.created_at %>
+    <%= text_field_tag 'request[starting_address]', @riderequest.starting_address,
+                       class: 'form-control', readonly: true %>
+    <%= text_field_tag 'request[destination_addressd]', @riderequest.destination_address,
+                       class: 'form-control', readonly: true %>
+    <%= time_field_tag 'request[pickup_time]', @riderequest.pickup_time,
+                       class: 'form-control', readonly: true %>
+  </div>
+  <div class="modal-footer">
+    <%= submit_tag value: "Cancel Drive", class: "btn btn-primary" %>
+    <%= submit_tag value: "Accept", class: "btn btn-primary" %>
+    <%= submit_tag value: "Pass", class: "btn btn-primary" %>
+  </div>
+<% end %>

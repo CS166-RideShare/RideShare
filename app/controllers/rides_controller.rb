@@ -1,8 +1,5 @@
 class RidesController < ApplicationController
-
-  def new_request
-    @riderequest = Ride.new
-  end
+  include GoogleMapApiHelper
 
   def create_request
     create_params = request_params
@@ -12,29 +9,48 @@ class RidesController < ApplicationController
       render 'create_request'
     else
       flash.now[:danger] = 'Invalid input'
-      render 'new_request'
+      render 'cancel_request'
     end
   end
 
   def cancel_request
     riderequest = Ride.find(params[:rid])
+    @riderequest = riderequest.dup
     riderequest.destroy
   end
 
   def show_request
-    if params[:post_time]
-      session[:last_denied] = params[:post_time]
+    if params[:commit] == "Accept"
+      redirect_to request_path(rid: params[:rid]), method: :patch, format: :js and return
+    end
+    if params[:commit] == "Cancel Drive"
+      render 'cancel_drive' and return
+    end
+    if params[:commit] == "Pass"
+      session[:last_denied] = params[:request][:created_at]
     end
     @riderequest = nil
+    @response = nil
+    drive_starting_id = params[:drive][:starting_id]
+    drive_destination_id = params[:drive][:destination_id]
+    org_duration = params[:drive][:duration]
     if Ride.available
       if session[:last_denied]
         time = Time.parse(session[:last_denied])
-        @riderequest = Ride.available
-                           .order(:created_at)
-                           .find_by("created_at > ?", time+1)
+        requests = Ride.available.order(:created_at)
+                       .where("created_at > ?", time+1)
       else
-        @riderequest = Ride.available.order(:created_at).first
+        requests = Ride.available.order(:created_at).first
       end
+      requests.each do |request|
+        if @response = direction_if_pickup(request,
+                                           drive_starting_id,
+                                           drive_destination_id,
+                                           org_duration)
+          @riderequest = request
+        end
+      end
+      @drive = params[:drive]
     end
   end
 
@@ -59,7 +75,10 @@ class RidesController < ApplicationController
   private
 
     def request_params
-      params.require(:ride).permit(:destination,
-                                   :pickup_time)
+      params.require(:request).permit(:destination_id,
+                                      :destination_address,
+                                      :starting_id,
+                                      :starting_address,
+                                      :pickup_time)
     end
 end

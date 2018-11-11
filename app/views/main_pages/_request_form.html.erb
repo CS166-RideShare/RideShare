@@ -1,0 +1,21 @@
+<div class="modal-header">
+  Request a ride
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<% @riderequest||=Ride.new %>
+<%= form_with model: @riderequest, scope: :request, url: request_new_path, html: { class: "form-group" } do |f| %>
+  <div class="modal-body">
+    <%= f.hidden_field :starting_id, class: 'starting_id' %>
+    <%= f.hidden_field :destination_id, class: 'destination_id' %>
+    <%= f.label :starting_address %>
+    <%= f.text_field :starting_address, class: 'form-control starting_address', readonly: true %>
+    <%= f.label :destination_address %>
+    <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
+    <%= f.label :pickup_time %>
+    <%= f.time_field :pickup_time, class: 'form-control', min: Time.now %>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">Edit locations</button>
+    <%= f.submit value:"Post Request", class: "btn btn-primary" %>
+  </div>
+<% end %>

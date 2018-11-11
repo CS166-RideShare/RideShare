@@ -1,3 +1,3 @@
 <% page = @riderequest.nil? ? 'no_request' : 'show_request' %>
-$("#modal-window").find(".modal-content").html("<%= j (render page) %>");
-$("#modal-window").modal('show');
+$("#drive-set-window").find(".modal-content").html("<%= j (render page) %>");
+$("#drive-set-window").modal('show');

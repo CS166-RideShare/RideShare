@@ -4,10 +4,6 @@
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
     var map, infoWindow, geocoder, curMarker;
-    var starting_id = document.getElementById('request_starting_id');
-    var destination_id = document.getElementById('request_destination_id');
-    var starting_address = document.getElementById('request_starting_address');
-    var destination_address = document.getElementById('request_destination_address');
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -42,8 +38,8 @@
 
         this.setupPlaceChangedListener(originInput, originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationInput, destinationAutocomplete, 'DEST');
-        this.setupEnterPressListener(originInput, 'ORIG')
-        this.setupEnterPressListener(destinationInput, 'DEST')
+        this.setupEnterPressListener(originInput);
+        this.setupEnterPressListener(destinationInput);
       }
 
       AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(input, autocomplete, mode) {
@@ -76,18 +72,16 @@
           });
           if (mode === 'ORIG') {
             me.originPlaceId = place.place_id;
-            starting_id.value = place.place_id;
-            starting_address.value = input.value;
+            setFields('.starting', place.place_id, input.value);
           } else {
             me.destinationPlaceId = place.place_id;
-            destination_id.value = place.place_id;
-            destination_address.value = input.value;
+            setFields('.destination', place.place_id, input.value);
           }
           me.route();
         });
       };
 
-      AutocompleteDirectionsHandler.prototype.setupEnterPressListener = function(input, mode) {
+      AutocompleteDirectionsHandler.prototype.setupEnterPressListener = function(input) {
         var _addEventListener = (input.addEventListener) ? input.addEventListener : input.attachEvent;
         var me = this;
         var suggestion_selected = $(".pac-item-selected").length > 0;
@@ -116,7 +110,6 @@
 
         input.addEventListener = addEventListenerWrapper;
         input.attachEvent = addEventListenerWrapper;
-        
       }
 
       AutocompleteDirectionsHandler.prototype.route = function() {
@@ -133,6 +126,10 @@
             curMarker.setMap(null);
             me.directionsDisplay.setMap(me.map);
             me.directionsDisplay.setDirections(response);
+            var duration = response.routes[0].legs.reduce(
+              (res, leg) => res+leg.duration.value, 0
+            );
+            document.getElementById('drive_duration').value=duration;
           } else {
             window.alert('Directions request failed due to ' + status);
           }
@@ -181,6 +178,15 @@
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
+    }
+
+    function setFields(loc, id, address) {
+      $(loc+'_id').each(function(){
+        $(this).val(id);
+      });
+      $(loc+'_address').each(function(){
+        $(this).val(address);
+      });
     }
 </script>
 
