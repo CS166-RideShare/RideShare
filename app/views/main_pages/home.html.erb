@@ -1,7 +1,7 @@
 <% provide(:title, 'Share Your Ride!') %>
 
 <div class="top-menu">
-  <%= render 'avatar_button' %>
+  <%= render 'nav_bar' %>
 </div>
 
 
@@ -14,24 +14,11 @@
 </div>
 
 
-<div class="top-space center w-50 input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Choose your starting point:</span>
-  </div>
-  <input class="form-control" type="text" id="starting_input">
+<div class="justify-content-center">
+
+  <%= render 'location_form' %>
 </div>
 
-<div class="center top-space w-10">
-  <button id="go_button" class="btn btn-primary" type="button"> Get route </button>
-</div>
+<%= render 'map_scripts' %>
 
-
-<div class="fixed-bottom d-flex justify-content-center">
-
-  <div class="p-2 bd-highlight">
-    <%= link_to "Set a drive", request_path, {remote: true,
-                                              class: 'btn btn-primary btn-block'} %>
-  </div>
-</div>
-
-<!-- <%= render 'map_scripts' %> -->
+<%= render 'role_scripts' %>
