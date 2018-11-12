@@ -39,7 +39,7 @@ class RidesController < ApplicationController
         requests = Ride.available.order(:created_at)
                        .where("created_at > ?", time+1)
       else
-        requests = Ride.available.order(:created_at).first
+        requests = Ride.available.order(:created_at)
       end
       requests.each do |request|
         if @response = direction_if_pickup(request,
