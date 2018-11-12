@@ -3,7 +3,7 @@
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
-    var map, infoWindow, geocoder, curMarker
+    var map, infoWindow, geocoder, curMarker;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -14,39 +14,7 @@
         infoWindow = new google.maps.InfoWindow;
         geocoder = new google.maps.Geocoder();
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-
-                infoWindow.setPosition(pos);
-                // infoWindow.setContent('Location found.');
-                infoWindow.open(map);
-                map.setCenter(pos);
-
-                geocoder.geocode({'location': pos}, function(results, status) {
-                  if (status === 'OK') {
-                    if (results[0]) {
-                      map.setZoom(15);
-                      document.getElementById('starting_input').value=results[0].formatted_address;
-                    } else {
-                      window.alert('No results found');
-                    }
-                  } else {
-                    window.alert('Geocoder failed due to: ' + status);
-                  }
-                });
-
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
+        getLocation();
 
         new AutocompleteDirectionsHandler(map, geocoder);
     }
@@ -70,13 +38,8 @@
 
         this.setupPlaceChangedListener(originInput, originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationInput, destinationAutocomplete, 'DEST');
-        this.setupEnterPressListener(originInput, 'ORIG')
-        this.setupEnterPressListener(destinationInput, 'DEST')
-
-        var me = this;
-        document.getElementById('go_button').addEventListener('click',function() {
-           me.route()
-        });
+        this.setupEnterPressListener(originInput);
+        this.setupEnterPressListener(destinationInput);
       }
 
       AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(input, autocomplete, mode) {
@@ -100,8 +63,6 @@
                   map: me.map,
                   position: results[0].geometry.location
                 });
-                infowindow.setContent(results[0].formatted_address);
-                infowindow.open(map, marker);
               } else {
                 window.alert('No results found');
               }
@@ -111,44 +72,44 @@
           });
           if (mode === 'ORIG') {
             me.originPlaceId = place.place_id;
+            setFields('.starting', place.place_id, input.value);
           } else {
             me.destinationPlaceId = place.place_id;
+            setFields('.destination', place.place_id, input.value);
           }
+          me.route();
         });
       };
 
-      AutocompleteDirectionsHandler.prototype.setupEnterPressListener = function(input, mode) {
+      AutocompleteDirectionsHandler.prototype.setupEnterPressListener = function(input) {
+        var _addEventListener = (input.addEventListener) ? input.addEventListener : input.attachEvent;
         var me = this;
-        input.addEventListener('keypress', function(e){
-          if (e.keyCode == 13) {
-            var address = input.value;
-            me.geocoder.geocode({'address': address}, function(results, status) {
-              if (status === 'OK') {
-                me.map.setZoom(15);
-                me.map.setCenter(results[0].geometry.location);
-                if(curMarker!=null) {
-                  curMarker.setMap(null);
-                }
-                if(me.directionsDisplay!=null) {
-                  me.directionsDisplay.setMap(null);
-                }
-                curMarker = new google.maps.Marker({
-                  map: me.map,
-                  position: results[0].geometry.location
-                });
-                placeId = results[0].place_id;
-                if (mode === 'ORIG') {
-                  me.originPlaceId = placeId;
-                } else {
-                  me.destinationPlaceId = placeId;
-                }
-                input.value = results[0].formatted_address;
-              } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-          }
-        });
+        var suggestion_selected = $(".pac-item-selected").length > 0;
+
+        function addEventListenerWrapper(type, listener) {
+            // Simulate a 'down arrow' keypress on hitting 'return' when no pac suggestion is selected,
+            // and then trigger the original listener.
+            if (type == "keydown") {
+                var orig_listener = listener;
+                listener = function(event) {
+                    var suggestion_selected = $(".pac-item-selected").length > 0;
+                    if (event.which == 13 && !suggestion_selected) {
+                        var simulated_downarrow = $.Event("keydown", {
+                            keyCode: 40,
+                            which: 40
+                        });
+                        orig_listener.apply(input, [simulated_downarrow]);
+                    }
+
+                    orig_listener.apply(input, [event]);
+                };
+            }
+
+            _addEventListener.apply(input, [type, listener]);
+        }
+
+        input.addEventListener = addEventListenerWrapper;
+        input.attachEvent = addEventListenerWrapper;
       }
 
       AutocompleteDirectionsHandler.prototype.route = function() {
@@ -165,11 +126,51 @@
             curMarker.setMap(null);
             me.directionsDisplay.setMap(me.map);
             me.directionsDisplay.setDirections(response);
+            var duration = response.routes[0].legs.reduce(
+              (res, leg) => res+leg.duration.value, 0
+            );
+            document.getElementById('drive_duration').value=duration;
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
       };
+
+    function getLocation() {
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              var pos = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+              };
+
+              infoWindow.setPosition(pos);
+              // infoWindow.setContent('You're here');
+              infoWindow.open(map);
+              map.setCenter(pos);
+
+              geocoder.geocode({'location': pos}, function(results, status) {
+                if (status === 'OK') {
+                  if (results[0]) {
+                    map.setZoom(15);
+                    document.getElementById('starting_input').value=results[0].formatted_address;
+                  } else {
+                    window.alert('No results found');
+                  }
+                } else {
+                  window.alert('Geocoder failed due to: ' + status);
+                }
+              });
+
+          }, function() {
+              handleLocationError(true, infoWindow, map.getCenter());
+          });
+      } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+      }
+    }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
@@ -177,6 +178,15 @@
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
+    }
+
+    function setFields(loc, id, address) {
+      $(loc+'_id').each(function(){
+        $(this).val(id);
+      });
+      $(loc+'_address').each(function(){
+        $(this).val(address);
+      });
     }
 </script>
 
