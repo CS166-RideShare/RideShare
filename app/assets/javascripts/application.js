@@ -17,3 +17,4 @@
 //= require jquery
 //= require popper
 //= require bootstrap-sprockets
+//= require bootstrap.js
