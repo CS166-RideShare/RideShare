@@ -7,6 +7,17 @@
 
 <div id="map"></div>
 
+<div class="justify-content-center row fixed-bottom">
+  <div class="col-xs-10 col-md-11">
+    <input type="text" id='starting_input' class='form-control' placeholder="Where would you like to start?">
+    <input type="text" id='destination_input' class='form-control' placeholder="Where would you like to go?">
+  </div>
+  <div class="col-xs-2  col-md-1">
+    <button type="button" id="ride_button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>
+  </div>
+</div>
+
+
 <div id="ride-request-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -23,11 +34,7 @@
   </div>
 </div>
 
-<div class="justify-content-center">
-  <input type="text" id='starting_input' class='form-control' placeholder="Where would you like to start?">
-  <input type="text" id='destination_input' class='form-control' placeholder="Where would you like to go?">
-  <button type="button" id="ride_button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">Go!</button>
-</div>
+
 
 <%= render 'map_scripts' %>
 

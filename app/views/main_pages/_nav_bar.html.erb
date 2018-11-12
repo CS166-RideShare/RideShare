@@ -1,38 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="/">
+      <%= image_tag("logo.png",
+                    width: "40", height: "40",
+                    class: "d-inline-block align-top",
+                    alt: "RideShare Logo") %>
+      RideShare
+    </a>
 
-  <a class="navbar-brand" href="/">
-    <%= image_tag("logo.png",
-                  width: "40", height: "40",
-                  class: "d-inline-block align-top",
-                  alt: "RideShare Logo") %>
-    RideShare
-  </a>
-
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-
-
-
-      <li class="nav-item active">
+    <div class="form-inline">
+      <a>I'm driving</a>
+      <a class="nav-item active">
         <label class="switch">
           Am I driving?
           <input id="user-role" type="checkbox", onclick="changeUserRole();">
           <span class="slider round"></span>
         </label>
-      </li>
+      </a>
+      <a>I need a ride</a>
+    </div>
 
-    </ul>
-  </div>
-
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="btn btn-primary right" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= image_tag("logo.png", id: "user_avatar", alt: "User avatar") %>
     </a>
-    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-      <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
-      <a class="list-group-item list-group-item-action" href="#">Ride records</a>
-      <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
-    </div>
-  </li>
 
-</nav>
+  </nav>
+  <div class="collapse w-25 right" id="collapseMenu">
+    <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
+    <a class="list-group-item list-group-item-action" href="#">Ride records</a>
+    <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
+  </div>
+</div>
