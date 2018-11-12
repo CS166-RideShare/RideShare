@@ -20,9 +20,6 @@ class RidesController < ApplicationController
   end
 
   def show_request
-    if params[:commit] == "Accept"
-      redirect_to request_path(rid: params[:rid]), method: :patch, format: :js and return
-    end
     if params[:commit] == "Cancel Drive"
       render 'cancel_drive' and return
     end
@@ -31,9 +28,11 @@ class RidesController < ApplicationController
     end
     @riderequest = nil
     @response = nil
+    drive_starting_address = params[:drive][:starting_address]
+    drive_destination_address = params[:drive][:destination_address]
     drive_starting_id = params[:drive][:starting_id]
     drive_destination_id = params[:drive][:destination_id]
-    org_duration = params[:drive][:duration]
+    org_duration = params[:drive][:duration].to_i
     if Ride.available
       if session[:last_denied]
         time = Time.parse(session[:last_denied])

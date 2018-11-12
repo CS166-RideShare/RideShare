@@ -2,31 +2,36 @@
   Someone is asking for a ride
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<%= form_tag request_path, method: :get, remote: true
+<%= form_tag request_path, method: :get, remote: true,
              html: { class: "form-group" } do %>
   <div class="modal-body">
     <%= hidden_field_tag 'drive[starting_id]', @drive[:starting_id] %>
     <%= hidden_field_tag 'drive[destination_id]', @drive[:destination_id] %>
     <%= hidden_field_tag 'drive[duration]', @drive[:duration] %>
+    <%= label_tag "Your starting point" %>
     <%= text_field_tag 'drive[starting_address]', @drive[:starting_address],
                        class: 'form-control', readonly: true %>
+    <%= label_tag "Your destination" %>
     <%= text_field_tag 'drive[destination_addressd]', @drive[:destination_address],
                        class: 'form-control', readonly: true %>
+    <%= label_tag "Your drive start at" %>
     <%= time_field_tag 'drive[scheduled_time]', @drive[:scheduled_time],
                        class: 'form-control', readonly: true %>
 
-    <%= hidden_field_tag 'rid', @riderequest.id %>
     <%= hidden_field_tag 'request[created_at]', @riderequest.created_at %>
+    <%= label_tag "Rider get in at" %>
     <%= text_field_tag 'request[starting_address]', @riderequest.starting_address,
                        class: 'form-control', readonly: true %>
+    <%= label_tag "Rider get off at" %>
     <%= text_field_tag 'request[destination_addressd]', @riderequest.destination_address,
                        class: 'form-control', readonly: true %>
+    <%= label_tag "Rider asked to be pick up at" %>
     <%= time_field_tag 'request[pickup_time]', @riderequest.pickup_time,
                        class: 'form-control', readonly: true %>
   </div>
   <div class="modal-footer">
-    <%= submit_tag value: "Cancel Drive", class: "btn btn-primary" %>
-    <%= submit_tag value: "Accept", class: "btn btn-primary" %>
-    <%= submit_tag value: "Pass", class: "btn btn-primary" %>
+    <%= submit_tag "Cancel Drive", class: "btn btn-primary" %>
+    <%= link_to "Accept", request_path(rid: @riderequest.id), method: :patch, remote: true, class: "btn btn-primary" %>
+    <%= submit_tag "Pass", class: "btn btn-primary" %>
   </div>
 <% end %>
