@@ -25,7 +25,7 @@
     </a>
 
   </nav>
-  <div class="collapse w-25 right" id="collapseMenu">
+  <div class="collapse w-25 menu" id="collapseMenu">
     <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
     <a class="list-group-item list-group-item-action" href="#">Ride records</a>
     <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
