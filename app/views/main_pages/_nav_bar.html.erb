@@ -1,5 +1,5 @@
 <div>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+  <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="/">
       <%= image_tag("logo.png",
                     width: "40", height: "40",
@@ -8,19 +8,21 @@
       RideShare
     </a>
 
-    <div class="form-inline">
-      <a>I'm driving</a>
-      <a class="nav-item active">
-        <label class="switch">
-          Am I driving?
-          <input id="user-role" type="checkbox", onclick="changeUserRole();">
-          <span class="slider round"></span>
-        </label>
-      </a>
-      <a>I need a ride</a>
+    <div class="mx-auto">
+      <row>
+        <a class="nav-item">I need a ride</a>
+        <a class="nav-item active ">
+          <label class="switch">
+            <input id="user-role" type="checkbox", onclick="changeUserRole();">
+            <span class="slider round"></span>
+          </label>
+        </a>
+        <a class="nav-item">I'm driving</a>
+      </row>
+
     </div>
 
-    <a class="btn btn-primary right" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <a class="navbar-brand" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= image_tag("logo.png", id: "user_avatar", alt: "User avatar") %>
     </a>
 

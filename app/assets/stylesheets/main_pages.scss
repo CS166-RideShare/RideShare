@@ -22,3 +22,12 @@
   margin-bottom: 0;
 }
 
+.btn-block {
+  padding: 10% 0;
+  /* define values in pixels / Percentage or em. whatever suits
+     your requirements */
+}
+.search-background {
+  background-color: #e3f2fd;
+}
+[class*="rounded"] { border-radius: 10rem!important; }
