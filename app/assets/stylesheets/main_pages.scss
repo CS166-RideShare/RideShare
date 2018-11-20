@@ -22,7 +22,17 @@
   margin-bottom: 0;
 }
 
-.bottom {
-  position: absolute;
-  bottom: 10%;
+#ride_button {
+  background-color: #2E2F30;
+  border-color: #777777;
 }
+
+.btn-block {
+  padding: 10% 0;
+  /* define values in pixels / Percentage or em. whatever suits
+     your requirements */
+}
+.search-background {
+  background-color: #e3f2fd;
+}
+[class*="rounded"] { border-radius: 10rem!important; }
