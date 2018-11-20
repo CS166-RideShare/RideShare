@@ -28,11 +28,6 @@ class RidesController < ApplicationController
     end
     @riderequest = nil
     @response = nil
-    drive_starting_address = params[:drive][:starting_address]
-    drive_destination_address = params[:drive][:destination_address]
-    drive_starting_id = params[:drive][:starting_id]
-    drive_destination_id = params[:drive][:destination_id]
-    org_duration = params[:drive][:duration].to_i
     if Ride.available
       if session[:last_denied]
         time = Time.parse(session[:last_denied])
@@ -42,10 +37,8 @@ class RidesController < ApplicationController
         requests = Ride.available.order(:created_at)
       end
       requests.each do |request|
-        if @response = direction_if_pickup(request,
-                                           drive_starting_id,
-                                           drive_destination_id,
-                                           org_duration)
+        if @response = direction_if_pickup_coor(request,
+                                           drive_params)
           @riderequest = request
         end
       end
@@ -78,6 +71,23 @@ class RidesController < ApplicationController
                                       :destination_address,
                                       :starting_id,
                                       :starting_address,
+                                      :destination_lat,
+                                      :destination_lng,
+                                      :starting_lat,
+                                      :starting_lng,
                                       :pickup_time)
+    end
+
+    def drive_params
+      params.require(:drive).permit(:destination_id,
+                                    :destination_address,
+                                    :starting_id,
+                                    :starting_address,
+                                    :destination_lat,
+                                    :destination_lng,
+                                    :starting_lat,
+                                    :starting_lng,
+                                    :pickup_time,
+                                    :duration)
     end
 end

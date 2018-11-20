@@ -3,7 +3,7 @@
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
-    var map, infoWindow, geocoder, curMarker;
+    var map, infoWindow, geocoder, curMarker, directionsDisplayer, directions;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -13,6 +13,8 @@
         });
         infoWindow = new google.maps.InfoWindow;
         geocoder = new google.maps.Geocoder();
+        directionsDisplayer = new google.maps.DirectionsRenderer;
+        directions = new google.maps.DirectionsService;
 
         getLocation();
 
@@ -27,14 +29,14 @@
         this.travelMode = 'DRIVING';
         var originInput = document.getElementById('starting_input');
         var destinationInput = document.getElementById('destination_input');
-        this.directionsService = new google.maps.DirectionsService;
-        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsService = directions;
+        this.directionsDisplay = directionsDisplayer;
         this.directionsDisplay.setMap(map);
 
         var originAutocomplete = new google.maps.places.Autocomplete(
-            originInput, {placeIdOnly: true});
+            originInput, {fields: ['geometry','place_id']});
         var destinationAutocomplete = new google.maps.places.Autocomplete(
-            destinationInput, {placeIdOnly: true});
+            destinationInput, {fields: ['geometry','place_id']});
 
         this.setupPlaceChangedListener(originInput, originAutocomplete, 'ORIG');
         this.setupPlaceChangedListener(destinationInput, destinationAutocomplete, 'DEST');
@@ -47,35 +49,30 @@
         autocomplete.bindTo('bounds', this.map);
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
+          var location = place.geometry.location;
           if (!place.place_id) {
             console.log("null place_id")
             return;
           }
-          me.geocoder.geocode({'placeId': place.place_id}, function(results, status) {
-            if (status === 'OK') {
-              if (results[0]) {
-                me.map.setZoom(15);
-                me.map.setCenter(results[0].geometry.location);
-                if(curMarker!=null) {
-                  curMarker.setMap(null);
-                }
-                curMarker = new google.maps.Marker({
-                  map: me.map,
-                  position: results[0].geometry.location
-                });
-              } else {
-                window.alert('No results found');
-              }
-            } else {
-              window.alert('Geocoder failed due to: ' + status);
-            }
+
+          me.map.setZoom(15);
+          me.map.setCenter(location);
+          if(curMarker!=null) {
+            curMarker.setMap(null);
+          }
+          curMarker = new google.maps.Marker({
+            map: me.map,
+            position: location
           });
+
+          var infos = {id: place.place_id, address: input.value,
+                       lat: location.lat(), lng: location.lng()};
           if (mode === 'ORIG') {
             me.originPlaceId = place.place_id;
-            setFields('.starting', place.place_id, input.value);
+            setFields('.starting', infos);
           } else {
             me.destinationPlaceId = place.place_id;
-            setFields('.destination', place.place_id, input.value);
+            setFields('.destination', infos);
           }
           me.route();
         });
@@ -172,6 +169,30 @@
       }
     }
 
+    function showRoute(response) {
+      var route = response.routes[0];
+      var waypts = [];
+      for (var i = 1; i < response.routes[0].legs.length; i++) {
+        waypts.push({
+          location: response.routes[0].legs[i].start_location
+        });
+      }
+      directions.route({
+        origin: route.legs[0].start_location,
+        destination: route.legs[route.legs.length-1].end_location,
+        waypoints: waypts,
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          curMarker.setMap(null);
+          directionsDisplayer.setMap(map);
+          directionsDisplayer.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -180,12 +201,18 @@
         infoWindow.open(map);
     }
 
-    function setFields(loc, id, address) {
+    function setFields(loc, infos) {
       $(loc+'_id').each(function(){
-        $(this).val(id);
+        $(this).val(infos.id);
       });
       $(loc+'_address').each(function(){
-        $(this).val(address);
+        $(this).val(infos.address);
+      });
+      $(loc+'_lat').each(function(){
+        $(this).val(infos.lat);
+      });
+      $(loc+'_lng').each(function(){
+        $(this).val(infos.lng);
       });
     }
 </script>

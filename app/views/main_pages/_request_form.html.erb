@@ -5,6 +5,10 @@
 <% @riderequest||=Ride.new %>
 <%= form_with model: @riderequest, scope: :request, url: request_new_path, html: { class: "form-group" } do |f| %>
   <div class="modal-body">
+    <%= f.hidden_field :starting_lat, class: 'starting_lat' %>
+    <%= f.hidden_field :destination_lat, class: 'destination_lat' %>
+    <%= f.hidden_field :starting_lng, class: 'starting_lng' %>
+    <%= f.hidden_field :destination_lng, class: 'destination_lng' %>
     <%= f.hidden_field :starting_id, class: 'starting_id' %>
     <%= f.hidden_field :destination_id, class: 'destination_id' %>
     <%= f.label :starting_address %>
