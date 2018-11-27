@@ -1,1 +1,6 @@
-<h1>this is a placeholder for trips</h1>
+<% rides = @user.rides %>
+<ul>
+  <% rides.each do |ride| %>
+    <li><%=ride.starting_address %></li>
+  <% end %>
+</ul>
