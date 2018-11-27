@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_194417) do
+ActiveRecord::Schema.define(version: 2018_11_24_165833) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -51,15 +51,16 @@ ActiveRecord::Schema.define(version: 2018_11_16_194417) do
     t.string "destination_id"
     t.string "starting_address"
     t.string "destination_address"
-    t.time "pickup_time"
+    t.datetime "pickup_start"
     t.integer "canceled_by"
-    t.boolean "finished"
+    t.boolean "finished", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "starting_lat"
     t.string "starting_lng"
     t.string "destination_lat"
     t.string "destination_lng"
+    t.datetime "pickup_end"
   end
 
   create_table "users", force: :cascade do |t|

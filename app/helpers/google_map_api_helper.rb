@@ -46,11 +46,11 @@ module GoogleMapApiHelper
     duration = result["routes"].first["legs"].inject(0) {|sum, leg| sum+leg["duration"]["value"]}
 
     # Return the response as a json if the duration increase is equal to or less than 330 seconds
-    # duration>org_duration+330 ? nil : response
-    response
+    duration>org_duration+600 ? nil : response
   end
 
   protected
+  
     def check_way_points(args={})
       waypoints = ""
       if args[:rs_lat]!=args[:ds_lat]&&args[:rs_lng]!=args[:ds_lng]
@@ -63,14 +63,5 @@ module GoogleMapApiHelper
         waypoints = "waypoints="+waypoints[0..-2]+"&"
       end
       return waypoints
-    end
-
-    def adjust_json result
-      bounds = result["routes"].first["bounds"]
-      new_bounds = {
-        "l" => {"j" => bounds["southwest"]["lat"], "l" => bounds["northeast"]["lat"]},
-        "j" => {"j" => bounds["southwest"]["lng"], "l" => bounds["northeast"]["lng"]}
-      }
-      result["routes"].first["bounds"] = new_bounds
     end
 end

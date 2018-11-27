@@ -17,7 +17,18 @@
     <%= f.label :destination_address %>
     <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
     <%= f.label :scheduled_time %>
-    <%= f.time_field :scheduled_time, class: 'form-control', min: Time.now %>
+    <%= f.collection_select 'scheduled_time[day]',
+                            {today: 0, tomorrow: 1}, :last, :first,
+                            {prompt: 'select the day'},
+                            class: 'form-control' %>
+    <%= f.collection_select 'scheduled_time[hour]',
+                            (0..23).to_a, :to_i, :to_s,
+                            {prompt: 'select the hour'},
+                            class: 'form-control' %>
+    <%= f.collection_select 'scheduled_time[minute]',
+                            (0..11).map{|n| n*5}, :to_i, :to_s,
+                            {prompt: 'select the minute'},
+                            class: 'form-control' %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drive-set-window">Edit locations</button>

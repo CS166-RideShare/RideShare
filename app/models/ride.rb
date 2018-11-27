@@ -4,4 +4,6 @@ class Ride < ApplicationRecord
   has_one :review
 
   scope :available, -> { where(driver_id: nil) }
+  scope :unfinished, -> { where.not(driver_id: nil)
+                          .where(finished: false, canceled_by: nil) }
 end

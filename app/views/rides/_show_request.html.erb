@@ -25,8 +25,11 @@
     <%= label_tag "Rider get off at" %>
     <%= text_field_tag 'request[destination_addressd]', @riderequest.destination_address,
                        class: 'form-control', readonly: true %>
-    <%= label_tag "Rider asked to be pick up at" %>
-    <%= time_field_tag 'request[pickup_time]', @riderequest.pickup_time,
+    <%= label_tag "Rider asked to be pick up between" %>
+    <%= time_field_tag 'request[pickup_start]', @riderequest.pickup_start,
+                       class: 'form-control', readonly: true %>
+    <%= label_tag "and" %>
+    <%= time_field_tag 'request[pickup_end]', @riderequest.pickup_end,
                        class: 'form-control', readonly: true %>
   </div>
   <div class="modal-footer">

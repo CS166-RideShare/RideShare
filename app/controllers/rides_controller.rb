@@ -4,6 +4,9 @@ class RidesController < ApplicationController
   def create_request
     create_params = request_params
     create_params[:rider_id] = current_user.id
+    create_params[:pickup_start] = read_time create_params[:pickup_start]
+    create_params[:pickup_end] = read_time create_params[:pickup_end]
+    puts create_params
     @riderequest = Ride.new(create_params)
     if @riderequest.save
       render 'create_request'
@@ -26,24 +29,15 @@ class RidesController < ApplicationController
     if params[:commit] == "Pass"
       session[:last_denied] = params[:request][:created_at]
     end
+
+    scheduled_time = read_time create_params[:scheduled_time]
+
     @riderequest = nil
     @response = nil
-    if Ride.available
-      if session[:last_denied]
-        time = Time.parse(session[:last_denied])
-        requests = Ride.available.order(:created_at)
-                       .where("created_at > ?", time+1)
-      else
-        requests = Ride.available.order(:created_at)
-      end
-      requests.each do |request|
-        if @response = direction_if_pickup_coor(request,
-                                           drive_params)
-          @riderequest = request
-        end
-      end
-      @drive = params[:drive]
+    if requests = Ride.available.where.not(rider_id: current_user.id)
+      select_request requests, session[:last_denied]
     end
+    @drive = drive_params
   end
 
   def take_request
@@ -66,6 +60,26 @@ class RidesController < ApplicationController
 
   private
 
+    def select_request requests, last_denied
+      if last_denied
+        time = Time.parse(last_denied)
+        requests = requests.order(:created_at).where("created_at > ?", time+1)
+      else
+        requests = requests.order(:created_at)
+      end
+      @riderequest = requests.find do |request|
+        @response = direction_if_pickup_coor(request, drive_params)
+      end
+    end
+
+    def read_time time_hash
+      time = Time.parse time_hash[:hour]+":"+time_hash[:minute], Time.now
+      if time_hash[:day]=="1"
+        time += 1.days
+      end
+      time
+    end
+
     def request_params
       params.require(:request).permit(:destination_id,
                                       :destination_address,
@@ -75,7 +89,8 @@ class RidesController < ApplicationController
                                       :destination_lng,
                                       :starting_lat,
                                       :starting_lng,
-                                      :pickup_time)
+                                      pickup_start: [:day, :hour, :minute],
+                                      pickup_end: [:day, :hour, :minute])
     end
 
     def drive_params
@@ -87,7 +102,7 @@ class RidesController < ApplicationController
                                     :destination_lng,
                                     :starting_lat,
                                     :starting_lng,
-                                    :pickup_time,
-                                    :duration)
+                                    :duration,
+                                    scheduled_time: [:day, :hour, :minute])
     end
 end

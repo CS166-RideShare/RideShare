@@ -12,3 +12,4 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
     $("#ride-request-window").find(".modal-content").html(data['accepted'])
+    $("#ride-request-window").modal('show');
