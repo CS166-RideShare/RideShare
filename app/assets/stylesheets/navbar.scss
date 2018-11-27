@@ -13,3 +13,26 @@
   height: 40px;
   border-radius: 50%
 }
+.navbar-nav {
+  vertical-align: middle;
+  float:none;
+  margin:0 auto;
+  display: block;
+  text-align: center;
+}
+
+.navbar-nav > li {
+  display: inline-block;
+  float:none;
+}
+.right {
+  position: absolute;
+  right: 0px;
+}
+
+.inner-nav {
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  height: 100%;
+}

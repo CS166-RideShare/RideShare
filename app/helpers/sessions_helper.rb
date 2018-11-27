@@ -11,6 +11,12 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
   end
 
+  def temp_remember(user)
+    user.remember
+    cookies.signed[:user_id] = { value: user.id, expires: 30.minutes }
+    cookies[:remember_token] = { value: user.remember_token, expires: 30.minutes }
+  end
+
   # Returns the current logged-in user (if any).
   def current_user
     if (user_id = session[:user_id])
@@ -36,7 +42,9 @@ module SessionsHelper
   end
 
   def check_login
-    if !logged_in?
+    if logged_in?
+      temp_remember current_user if cookies[:remember_token].nil?
+    else
       redirect_to login_path
     end
   end
@@ -47,6 +55,4 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
-
-
 end

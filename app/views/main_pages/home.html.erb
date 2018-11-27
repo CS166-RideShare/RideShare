@@ -1,37 +1,57 @@
 <% provide(:title, 'Share Your Ride!') %>
 
-<div class="top-menu">
-  <%= render 'avatar_button' %>
+
+
+<div>
+  <%= render 'nav_bar' %>
 </div>
 
 
 <div id="map"></div>
 
-<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="row search-background">
+  <div class="col-10">
+    <div class="row">
+      <input type="text" id='starting_input' class='form-control' placeholder="Where would you like to start?">
+    </div>
+    <div class="row">
+      <input type="text" id='destination_input' class='form-control' placeholder="Where would you like to go?">
+    </div>
+  </div>
+  <div class="col-2">
+    <button type="button" id="ride_button" class="btn btn-primary btn-rounded btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>
+  </div>
+</div>
+
+<!--<div class="justify-content-center row">-->
+<!--  <div class="col-xs-10 col-md-11">-->
+
+
+<!--  </div>-->
+<!--  <div class="col-xs-2  col-md-1">-->
+<!--    <button type="button" id="ride_button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div id="ride-request-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content"></div>
+    <div class="modal-content">
+      <%= render 'request_form' %>
+    </div>
+  </div>
+</div>
+
+<div id="drive-set-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= render 'drive_form' %>
+    </div>
   </div>
 </div>
 
 
-<div class="top-space center w-50 input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Choose your starting point:</span>
-  </div>
-  <input class="form-control" type="text" id="starting_input">
-</div>
 
-<div class="center top-space w-10">
-  <button id="go_button" class="btn btn-primary" type="button"> Get route </button>
-</div>
+<%= render 'map_scripts' %>
 
-
-<div class="fixed-bottom d-flex justify-content-center">
-
-  <div class="p-2 bd-highlight">
-    <%= link_to "Set a drive", request_path, {remote: true,
-                                              class: 'btn btn-primary btn-block'} %>
-  </div>
-</div>
-
-<!-- <%= render 'map_scripts' %> -->
+<%= render 'role_scripts' %>
