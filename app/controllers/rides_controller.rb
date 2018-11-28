@@ -30,7 +30,7 @@ class RidesController < ApplicationController
       session[:last_denied] = params[:request][:created_at]
     end
 
-    scheduled_time = read_time create_params[:scheduled_time]
+    scheduled_time = read_time drive_params[:scheduled_time]
 
     @riderequest = nil
     @response = nil
