@@ -1,6 +1,39 @@
 <% rides = @user.rides %>
-<ul>
+<div class = "container-fluid">
   <% rides.each do |ride| %>
-    <li><%=ride.starting_address %></li>
+
+    <div class = "row">
+      <div class = "col">
+        <%= ride.created_at %>
+      </div>
+
+      <div>
+        <div class = "col">
+          <% if ride.canceled_by %>
+            Canceled
+          <%end %>
+        </div>
+      </div>
+    </div>
+
+
+    <div class = "row">
+      <div class="col">
+        <address>
+          <%=ride.starting_address %>
+        </address>
+      </div>
+      <div class = "col">
+        <span class="oi oi-arrow-right"></span>
+      </div>
+      <div class = "col">
+        <address>
+          <%=ride.destination_address %>
+        </address>
+      </div>
+      <div class = "col">
+
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
