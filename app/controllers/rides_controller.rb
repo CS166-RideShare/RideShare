@@ -77,7 +77,8 @@ class RidesController < ApplicationController
 
     def read_time time_hash
       begin
-        time = Time.parse time_hash[:hour]+":"+time_hash[:minute], Time.now
+        time = DateTime.parse time_hash[:hour]+":"+time_hash[:minute],
+                              DateTime.now.in_time_zone(cookies['browser.timezone'])
         if time_hash[:day]=="1"
           time += 1.days
         end
