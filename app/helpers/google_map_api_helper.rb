@@ -3,18 +3,18 @@ require 'json'
 
 module GoogleMapApiHelper
 
-  def direction_if_pickup_coor(riderequest, drive_params)
+  def direction_if_pickup_coor(riderequest, drive)
     rs_lat = riderequest.starting_lat
     rs_lng = riderequest.starting_lng
     rd_lat = riderequest.destination_lat
     rd_lng = riderequest.destination_lng
 
-    ds_lat = drive_params[:starting_lat]
-    ds_lng = drive_params[:starting_lng]
-    dd_lat = drive_params[:destination_lat]
-    dd_lng = drive_params[:destination_lng]
+    ds_lat = drive.starting_lat
+    ds_lng = drive.starting_lng
+    dd_lat = drive.destination_lat
+    dd_lng = drive.destination_lng
 
-    org_duration = drive_params[:duration].to_i
+    org_duration = drive.duration
 
     waypoints = check_way_points(
       rs_lat: rs_lat,
@@ -50,7 +50,7 @@ module GoogleMapApiHelper
   end
 
   protected
-  
+
     def check_way_points(args={})
       waypoints = ""
       if args[:rs_lat]!=args[:ds_lat]&&args[:rs_lng]!=args[:ds_lng]

@@ -5,6 +5,8 @@
 <% @riderequest||=Ride.new %>
 <%= form_with model: @riderequest, scope: :request, url: request_new_path, html: { class: "form-group" } do |f| %>
   <div class="modal-body">
+    <div id="request_error_explanation">
+    </div>
     <%= f.hidden_field :starting_lat, class: 'starting_lat' %>
     <%= f.hidden_field :destination_lat, class: 'destination_lat' %>
     <%= f.hidden_field :starting_lng, class: 'starting_lng' %>
@@ -15,33 +17,13 @@
     <%= f.text_field :starting_address, class: 'form-control starting_address', readonly: true %>
     <%= f.label :destination_address %>
     <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
+
+    <% f.extend CustomTimeSelectHelper %>
     <%= f.label :pickup_start %>
-    <%= f.collection_select 'pickup_start[day]',
-                            {today: 0, tomorrow: 1}, :last, :first,
-                            {prompt: 'select the day'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'pickup_start[hour]',
-                            (0..23).to_a, :to_i, :to_s,
-                            {prompt: 'select the hour'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'pickup_start[minute]',
-                            (0..3).map{|n| n*15}, :to_i, :to_s,
-                            {prompt: 'select the minute'},
-                            class: 'form-control' %>
+    <%= f.custom_time_select @riderequest, :pickup_start, 15, @timezone %>
 
     <%= f.label :pickup_end %>
-    <%= f.collection_select 'pickup_end[day]',
-                            {today: 0, tomorrow: 1}, :last, :first,
-                            {prompt: 'select the day'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'pickup_end[hour]',
-                            (0..23).to_a, :to_i, :to_s,
-                            {prompt: 'select the hour'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'pickup_end[minute]',
-                            (0..3).map{|n| n*15}, :to_i, :to_s,
-                            {prompt: 'select the minute'},
-                            class: 'form-control' %>
+    <%= f.custom_time_select @riderequest, :pickup_end, 15, @timezone %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">Edit locations</button>

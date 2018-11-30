@@ -5,9 +5,8 @@ class MainPagesController < ApplicationController
     if @riderequest
       render 'home', locals: { request_form: 'rides/create_request' }
     elsif @riderequest = current_user.rides.unfinished.first
-      driver_name = @riderequest.driver.name
-      render 'home', locals: { request_form: 'rides/request_accepted',
-                               driver_name: driver_name }
+      @driver = @riderequest.driver
+      render 'home', locals: { request_form: 'rides/request_accepted' }
     else
       render 'home', locals: { request_form: 'request_form' }
     end
