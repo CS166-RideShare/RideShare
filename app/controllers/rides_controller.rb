@@ -64,21 +64,24 @@ class RidesController < ApplicationController
   private
 
     def select_request requests, last_denied
+      requests = requests.order(:created_at)
       if last_denied
         time = Time.parse(last_denied)
-        requests = requests.order(:created_at).where("created_at > ?", time+1)
-      else
-        requests = requests.order(:created_at)
+        requests = requests.where("created_at > ?", time+1)
       end
       @riderequest = requests.find do |request|
-        @response = direction_if_pickup_coor(request, @drive)
+        if request.pickup_start<=@drive.scheduled_time &&
+           request.pickup_end>=@drive.scheduled_time
+          @response = direction_if_pickup_coor(request, @drive)
+        end
+        !@response.nil?
       end
     end
 
     def read_time time_hash
       begin
-        time = DateTime.parse time_hash[:hour]+":"+time_hash[:minute],
-                              DateTime.now.in_time_zone(cookies['browser.timezone'])
+        time = Time.find_zone(cookies['browser.timezone'])
+                   .parse(time_hash[:hour]+":"+time_hash[:minute], Time.now.in_time_zone(cookies['browser.timezone']))
         if time_hash[:day]=="1"
           time += 1.days
         end
