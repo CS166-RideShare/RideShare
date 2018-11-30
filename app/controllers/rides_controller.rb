@@ -83,7 +83,7 @@ class RidesController < ApplicationController
         if time_hash[:day]=="1"
           time += 1.days
         end
-        return Datetime.parse(time.to_s)
+        return DateTime.parse(time.to_s)
       rescue
         return nil
       end
