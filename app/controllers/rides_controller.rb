@@ -3,9 +3,6 @@ class RidesController < ApplicationController
 
   def create_request
     @riderequest = Ride.new(request_params)
-    puts @riderequest.pickup_end
-    puts Time.now.in_time_zone(cookies['browser.timezone'])
-    puts DateTime.now
     if @riderequest.save
       render 'create_request'
     else
@@ -82,7 +79,7 @@ class RidesController < ApplicationController
     def read_time time_hash
       begin
         time = Time.find_zone(cookies['browser.timezone'])
-                   .parse(time_hash[:hour]+":"+time_hash[:minute], Time.now.in_time_zone(cookies['browser.timezone']))
+                   .parse(time_hash[:hour]+":"+time_hash[:minute])
         if time_hash[:day]=="1"
           time += 1.days
         end
