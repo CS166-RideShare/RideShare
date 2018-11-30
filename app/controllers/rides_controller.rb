@@ -3,6 +3,8 @@ class RidesController < ApplicationController
 
   def create_request
     @riderequest = Ride.new(request_params)
+    puts @riderequest.pickup_end
+    puts DateTime.now
     if @riderequest.save
       render 'create_request'
     else
