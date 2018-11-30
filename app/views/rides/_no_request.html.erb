@@ -6,5 +6,22 @@
   There is no request available currently :(
 </div>
 <div class="modal-footer">
-  <%= link_to "Cancel Drive", request_path(commit: "Cancel Drive"), remote: true, class: "btn btn-primary" %>
+  <%= form_with model: @drive, scope: :drive, url: request_path, method: :get,
+                html: { class: "form-group" } do |f| %>
+    <%= f.hidden_field :starting_lat %>
+    <%= f.hidden_field :destination_lat %>
+    <%= f.hidden_field :starting_lng %>
+    <%= f.hidden_field :destination_lng %>
+    <%= f.hidden_field :starting_id %>
+    <%= f.hidden_field :destination_id %>
+    <%= f.hidden_field :duration %>
+    <%= f.hidden_field :starting_address %>
+    <%= f.hidden_field :destination_address %>
+    <%= f.fields_for :scheduled_time do |fields| %>
+      <%= fields.hidden_field :day, value: 1 %>
+      <%= fields.hidden_field :hour, value: @drive.scheduled_time.in_time_zone(@timezone).hour %>
+      <%= fields.hidden_field :minute, value: @drive.scheduled_time.in_time_zone(@timezone).min %>
+    <% end %>
+    <%= submit_tag "Cancel Drive", class: "btn btn-primary" %>
+  <% end %>
 </div>

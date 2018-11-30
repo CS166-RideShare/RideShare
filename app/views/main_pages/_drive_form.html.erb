@@ -2,9 +2,12 @@
   Set a drive
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<%= form_with model: Ride.new, scope: :drive, url: request_path, method: :get,
+<% @drive||=Ride.new %>
+<%= form_with model: @drive, scope: :drive, url: request_path, method: :get,
               html: { class: "form-group" } do |f| %>
   <div class="modal-body">
+    <div id="drive_error_explanation">
+    </div>
     <%= f.hidden_field :starting_lat, class: 'starting_lat' %>
     <%= f.hidden_field :destination_lat, class: 'destination_lat' %>
     <%= f.hidden_field :starting_lng, class: 'starting_lng' %>
@@ -16,19 +19,10 @@
     <%= f.text_field :starting_address, class: 'form-control starting_address', readonly: true %>
     <%= f.label :destination_address %>
     <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
+
+    <% f.extend CustomTimeSelectHelper %>
     <%= f.label :scheduled_time %>
-    <%= f.collection_select 'scheduled_time[day]',
-                            {today: 0, tomorrow: 1}, :last, :first,
-                            {prompt: 'select the day'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'scheduled_time[hour]',
-                            (0..23).to_a, :to_i, :to_s,
-                            {prompt: 'select the hour'},
-                            class: 'form-control' %>
-    <%= f.collection_select 'scheduled_time[minute]',
-                            (0..11).map{|n| n*5}, :to_i, :to_s,
-                            {prompt: 'select the minute'},
-                            class: 'form-control' %>
+    <%= f.custom_time_select @drive, :scheduled_time, 5, @timezone  %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drive-set-window">Edit locations</button>

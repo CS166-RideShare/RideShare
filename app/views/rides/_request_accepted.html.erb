@@ -3,5 +3,6 @@
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
 <div class="modal-body">
-  <%= driver_name %> has accepted your request!
+  <% @driver ||= driver %>
+  <%= @driver.name %> has accepted your request!
 </div>
