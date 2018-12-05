@@ -23,13 +23,13 @@
     </div>
 
     <a class="navbar-brand" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
-      <%= image_tag("logo.png", id: "user_avatar", alt: "User avatar") %>
+      <%= image_tag("Hamburger.png", id: "user_avatar", alt: "User avatar") %>
     </a>
 
   </nav>
-  <div class="collapse w-25 menu" id="collapseMenu">
+  <div class="collapse col-md-auto menu" id="collapseMenu">
     <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
-    <a class="list-group-item list-group-item-action" href="#">Ride records</a>
+<!--    <a class="list-group-item list-group-item-action" href="#">Ride records</a>-->
     <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
   </div>
 </div>

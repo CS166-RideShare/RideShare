@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
 <% provide(:title, @user.name) %>
 
 <div class="top-menu">
   <%#= render 'main_pages/avatar_button' %>
 </div>
-<div class="row">
-  <aside class="col-md-2" style="background-color: #e3f2fd;">
+<div class="row" style="height:100%;">
+  <div class="col-md-auto" style="background-color: #e3f2fd; height:100%;">
     <a class="navbar-brand" href="/">
       <%= image_tag("logo.png",
                     width: "40", height: "40",
                     class: "d-inline-block align-top",
-                    alt: "RideShare Logo") %>
+                    alt: "RideShare Logo")
+      %>
       RideShare
     </a>
     <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
@@ -25,22 +25,17 @@
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" role="tab" href="#payments">Payment method</a>
       </li>
     </ul>
-  </aside>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="profile" role="tabpanel">
-      Profile
-      <%= render 'profile' %>
-    </div>
-    <div class="tab-pane fade" id="trips" role="tabpanel">
-      My trips
-      <%= render 'trips' %>
-    </div>
-    <div class="tab-pane fade" id="payments" role="tabpanel">
-      Payment method
-      <%= render 'payment' %>
-    </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div>
-
+  <div class="col tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="profile" role="tabpanel">
+        <%= render 'profile' %>
+      </div>
+      <div class="tab-pane fade" id="trips" role="tabpanel">
+        <%= render 'trips' %>
+      </div>
+      <div class="tab-pane fade" id="payments" role="tabpanel">
+        <%= render 'payment' %>
+      </div>
+    </div>
 </div>
-</html>
+
