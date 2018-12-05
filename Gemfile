@@ -45,6 +45,10 @@ gem 'simple_form'
 # Read JSON
 gem 'json'
 
+gem 'twilio-ruby'
+
+gem 'best_in_place'
+
 # Get user's timezone
 gem 'browser-timezone-rails'
 

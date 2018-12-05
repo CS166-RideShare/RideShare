@@ -9,19 +9,19 @@
     </a>
 
     <div class="mx-auto">
-      <row>
-        <a class="nav-item">I need a ride</a>
-        <a class="nav-item active ">
-          <label class="switch">
-            <input id="user-role" type="checkbox", onclick="changeUserRole();">
-            <span class="slider round"></span>
-          </label>
-        </a>
-        <a class="nav-item">I'm driving</a>
-      </row>
-
+      <a class="nav-item">I need a ride</a>
+      <a class="nav-item active ">
+        <label class="switch">
+          <input id="user-role" type="checkbox", onclick="changeUserRole();">
+          <span class="slider round"></span>
+        </label>
+      </a>
+      <a class="nav-item">I'm driving</a>
     </div>
 
+    <a class="navbar-brand">
+      <%= image_tag("emergency.png", id: "user_avatar", alt: "User avatar")%>
+    </a>
     <a class="navbar-brand" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= image_tag("Hamburger.png", id: "user_avatar", alt: "User avatar") %>
     </a>

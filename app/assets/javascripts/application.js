@@ -15,9 +15,16 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
+//= require jquery.purr
+//= require best_in_place
 //= require popper
 //= require bootstrap-sprockets
 //= require bootstrap.js
 //= require js.cookie
 //= require jstz
 //= require browser_timezone_rails/set_time_zone
+
+$(document).ready(function() {
+    /* Activating Best In Place */
+    jQuery(".best_in_place").best_in_place();
+});

@@ -4,40 +4,40 @@
 
   <div class="user_info mx-auto">
     <h1>
-    <% if @user.profile_image.attached? %>
-    <%= image_tag(@user.profile_image, :size => "200x150") %>
-    <% end %>
-    <%= @user.name %>
+      <% if @user.profile_image.attached? %>
+      <%= image_tag(@user.profile_image, :size => "200x150") %>
+      <% end %>
+      <%= best_in_place @user, :name, :as => :input%>
     </h1>
-
-
     <div>
       <%= render partial: "upload_button" %>
     </div>
-
+    <br>
     <div class="justify-content-md-center">
-    <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
-      <p class="text-monospace"><%= @user.email %></p>
-    </div>
-    </div>
-    <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Phone</span>
-      <p class="text-monospace">eg:6177633765</p>
-    </div>
-    </div>
 
-    <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
-      <p class="text-monospace"><%=@user.name %></p>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+          <%= best_in_place @user, :email, :as => :input%>
+        </div>
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Phone</span>
+          <%if @user.phone_number.nil?%>
+            <%= best_in_place @user, :phone_number, :as => :input, :place_holder => "Click me to add content!"%>
+          <%else %>
+            <%= best_in_place @user, :phone_number, :as => :input%>
+          <%end %>
+        </div>
+      </div>
+<!--      <div class="input-group input-group-sm mb-3">-->
+<!--        <div class="input-group-prepend">-->
+<!--          <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>-->
+          <%#= best_in_place @user, :name, :as => :input%>
+<!--        </div>-->
+<!--      </div>-->
     </div>
-    </div>
-    </div>
-
   </div>
-
 </div>
 
