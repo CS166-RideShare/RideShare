@@ -2,7 +2,7 @@
 <h1>Sign up</h1>
 
 <div class="row">
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
     <%= form_for(@user, url: signup_path) do |f| %>
       <%= render 'error_messages' %>
 
@@ -11,6 +11,12 @@
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number, class: 'form-control' %>
+
+      <%= f.label :emergency_contact %>
+      <%= f.text_field :emergency_contact, class: 'form-control' %>
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>

@@ -46,9 +46,8 @@ class UsersController < ApplicationController
   private
 
     def user_signup_params
-      params.require(:user).permit(:name, :email, :is_driver,
-                                   :password,
-                                   :password_confirmation)
+      params.require(:user).permit(:name, :email, :is_driver, :phone_number, :emergency_contact,
+                                   :password, :password_confirmation)
     end
 
     def user_info_params
