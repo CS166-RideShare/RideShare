@@ -20,7 +20,11 @@
     </div>
 
     <a class="navbar-brand">
-      <%= image_tag("emergency.png", id: "user_avatar", alt: "User avatar")%>
+      <%= link_to(image_tag("emergency.png", id: "user_avatar", alt: "User avatar"),
+                  {controller: "main_pages", action: "emergency"},
+                  data: {confirm: "This will send a message to your emergency contact.\nAre you sure?"},
+                  :remote => true)
+      %>
     </a>
     <a class="navbar-brand" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
       <%= image_tag("Hamburger.png", id: "user_avatar", alt: "User avatar") %>

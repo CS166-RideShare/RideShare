@@ -11,20 +11,16 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    puts "***********#{@user.phone_number}"
     puts user_update_params
     respond_to do |format|
       if @user.update_attributes(user_update_params)
-        puts "$$$$$$$$$"
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.json { respond_with_bip(@user) }
       else
-        puts "&&&&&&&&&&"
         format.html { render :action => "edit" }
         format.json { respond_with_bip(@user) }
       end
     end
-    puts "***********#{@user.phone_number}"
   end
 
   def new

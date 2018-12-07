@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery
 //= require jquery.purr
+//= require jquery_ujs
 //= require best_in_place
 //= require popper
 //= require bootstrap-sprockets

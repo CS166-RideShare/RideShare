@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'main_pages#home'
 
+  get  '/emergency', to: 'main_pages#emergency'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get    '/login',   to: 'sessions#new'
