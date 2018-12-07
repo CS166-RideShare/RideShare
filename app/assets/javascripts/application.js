@@ -24,7 +24,8 @@
 //= require jstz
 //= require browser_timezone_rails/set_time_zone
 
-$(document).ready(function() {
-    /* Activating Best In Place */
-    jQuery(".best_in_place").best_in_place();
+$(document).on('turbolinks:load', function() {
+  /* Activating Best In Place */
+  $(".best_in_place").best_in_place();
+  App.web_notifications.connected();
 });

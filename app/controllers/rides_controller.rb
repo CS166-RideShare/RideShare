@@ -4,6 +4,8 @@ class RidesController < ApplicationController
   def create_request
     @riderequest = Ride.new(request_params)
     if @riderequest.save
+      RequestCleanupJob.set(wait_until: @riderequest.pickup_end)
+                       .perform_later(@riderequest.id)
       render 'create_request'
     else
       render 'error_request', locals: { errors: @riderequest.errors }
