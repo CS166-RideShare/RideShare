@@ -1,39 +1,57 @@
-<% rides = @user.rides %>
-<div class = "container-fluid">
-  <% rides.each do |ride| %>
-
-    <div class = "row">
-      <div class = "col">
-        <%= ride.created_at %>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
+        <% if @user.profile_image.attached? %>
+          <%= image_tag(@user.profile_image, :size => "200x200") %>
+        <% else %>
+          <%= image_tag('user_default.png', :size => "200x200") %>
+        <% end %>
       </div>
-
-      <div>
-        <div class = "col">
-          <% if ride.canceled_by %>
-            Canceled
-          <%end %>
-        </div>
+      <div class="col-md-4">
+        <p class="my-3 font-weight-bold" style="font-size: 300%"><%= best_in_place @user, :name, :as => :input%></p>
+        <div class="my-3"><%= render partial: "upload_button" %></div>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-12 offset-md-2">
+        <% rides = @user.rides %>
+          <% rides.each do |ride| %>
+            <div class = "row">
+              <div class = "col">
+                <%= ride.pickup_start %>
+              </div>
 
-    <div class = "row">
-      <div class="col">
-        <address>
-          <%=ride.starting_address %>
-        </address>
-      </div>
-      <div class = "col">
-        <img src="app/assets/images/open-iconic-master/svg/arrow-right.svg">
-      </div>
-      <div class = "col">
-        <address>
-          <%=ride.destination_address %>
-        </address>
-      </div>
-      <div class = "col">
+              <div>
+                <div class = "col">
+                  <% if ride.canceled_by %>
+                    Canceled
+                  <%end %>
+                </div>
+              </div>
+            </div>
 
+
+            <div class = "row">
+              <div class="col">
+                <address>
+                  <%=ride.starting_address[0..-6]%>
+                </address>
+              </div>
+
+              <div class = "col">
+                <address>
+                  <%=ride.destination_address[0..-6] %>
+                </address>
+              </div>
+              <div class = "col">
+
+              </div>
+            </div>
+          <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 </div>
+
