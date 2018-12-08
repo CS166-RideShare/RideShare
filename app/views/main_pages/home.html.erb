@@ -2,18 +2,13 @@
 <html lang="en">
 
 <% provide(:title, 'Share Your Ride!') %>
-
-
-
 <div>
   <%= render 'nav_bar' %>
 </div>
-
-
 <div id="map"></div>
 
-<div class="row search-background">
-  <div class="col-10">
+<div class="row">
+  <div class="col-10 offset-1">
     <div class="row">
       <input type="text" id='starting_input' class='form-control' placeholder="Where would you like to start?">
     </div>
@@ -21,8 +16,11 @@
       <input type="text" id='destination_input' class='form-control' placeholder="Where would you like to go?">
     </div>
   </div>
-  <div class="col-2">
-    <button type="button" id="ride_button" class="btn btn-primary btn-rounded btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>
+</div>
+
+<div class="row">
+  <div class="col-10 offset-1">
+    <button type="button" id="ride_button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>
   </div>
 </div>
 

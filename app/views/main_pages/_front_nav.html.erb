@@ -1,0 +1,18 @@
+<div class="font-weight-bold text-light">
+  <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="background-color: #11294F;">
+    <a class="navbar-brand" href="/">
+      <%= image_tag("logo.png",
+                    width: "40", height: "40",
+                    class: "d-inline-block align-top",
+                    alt: "RideShare Logo") %>
+    </a>
+    <h3 class="font-italic">RideShare</h3>
+
+    <a class="navbar-brand">
+      <%= link_to "Sign Up", signup_path%>
+    </a>
+    <a class="navbar-brand">
+      <%= link_to "Login", login_path%>
+    </a>
+  </nav>
+</div>

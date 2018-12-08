@@ -22,17 +22,15 @@
   margin-bottom: 0;
 }
 
+#toggle-text {
+  font-size: larger;
+}
 #ride_button {
-  background-color: #2E2F30;
+  background-color: #11294F;
   border-color: #777777;
 }
 
-.btn-block {
-  padding: 10% 0;
-  /* define values in pixels / Percentage or em. whatever suits
-     your requirements */
-}
 .search-background {
-  background-color: #e3f2fd;
+  background-color: #11294F;
 }
 [class*="rounded"] { border-radius: 10rem!important; }

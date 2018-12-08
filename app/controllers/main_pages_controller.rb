@@ -1,5 +1,5 @@
 class MainPagesController < ApplicationController
-
+  skip_before_action :check_login, only: [:front]
   def home
     @riderequest = current_user.rides.available.first
     if @riderequest
@@ -25,5 +25,9 @@ class MainPagesController < ApplicationController
       to: to,
       body: "This is a test message from RideShare"
     )
+  end
+
+  def front
+
   end
 end

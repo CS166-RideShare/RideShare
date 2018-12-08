@@ -1,25 +1,24 @@
-<div>
-  <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="background-color: #e3f2fd;">
+<div class="font-weight-bold text-light">
+  <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-between" style="background-color: #11294F;">
     <a class="navbar-brand" href="/">
       <%= image_tag("logo.png",
                     width: "40", height: "40",
                     class: "d-inline-block align-top",
                     alt: "RideShare Logo") %>
-      RideShare
     </a>
-
+    <h3 class="font-italic">RideShare</h3>
     <div class="mx-auto">
-      <a class="nav-item">I need a ride</a>
+      <a class="nav-item" id="toggle-text">Rider</a>
       <a class="nav-item active ">
         <label class="switch">
           <input id="user-role" type="checkbox", onclick="changeUserRole();">
           <span class="slider round"></span>
         </label>
       </a>
-      <a class="nav-item">I'm driving</a>
+      <a class="nav-item" id="toggle-text">Driver</a>
     </div>
 
-    <a class="navbar-brand">
+    <a class="navbar-brand mr-2">
       <%= link_to(image_tag("emergency.png", id: "user_avatar", alt: "User avatar"),
                   {controller: "main_pages", action: "emergency"},
                   data: {confirm: "This will send a message to your emergency contact.\nAre you sure?"},

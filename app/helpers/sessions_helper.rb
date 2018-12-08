@@ -45,7 +45,7 @@ module SessionsHelper
     if logged_in?
       temp_remember current_user if cookies[:remember_token].nil?
     else
-      redirect_to login_path
+      redirect_to front_path
     end
   end
 
