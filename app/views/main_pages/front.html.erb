@@ -2,6 +2,13 @@
   <%= render 'front_nav' %>
 </div>
 
-<div id="backgroud">
-  <%=image_tag('background.png', size: "16") %>
+<div id="backgroud" style="background-color: #8ED6F0; height: 100%;">
+  <div class="center">
+    <%=image_tag('background.png', size: "1200x800", class: "mx-auto") %>
+  </div>
+  <div class="center text-light py-5" id="front-text" style="background-color: #8ED6F0; display: block;">
+    <p>Start sharing your daily commute right here.</p>
+    <%= link_to "Sign Up", signup_path, class: 'front-link-color mr-3'%>
+    <%= link_to "Login", login_path, class: 'front-link-color ml-3'%>
+  </div>
 </div>

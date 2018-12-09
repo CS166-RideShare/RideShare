@@ -29,9 +29,21 @@
   background-color: #11294F;
   border-color: #777777;
 }
-#backgroud {
+#background {
   z-index: -10;
 }
+#front-text {
+  font-family: Segoe;
+  font-size: 50px;
+  font-style: italic;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 38px;
+}
+.link-to-text-color { color: #ffffff }
+.link-to-text-color:hover { color: #8ED6F0}
+.front-link-color { color: #ffffff }
+.front-link-color:hover { color: #11294F}
 .search-background {
   background-color: #11294F;
 }
