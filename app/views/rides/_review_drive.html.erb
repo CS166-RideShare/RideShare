@@ -1,0 +1,22 @@
+<div class="modal-header">
+  Hope you've enjoyed your ride! How's your experience with <%= driver.name %>?
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<%= form_with model: Review.new, url: ride_review_path(id: ride.id, role: 'rider'), method: :post,
+              html: { class: "form-group" } do |f| %>
+  <div class="modal-body">
+    <div id="review_error_explanation">
+    </div>
+    <%= f.label :review %>
+    <%= f.text_field :driver_review, class: 'form-control starting_address' %>
+    <%= f.collection_select :driver_review_level,
+                            { good: 2, fair: 1, poor: 0 },
+                            :last, :first,
+                            { prompt: "please select a level" },
+                            class: 'form-control' %>
+  </div>
+  <div class="modal-footer">
+    <%= f.submit value:"Submit Review", class: "btn btn-primary" %>
+    <%= link_to "Give the review later", ride_new_path(ride: 'request'), remote: true %>
+  </div>
+<% end %>

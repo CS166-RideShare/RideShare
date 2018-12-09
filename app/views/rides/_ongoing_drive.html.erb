@@ -1,0 +1,20 @@
+<div class="modal-header"
+     data-channel="cancel_notifications"
+     data-role="driver"
+     data-ride-id="<%= @drive.id %>">
+  You're all set to go!
+  <button type="button" class="close" data-dismiss="modal">x</button>
+</div>
+<div class="modal-body">
+  <%= @rider.name %> would wait you at <%= @drive.starting_address %>!
+  <%= link_to "Send a reminder!", "#" %> to tell <%= @rider.name %> that you're here!
+</div>
+<div class="modal-footer">
+  <%= link_to "Finish Ride",
+              ride_path(rid: @drive.id),
+              method: :patch, remote: true %>
+  <%= link_to "Cancel Ride",
+              ride_path(rid: @drive.id, canceled_by: 1),
+              method: :delete, remote: true,
+              data: { confirm: "Are you sure? The rider is waiting you" } %>
+</div>

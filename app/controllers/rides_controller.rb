@@ -42,23 +42,79 @@ class RidesController < ApplicationController
   end
 
   def take_request
-    request = nil
+    @ride = nil
     success = Ride.transaction do
-      request = Ride.find(params[:rid])
-      request.lock!
-      raise ActiveRecord::Rollback unless request.driver_id.nil?
-      request.update!(driver_id: current_user.id)
+      @ride = Ride.find(params[:rid])
+      @ride.lock!
+      raise ActiveRecord::Rollback unless @ride.driver_id.nil?
+      @ride.update!(driver_id: current_user.id)
       true
     end
     if success
+      @drive = @ride
+      @rider = @drive.rider
       @driver = current_user
-      ActionCable.server.broadcast "request_channel/#{request.id}",
+      ActionCable.server.broadcast "request_channel/#{@ride.id}",
                                    accepted: ApplicationController.render(partial: 'rides/request_accepted',
-                                                                          locals: { driver: @driver })
+                                                                          locals: { driver: @driver, ride: @ride })
       render 'take_request'
     else
       redirect_to request_path, format: :js
     end
+  end
+
+  def cancel_ride
+    @ride = Ride.find(params[:rid])
+    @ride.update(canceled_by: params[:canceled_by].to_i)
+    if params[:canceled_by].to_i==0
+      ActionCable.server.broadcast "cancel_notice/#{@ride.id}/driver",
+                                   accepted: ApplicationController.render(partial: 'rides/canceled_drive',
+                                                                          locals: { rider: @ride.rider })
+      render 'cancel_request'
+    else
+      ActionCable.server.broadcast "cancel_notice/#{@ride.id}/rider",
+                                   accepted: ApplicationController.render(partial: 'rides/canceled_ride',
+                                                                          locals: { driver: @ride.driver })
+      render 'cancel_drive'
+    end
+  end
+
+  def new_ride
+    if params[:ride]=='request'
+      render 'cancel_request'
+    else
+      render 'cancel_drive'
+    end
+  end
+
+  def finish_ride
+    @ride = Ride.find(params[:rid])
+    @ride.update(finished: true)
+    @rider = @ride.rider
+    @driver = @ride.driver
+    ActionCable.server.broadcast "finish_notice/#{@ride.id}",
+                                 accepted: ApplicationController.render(partial: 'rides/review_drive',
+                                                                        locals: { driver: @driver, ride: @ride })
+    render 'review_ride'
+  end
+
+  def review_ride
+    if params[:role]=='driver'
+      to_render = 'cancel_drive'
+    else
+      to_render = 'cancel_request'
+    end
+    puts review_params
+    success = Review.transaction do
+      @review = Ride.find(params[:id]).review
+      raise ActiveRecord::Rollback unless @review.nil?
+      @review = Review.new(review_params)
+      @review.save!
+    end
+    if !success
+      @review.update(review_params)
+    end
+    render to_render
   end
 
   private
@@ -128,5 +184,15 @@ class RidesController < ApplicationController
       temp_params[:duration] = temp_params[:duration].to_i
 
       temp_params
+    end
+
+    def review_params
+      if params[:role]=='driver'
+        temp = params.require(:review).permit(:rider_review, :rider_review_level)
+      else
+        temp = params.require(:review).permit(:driver_review, :driver_review_level)
+      end
+      temp[:ride_id] = params[:id].to_i
+      temp
     end
 end
