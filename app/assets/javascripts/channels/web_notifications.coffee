@@ -1,7 +1,8 @@
 App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    if requestId = $("[data-channel='web_notifications']").data('request-id')
+    requestId = $("[data-channel='web_notifications']").data('request-id')
+    if requestId
       @perform 'subscribed', request_id: requestId
     else
       @perform 'unsubscribed'
