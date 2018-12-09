@@ -1,5 +1,5 @@
-<div class="font-weight-bold text-light" style="background-color: #11294F;">
-  <div class="row">
+<div class="font-weight-bold text-light" style="background-color: #11294F; height: 70px">
+  <div class="row w-100">
     <div class="col-md-3">
       <a class="mr-auto" href="/">
         <%= image_tag("logo.png", width: "165", height: "70") %>
@@ -14,20 +14,21 @@
       </label>
       <a class="align-middle" id="toggle-text">Driver</a>
     </div>
-    <div class="col-md-3 text-right my-auto">
+    <div class="col-md-3 text-right">
 <!--      <a>test</a>-->
-      <%= link_to(image_tag("emergency.png",  width: "70", height: "70"),
+      <%= link_to(image_tag("911.png",  width: "70", height: "70"),
                   {controller: "main_pages", action: "emergency"},
                   data: {confirm: "This will send a message to your emergency contact.\nAre you sure?"},
                   :remote => true)
       %>
       <a class="align-middle ml-3" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <%= image_tag("menu.png", width: "140", height: "38") %>
+        <%= image_tag("menu.png", width: "137", height: "64") %>
       </a>
     </div>
   </div>
-  <div class="collapse col-md-auto menu" id="collapseMenu">
-    <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
-    <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
-  </div>
+
+</div>
+<div class="collapse col-md-auto menu" id="collapseMenu" style="width: 8.3%">
+  <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
+  <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
 </div>
