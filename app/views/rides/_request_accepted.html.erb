@@ -1,8 +1,19 @@
-<div class="modal-header">
+<% @ride ||= ride %>
+<% @driver ||= driver %>
+
+<div class="modal-header"
+     data-channel="cancel_notifications finish_notifications"
+     data-role="rider"
+     data-ride-id="<%= @ride.id %>">
   Congrads!
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
 <div class="modal-body">
-  <% @driver ||= driver %>
   <%= @driver.name %> has accepted your request!
+</div>
+<div class="modal-footer">
+  <%= link_to "Cancel Ride",
+              ride_path(rid: @ride.id, canceled_by: 0),
+              method: :delete, remote: true,
+              data: { confirm: "Are you sure? The driver may have been on his way" } %>
 </div>

@@ -22,6 +22,6 @@
       <%= fields.hidden_field :hour, value: @drive.scheduled_time.in_time_zone(@timezone).hour %>
       <%= fields.hidden_field :minute, value: @drive.scheduled_time.in_time_zone(@timezone).min %>
     <% end %>
-    <%= submit_tag "Cancel Drive", class: "btn btn-primary" %>
+    <%= f.submit "Cancel Drive", class: "btn btn-primary" %>
   <% end %>
 </div>

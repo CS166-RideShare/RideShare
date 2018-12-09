@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get '/request', to: 'rides#show_request'
   patch '/request', to: 'rides#take_request'
 
+  delete '/ride', to: 'rides#cancel_ride'
+  patch '/ride', to: 'rides#finish_ride'
+  get 'ride/new', to: 'rides#new_ride'
+  post 'ride/:id/review/:role', to: 'rides#review_ride', as: 'ride_review'
+
   resources :users
 
   mount ActionCable.server => '/cable'
