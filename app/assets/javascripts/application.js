@@ -28,5 +28,9 @@
 $(document).on('turbolinks:load', function() {
   /* Activating Best In Place */
   $(".best_in_place").best_in_place();
-  App.web_notifications.connected();
+  setTimeout(function(){
+    App.web_notifications.connected();
+    App.ride_cancel_notification.connected();
+    App.ride_finish_notification.connected();
+  }, 100)
 });
