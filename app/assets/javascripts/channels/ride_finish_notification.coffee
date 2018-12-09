@@ -1,8 +1,8 @@
-App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel",
+App.ride_finish_notification = App.cable.subscriptions.create "RideFinishNotificationChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    if requestId = $("[data-channel='web_notifications']").data('request-id')
-      @perform 'subscribed', request_id: requestId
+    if rideId = $("[data-channel*='finish_notifications']").data('ride-id')
+      @perform 'subscribed', ride_id: rideId
     else
       @perform 'unsubscribed'
 
@@ -13,5 +13,3 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     # Called when there's incoming data on the websocket for this channel
     $("#ride-request-window").find(".modal-content").html(data['accepted'])
     $("#ride-request-window").modal('show');
-    App.ride_cancel_notification.connected();
-    App.ride_finish_notifications.connected();

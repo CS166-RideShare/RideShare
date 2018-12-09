@@ -1,0 +1,9 @@
+<div class="modal-header">
+  Sorry!
+</div>
+<div class="modal-body">
+  This ride was canceled by <%= driver.name %>
+</div>
+<div class="modal-footer">
+  <%= link_to "Ask for another ride", ride_new_path(ride: 'request'), remote: true, method: :get %>
+</div>
