@@ -15,4 +15,4 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     $("#ride-request-window").find(".modal-content").html(data['accepted'])
     $("#ride-request-window").modal('show');
     App.ride_cancel_notification.connected();
-    App.ride_finish_notifications.connected();
+    App.ride_finish_notification.connected();

@@ -1,0 +1,88 @@
+.front_nav {
+  .nav-link {
+    color: #ffffff;
+
+    font-family: cursive;
+    font-size: 150%;
+    font-weight: 600;
+  }
+}
+
+#background {
+  /* The image used */
+    background-image: url(asset-path('background.png'));
+    background-color: #888888;
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: screen;
+}
+
+#title {
+  margin-top: 50px;
+
+  font-family: 'Pacifico', cursive;
+  font-size: 15em;
+  font-style: italic;
+
+  color: white;
+  text-shadow:
+   -5px -5px 0 #000066,
+    5px -5px 0 #000066,
+    -5px 5px 0 #000066,
+     5px 5px 0 #000066;
+}
+
+/* forms */
+.login_form {
+
+  margin-left: 0;
+  margin-right: 0;
+
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .btn {
+    width: 100%;
+    
+    font-family: cursive;
+    font-size: 125%;
+    font-weight: 600;
+  }
+
+  label {
+    color: #000066;
+    font-family: cursive;
+    font-size: 125%;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  input, textarea, select, .uneditable-input {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  input {
+    height: auto !important;
+  }
+
+  #session_remember_me {
+    width: auto;
+  }
+
+  .form-check-label {
+    margin-left: 10px;
+  }
+
+  .form-check {
+    margin-bottom: 10px;
+  }
+}

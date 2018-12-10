@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
       flash[:success] = "Welcome to Brandeis Ride Share!"
       redirect_to root_path
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render 'new'
+      redirect_to front_path
     end
   end
 

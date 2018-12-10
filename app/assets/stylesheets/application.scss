@@ -13,9 +13,10 @@
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import "formtastic";
 @import "custom";
-@import "signup";
+@import "front_page";
 @import "main_pages";
 @import "switch";
 @import "navbar";
