@@ -1,20 +1,14 @@
-<div class="row font-weight-bold text-light">
+<nav class="navbar front_nav">
+  <a class="navbar-brand" href="#">
+    <%= image_tag("logo.png", width: "165", height: "70", class: "d-inline-block align-top", alt: "") %>
+  </a>
 
-  <ul class="nav justify-content-end" style="background-color: #11294F; width: 100%;">
-    <a class="mr-auto" href="/">
-      <%= image_tag("logo.png", width: "165", height: "70") %>
-    </a>
-    <li class="nav-item my-3">
-      <a class="navbar-brand">
-        <%= link_to "Sign Up", signup_path, class: 'link-to-text-color'%>
-      </a>
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <%= link_to "About Us", "#", class: "nav-link"%>
     </li>
-    <li class="nav-item my-3 mr-3">
-      <a class="navbar-brand">
-        <%= link_to "Login", login_path, class: 'link-to-text-color'%>
-      </a>
+    <li class="nav-item">
+      <%= link_to "Help", "#", class: "nav-link"%>
     </li>
   </ul>
-<!--  <h3 class="font-italic mr-auto">RideShare</h3>-->
-
-</div>
+</nav>

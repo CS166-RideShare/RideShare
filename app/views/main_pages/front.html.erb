@@ -1,14 +1,34 @@
-<div>
-  <%= render 'front_nav' %>
-</div>
-
-<div id="backgroud" style="height: 100%;">
-  <div class="center">
-    <%=image_tag('background.png', size: "1050x700", class: "mx-auto") %>
+<div id="background">
+  <div>
+    <%= render 'front_nav' %>
   </div>
-  <div class="center text-light py-4" id="front-text" style="display: block;">
-    <p>Start sharing your daily commute right here.</p>
-    <%= link_to "Sign Up", signup_path, class: 'front-link-color mr-3'%>
-    <%= link_to "Login", login_path, class: 'front-link-color ml-3'%>
+  <div class="center text-light py-4">
+    <h1 id="title">Ride Share</h1>
+  </div>
+  <div class="row login_form">
+    <div class="col-md-4 offset-md-4">
+      <%= form_for(:session, url: login_path) do |f| %>
+
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <div class="form-check">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <label class="form-check-label">Remember me on this computer</label>
+        </div>
+        <div class="row">
+          <div class="col-5">
+            <%= link_to "Sign up", signup_path, class: "btn btn-primary" %>
+          </div>
+          <div class="col-5 offset-2">
+            <%= f.submit "Log in", class: "btn btn-primary" %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
   </div>
 </div>
