@@ -21,7 +21,11 @@
         </div>
         <div class="row">
           <div class="col-5">
-            <%= link_to "Sign up", signup_path, class: "btn btn-primary" %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpForm">
+              Sign up
+            </button>
+            <%#= link_to "Sign up", signup_path, { :class => 'btn btn-primary', :remote => true, 'data-target' => "#signUpForm", 'data-toggle' => "modal"}%>
+
           </div>
           <div class="col-5 offset-2">
             <%= f.submit "Log in", class: "btn btn-primary" %>
@@ -31,10 +35,50 @@
     </div>
   </div>
 
-  <!-- Button trigger modal -->
-  <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#approvalModal">
-    Approve
-  </button>
+  <div class="modal fade" id="signUpForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Sign up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= form_for(@user = User.new, url: signup_path) do |f| %>
+            <%= render 'error_messages' %>
 
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control signUpForm' %>
+
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control signUpForm' %>
+
+            <%= f.label :phone_number %>
+            <%= f.text_field :phone_number, class: 'form-control signUpForm' %>
+
+            <%= f.label :emergency_contact %>
+            <%= f.text_field :emergency_contact, class: 'form-control signUpForm' %>
+
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control signUpForm' %>
+
+            <%= f.label :password_confirmation, "Confirmation" %>
+            <%= f.password_field :password_confirmation, class: 'form-control signUpForm' %>
+            <div class="row mt-3">
+              <button type="button" class="btn btn-secondary ml-auto mr-2" data-dismiss="modal">Close</button>
+              <%= f.submit "Create my account", class: "btn btn-primary mr-auto", id: "signup_submit" %>
+            </div>
+
+          <% end %>
+        </div>
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--          <div class="mx-auto" style="width: 50%;">-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
 
 </div>

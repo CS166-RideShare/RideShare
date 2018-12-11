@@ -34,3 +34,7 @@ $(document).on('turbolinks:load', function() {
     App.ride_finish_notification.connected();
   }, 100)
 });
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
