@@ -51,6 +51,6 @@ class UsersController < ApplicationController
     end
     
     def user_update_params
-      params.require(:user).permit(:name, :phone_number, :email, :emergency_contact, :profile_image)
+      params.require(:user).permit(:name, :phone_number, :email, :emergency_contact, :profile_image, :vehicle_make, :license_number, :vehicle_model, :vehicle_plate)
     end
 end
