@@ -5,10 +5,10 @@
 
 /* Set the size of the div element that contains the map */
 #map {
-  position: relative;
+  position: absolute;
   top: 0px;
   left: 0px;
-  height: calc(100% - 142px);  /* The height is full browser */
+  height: 100%;  /* The height is full browser */
   width: 100%;  /* The width is full browser */
 }
 
@@ -34,10 +34,10 @@
 }
 
 .address_input {
+  position: relative;
   margin-left: 0;
   margin-right: 0;
-
-  height: 72px;
+  z-index: 5;
 
   input {
     border-style: none;
