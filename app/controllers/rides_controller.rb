@@ -1,6 +1,16 @@
 class RidesController < ApplicationController
   include GoogleMapApiHelper
 
+  def driving_index
+    @user = current_user
+    @riderequest = @user.drivings
+  end
+
+  def request_index
+    @user = current_user
+    @riderequest = @user.requests
+  end
+
   def create_request
     @riderequest = Ride.new(request_params)
     if @riderequest.save

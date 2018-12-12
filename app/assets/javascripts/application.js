@@ -32,7 +32,7 @@ $(document).on('turbolinks:load', function() {
     App.web_notifications.connected();
     App.ride_cancel_notification.connected();
     App.ride_finish_notification.connected();
-  }, 100)
+  }, 500)
 });
 
 $('#myModal').on('shown.bs.modal', function () {

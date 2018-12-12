@@ -7,7 +7,7 @@
 </div>
 <div class="modal-body">
   <%= @rider.name %> would wait you at <%= @drive.starting_address %>!
-  <%= link_to "Send a reminder!", "#" %> to tell <%= @rider.name %> that you're here!
+  <%= link_to "Send a reminder!", user_message_path(id: @rider.id), method: :post %> to tell <%= @rider.name %> that you're here!
 </div>
 <div class="modal-footer">
   <%= link_to "Finish Ride",
