@@ -3,14 +3,17 @@
     <div class="row">
       <div class="col-md-4 offset-md-2">
         <% if @user.profile_image.attached? %>
-          <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
+          <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
+            <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
+          </button>
         <% else %>
-          <%= image_tag('user_default.png', :size => "200x200", :class => "user_avatar") %>
+          <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
+            <%= image_tag('user_default.png', :size => "200x200", :class => "user_avatar") %>
+          </button>
         <% end %>
       </div>
       <div class="col-md-4">
         <p class="my-3 font-weight-bold" style="font-size: 300%"><%= best_in_place @user, :name, :as => :input%></p>
-        <div class="my-3"><%= render partial: "upload_button" %></div>
       </div>
     </div>
 
