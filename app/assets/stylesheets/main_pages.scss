@@ -5,10 +5,9 @@
 
 /* Set the size of the div element that contains the map */
 #map {
-  position: absolute;
   top: 0px;
   left: 0px;
-  height: 100%;  /* The height is full browser */
+  height: calc(100% - (3rem + 72px));  /* The height is full browser */
   width: 100%;  /* The width is full browser */
 }
 
@@ -37,7 +36,6 @@
   position: relative;
   margin-left: 0;
   margin-right: 0;
-  z-index: 5;
 
   input {
     border-style: none;
