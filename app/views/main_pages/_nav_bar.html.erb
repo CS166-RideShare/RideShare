@@ -1,33 +1,32 @@
 <div class="font-weight-bold text-light" id="navbar" style="background-color: #11294F; height: 70px">
   <div class="row w-100">
-    <div class="col-md-3">
+    <div class="col-md-6">
       <a class="mr-auto" href="/">
         <%= image_tag("logo.png", width: "165", height: "70") %>
+        <a class="align-middle" id="toggle-text">Rider</a>
+        <label class="switch">
+          <input id="user-role" type="checkbox", onclick="changeUserRole();">
+          <span class="slider round"></span>
+        </label>
+        <a class="align-middle" id="toggle-text">Driver</a>
       </a>
     </div>
-    <div class="col-md-6 center">
+    <div class="col-md-6  nav-right">
+      <div class="row align-middle" style="height: 100%">
+        <%= link_to("Emergency",
+                    {controller: "main_pages", action: "emergency"},
+                    {class: "my-auto ml-auto mr-2", style: "color: #ff0000", "data-remote" => true,
+                     "data-confirm": "This will send a message to your emergency contact.\nAre you sure?"},
+                    )
+        %>
+        <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>
+        <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
+      </div>
 
-      <a class="align-middle" id="toggle-text">Rider</a>
-      <label class="switch">
-        <input id="user-role" type="checkbox", onclick="changeUserRole();">
-        <span class="slider round"></span>
-      </label>
-      <a class="align-middle" id="toggle-text">Driver</a>
-    </div>
-    <div class="col-md-3 text-right">
-      <%= link_to(image_tag("911.png",  width: "70", height: "70"),
-                  {controller: "main_pages", action: "emergency"},
-                  data: {confirm: "This will send a message to your emergency contact.\nAre you sure?"},
-                  :remote => true)
-      %>
-      <a class="align-middle ml-3" data-toggle="collapse" href="#collapseMenu" role="button" aria-expanded="false" aria-controls="collapseExample">
-        <%= image_tag("menu.png", width: "137", height: "64") %>
-      </a>
     </div>
   </div>
 
 </div>
 <div class="collapse col-md-auto menu" id="collapseMenu" style="width: 8.3%">
-  <%= link_to "Profile", user_path(current_user.id), class: "list-group-item list-group-item-action" %>
-  <%= link_to "Log out", logout_path, class: "list-group-item list-group-item-action", method: :delete %>
+
 </div>
