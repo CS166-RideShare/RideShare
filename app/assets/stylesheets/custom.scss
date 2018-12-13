@@ -1,12 +1,14 @@
 /* universal */
 
 nav {
-  background-color: #11294F;
+  background-color: #065279;
 }
 
 html,
 body {
   height: 100%;
+  font-size: 100%;
+  font-family: 'Lora', serif;
 }
 
 section {
@@ -116,13 +118,9 @@ a {
   color: #000000;
 }
 a:hover {
-  color: #8ED6F0;
+  color: #177cb0;
 }
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #000000;
-  background-color: #8ED6F0;
-  border-radius: 0;
-}
+
 .user_avatar {
   border-radius: 50%;
 }
