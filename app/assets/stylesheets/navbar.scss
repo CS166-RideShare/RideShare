@@ -50,3 +50,14 @@
     font-family: 'Lora', serif;
   }
 }
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 0;
+}
+
+.side-menu {
+  font-size: 100%;
+  font-weight: 500;
+  font-family: 'Lora', serif;
+}

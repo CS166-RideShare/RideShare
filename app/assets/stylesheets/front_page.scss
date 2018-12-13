@@ -1,10 +1,8 @@
 .front_nav {
   .nav-link {
     color: #ffffff;
-
-    font-family: cursive;
     font-size: 150%;
-    font-weight: 600;
+    font-family: 'Lora', serif;
   }
 }
 
@@ -51,15 +49,12 @@
 
   .btn {
     width: 100%;
-    
-    font-family: cursive;
     font-size: 125%;
-    font-weight: 600;
+    background-color: #065279;
   }
 
   label {
-    color: #000066;
-    font-family: cursive;
+    color: #065279;
     font-size: 125%;
     font-weight: 600;
     margin-bottom: 0;
