@@ -1,7 +1,7 @@
 class RideFinishNotificationChannel < ApplicationCable::Channel
-  def subscribed(data)
+  def subscribed
     stop_all_streams
-    stream_from "finish_notice/#{data['ride_id']}"
+    stream_from "finish_notice"
   end
 
   def unsubscribed

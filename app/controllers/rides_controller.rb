@@ -1,16 +1,6 @@
 class RidesController < ApplicationController
   include GoogleMapApiHelper
 
-  def driving_index
-    @user = current_user
-    @riderequest = @user.drivings
-  end
-
-  def request_index
-    @user = current_user
-    @riderequest = @user.requests
-  end
-
   def create_request
     @riderequest = Ride.new(request_params)
     if @riderequest.save
@@ -64,7 +54,8 @@ class RidesController < ApplicationController
       @drive = @ride
       @rider = @drive.rider
       @driver = current_user
-      ActionCable.server.broadcast "request_channel/#{@ride.id}",
+      ActionCable.server.broadcast "request_channel",
+                                   request_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/request_accepted',
                                                                           locals: { driver: @driver, ride: @ride })
       render 'take_request'
@@ -77,12 +68,14 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:rid])
     @ride.update(canceled_by: params[:canceled_by].to_i)
     if params[:canceled_by].to_i==0
-      ActionCable.server.broadcast "cancel_notice/#{@ride.id}/driver",
+      ActionCable.server.broadcast "cancel_notice",
+                                   ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
                                                                           locals: { rider: @ride.rider })
       render 'cancel_request'
     else
-      ActionCable.server.broadcast "cancel_notice/#{@ride.id}/rider",
+      ActionCable.server.broadcast "cancel_notice",
+                                   ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
                                                                           locals: { driver: @ride.driver })
       render 'cancel_drive'
@@ -90,9 +83,12 @@ class RidesController < ApplicationController
   end
 
   def new_ride
+    ride = Ride.new(ride_params)
     if params[:ride]=='request'
+      @riderequest = ride
       render 'cancel_request'
     else
+      @drive = ride
       render 'cancel_drive'
     end
   end
@@ -102,7 +98,8 @@ class RidesController < ApplicationController
     @ride.update(finished: true)
     @rider = @ride.rider
     @driver = @ride.driver
-    ActionCable.server.broadcast "finish_notice/#{@ride.id}",
+    ActionCable.server.broadcast "finish_notice",
+                                 ride_id: @ride.id,
                                  accepted: ApplicationController.render(partial: 'rides/review_drive',
                                                                         locals: { driver: @driver, ride: @ride })
     render 'review_ride'
@@ -155,6 +152,18 @@ class RidesController < ApplicationController
       rescue
         return nil
       end
+    end
+
+    def ride_params
+      params.permit(:destination_id,
+                    :destination_address,
+                    :starting_id,
+                    :starting_address,
+                    :destination_lat,
+                    :destination_lng,
+                    :starting_lat,
+                    :starting_lng,
+                    :duration)
     end
 
     def request_params

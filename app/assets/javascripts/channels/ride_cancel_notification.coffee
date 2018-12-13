@@ -1,9 +1,8 @@
 App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotificationChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    if rideId = $("[data-channel*='cancel_notifications']").data('ride-id')
-      userRole = $("[data-channel*='cancel_notifications']").data('role')
-      @perform 'subscribed', ride_id: rideId, role: userRole
+    if $("[data-channel*='cancel_notifications']").length > 0
+      @perform 'subscribed'
     else
       @perform 'unsubscribed'
 
@@ -12,10 +11,7 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    userRole = $("[data-channel*='cancel_notifications']").data('role')
-    if userRole == 'rider'
-      $("#ride-request-window").find(".modal-content").html(data['accepted'])
-      $("#ride-request-window").modal('show');
-    else if userRole == 'driver'
+    if $("[data-channel*='cancel_notifications'][data-role='driver']").data("ride-id") == data['ride_id']
       $("#drive-set-window").find(".modal-content").html(data['accepted'])
-      $("#drive-set-window").modal('show');
+    if $("[data-channel*='cancel_notifications'][data-role='rider']").data("ride-id") == data['ride_id']
+      $("#ride-request-window").find(".modal-content").html(data['accepted'])

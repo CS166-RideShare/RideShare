@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   skip_before_action :check_login, only: [:new, :create]
 
+  def driving_index
+    @user = current_user
+  end
+
+  def request_index
+    @user = current_user
+  end
+
   def show
     @user = User.find(params[:id])
   end

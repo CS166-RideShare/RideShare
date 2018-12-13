@@ -1,0 +1,13 @@
+<div>
+  <%= link_to "Set drive", root_path %>
+  <ul>
+    <% @user.drivings.each do |driving| %>
+      <li><%= driving.starting_address + " " +
+              driving.destination_address + " " +
+              driving.pickup_start.to_s(:short) + " " +
+              driving.pickup_end.to_s(:short) %>
+          <%= link_to "status", "#" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

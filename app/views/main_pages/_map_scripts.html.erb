@@ -24,6 +24,8 @@
     function AutocompleteDirectionsHandler(map, geocoder) {
         this.map = map;
         this.geocoder = geocoder;
+        this.originCoordinate = null;
+        this.destinationCoordinate = null;
         this.originPlaceId = null;
         this.destinationPlaceId = null;
         this.travelMode = 'DRIVING';
@@ -69,9 +71,11 @@
                        lat: location.lat(), lng: location.lng()};
           if (mode === 'ORIG') {
             me.originPlaceId = place.place_id;
+            me.originCoordinate = place.geometry.location;
             setFields('.starting', infos);
           } else {
             me.destinationPlaceId = place.place_id;
+            me.destinationCoordinate = place.geometry.location;
             setFields('.destination', infos);
           }
           me.route();
@@ -115,8 +119,8 @@
         }
         var me = this;
         this.directionsService.route({
-          origin: {'placeId': this.originPlaceId},
-          destination: {'placeId': this.destinationPlaceId},
+          origin: this.originCoordinate,
+          destination: this.destinationCoordinate,
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
@@ -126,7 +130,7 @@
             var duration = response.routes[0].legs.reduce(
               (res, leg) => res+leg.duration.value, 0
             );
-            document.getElementById('drive_duration').value=duration;
+            document.getElementById('duration').value=duration;
           } else {
             window.alert('Directions request failed due to ' + status);
           }

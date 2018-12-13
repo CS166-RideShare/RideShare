@@ -1,0 +1,14 @@
+<div>
+  <%= link_to "Post request", root_path %>
+  <ul>
+    <% @user.requests.each do |request| %>
+      <li><%= request.starting_address + " " +
+              request.destination_address + " " +
+              request.pickup_start.to_s(:short) + " " +
+              request.pickup_end.to_s(:short) + " " +
+              request.status.to_s %>
+          <%= link_to "details", "#" %>
+      </li>
+    <% end %>
+  </ul>
+</div>

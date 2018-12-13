@@ -3,15 +3,23 @@
 
 <div class="top-menu">
   <%#= render 'main_pages/avatar_button' %>
+  <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
+    <li class="nav-item center">
+      <a class="nav-link" data-toggle="pill" role="tab" href="#requests" style="color: black;">Requests</a>
+    </li>
+    <li class="nav-item center">
+      <a class="nav-link" data-toggle="pill" role="tab" href="#drivings" style="color: black;">Drivings</a>
+    </li>
+  </ul>
 </div>
-<!--<div class="row" style="height:100%;">-->
+
   <div class="col-md-auto" style="background-color: #11294F; height:100%; z-index: 100; position: absolute">
     <a class="" href="/">
       <%= image_tag("logo.png", width: "330", height: "140", class: "d-inline-block align-top", alt: "") %>
     </a>
     <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
       <li class="nav-item center w-100">
-        <a class="nav-link active" data-toggle="pill"  role="tab" href="#profile">My Profile</a>
+        <a class="nav-link active" data-toggle="pill" role="tab" href="#profile">My Profile</a>
       </li>
       <li class="nav-item center w-100">
         <a class="nav-link" data-toggle="pill" role="tab" href="#trips">My Trips</a>
@@ -32,6 +40,18 @@
       <div class="tab-pane fade" id="vehicle" role="tabpanel">
         <%= render 'vehicle' %>
       </div>
+      <div class="tab-pane fade" id="requests" role="tabpanel">
+        <%= render 'request_index' %>
+      </div>
+      <div class="tab-pane fade" id="drivings" role="tabpanel">
+        <%= render 'driving_index' %>
+      </div>
   </div>
-<!--</div>-->
 
+  <div id="details-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
