@@ -1,10 +1,6 @@
 App.ride_finish_notification = App.cable.subscriptions.create "RideFinishNotificationChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    if $("[data-channel*='finish_notifications']").length > 0
-      @perform 'subscribed'
-    else
-      @perform 'unsubscribed'
 
   disconnected: ->
     # Called when the subscription has been terminated by the server

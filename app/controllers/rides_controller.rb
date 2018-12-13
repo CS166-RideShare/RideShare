@@ -54,7 +54,7 @@ class RidesController < ApplicationController
       @drive = @ride
       @rider = @drive.rider
       @driver = current_user
-      ActionCable.server.broadcast "request_channel",
+      ActionCable.server.broadcast "request_channel/#{@rider.id}",
                                    request_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/request_accepted',
                                                                           locals: { driver: @driver, ride: @ride })
@@ -68,13 +68,13 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:rid])
     @ride.update(canceled_by: params[:canceled_by].to_i)
     if params[:canceled_by].to_i==0
-      ActionCable.server.broadcast "cancel_notice",
+      ActionCable.server.broadcast "cancel_notice/#{@ride.driver.id}",
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
                                                                           locals: { rider: @ride.rider })
       render 'cancel_request'
     else
-      ActionCable.server.broadcast "cancel_notice",
+      ActionCable.server.broadcast "cancel_notice/#{@ride.rider.id}",
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
                                                                           locals: { driver: @ride.driver })
@@ -98,7 +98,7 @@ class RidesController < ApplicationController
     @ride.update(finished: true)
     @rider = @ride.rider
     @driver = @ride.driver
-    ActionCable.server.broadcast "finish_notice",
+    ActionCable.server.broadcast "finish_notice/#{@rider.id}",
                                  ride_id: @ride.id,
                                  accepted: ApplicationController.render(partial: 'rides/review_drive',
                                                                         locals: { driver: @driver, ride: @ride })

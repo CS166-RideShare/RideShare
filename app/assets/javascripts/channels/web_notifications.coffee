@@ -1,10 +1,6 @@
 App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    if $("[data-channel*='web_notifications']").length > 0
-      @perform 'subscribed'
-    else
-      @perform 'unsubscribed'
 
   disconnected: ->
     # Called when the subscription has been terminated by the server
