@@ -3,7 +3,7 @@
 
 
 <div class="row w-100 mx-0" style="height:100%;">
-  <div class="col-md-auto side-menu" style="background-color: #065279; height:100%; z-index: 100; position: absolute">
+  <div class="col-md-auto side-menu" style="background-color: #177cb0; height:100%; z-index: 100; position: absolute">
     <a class="" href="/">
       <%= image_tag("logo.png", width: "165", height: "70", class: "d-inline-block align-top", alt: "") %>
     </a>
@@ -24,14 +24,8 @@
     <div class="top-menu mb-3">
       <div class="nav-right" style="background-color: #065279; height: 70px">
         <div class="row align-middle w-100" style="height: 100%">
-          <%= link_to("Emergency",
-                      {controller: "main_pages", action: "emergency"},
-                      {class: "my-auto ml-auto mr-2", style: "color: #ff461f", "data-remote" => true,
-                       "data-confirm": "This will send a message to your emergency contact.\nAre you sure?"},
-                      )
-          %>
-          <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>
-          <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
+
+          <%= link_to "Log out", logout_path, class: "text-light  ml-auto my-auto mr-2", method: :delete %>
         </div>
       </div>
     </div>

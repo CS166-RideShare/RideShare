@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <div class="row profile">
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-6 offset-md-3 border">
     <div class="row">
-      <div class="col-md-4 offset-md-2">
+      <div class="col-md-8 offset-md-2 center">
         <% if @user.profile_image.attached? %>
           <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
             <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
@@ -13,25 +13,38 @@
           </button>
         <% end %>
       </div>
-      <div class="col-md-4">
-        <p class="my-3 font-weight-bold" style="font-size: 300%"><%= best_in_place @user, :name, :as => :input%></p>
+    </div>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <p class="my-3 font-weight-bold" style="font-size: 200%">
+          <%= best_in_place @user, :name, :as => :input%>
+        </p>
       </div>
     </div>
     <div class="row">
       <div class="col-md-4 offset-md-2">
-
         <p class="mt-1">Email</p>
+      </div>
+      <div class="col-md-4">
+        <p class="bg-secondary text-white my-1 rounded text-center"><%= best_in_place @user, :email, :as => :input%></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
         <p class="mt-1">Phone</p>
+      </div>
+      <div class="col-md-4">
+        <p class="bg-secondary text-white my-1 rounded text-center">
+          <%= best_in_place( @user, :phone_number, :as => :input, :place_holder => "Click to add!")%>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-md-2">
         <p class="mt-1">Emergency Contact</p>
       </div>
       <div class="col-md-4">
-
-        <p class="bg-secondary text-white mb-3 rounded text-center"><%= best_in_place @user, :email, :as => :input%></p>
-        <p class="bg-secondary text-white mb-3 rounded text-center">
-          <%= best_in_place( @user, :phone_number, :as => :input, :place_holder => "Click to add!")%>
-
-        </p>
-        <p class="bg-secondary text-white mb-3 rounded text-center">
+        <p class="bg-secondary text-white my-1 rounded text-center">
           <%= best_in_place @user, :emergency_contact, :as => :input, :place_holder => "Click to add!"%>
         </p>
       </div>
