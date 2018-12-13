@@ -8,14 +8,23 @@
       <%= image_tag("logo.png", width: "165", height: "70", class: "d-inline-block align-top", alt: "") %>
     </a>
     <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
-      <li class="nav-item center w-100">
-        <a class="nav-link active" data-toggle="pill"  role="tab" href="#profile">Profile</a>
+      <li class="nav-item w-100">
+        <a class="nav-link active" data-toggle="pill"  role="tab" href="#profile">
+          <%=image_tag("user.png", width: "25", height: "25", class: "my-auto ml-2") %>
+          Profile
+        </a>
       </li>
-      <li class="nav-item center w-100">
-        <a class="nav-link" data-toggle="pill" role="tab" href="#trips">Trips</a>
+      <li class="nav-item w-100">
+        <a class="nav-link" data-toggle="pill" role="tab" href="#trips">
+          <%=image_tag("trips.png", width: "25", height: "25", class: "my-auto ml-2") %>
+          Trips
+        </a>
       </li>
-      <li class="nav-item center w-100">
-        <a class="nav-link" data-toggle="pill" role="tab" href="#vehicle">Vehicle</a>
+      <li class="nav-item w-100">
+        <a class="nav-link" data-toggle="pill" role="tab" href="#vehicle">
+          <%=image_tag("car.png", width: "25", height: "25", class: "my-auto ml-2") %>
+          Vehicle
+        </a>
       </li>
     </ul>
   </div>
@@ -24,7 +33,6 @@
     <div class="top-menu mb-3">
       <div class="nav-right" style="background-color: #065279; height: 70px">
         <div class="row align-middle w-100" style="height: 100%">
-
           <%= link_to "Log out", logout_path, class: "text-light  ml-auto my-auto mr-2", method: :delete %>
         </div>
       </div>
