@@ -1,12 +1,12 @@
 <script>
   var userRole = document.getElementById('user-role')
-  var rideButton = document.getElementById('ride_button')
+  var roleField = document.getElementById('ride')
 
   function changeUserRole() {
     if(userRole.checked) {
-      rideButton.dataset.target="#drive-set-window";
+      roleField.value="drive";
     } else {
-      rideButton.dataset.target="#ride-request-window";
+      roleField.value="request";
     }
   }
 </script>

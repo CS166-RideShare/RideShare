@@ -26,6 +26,16 @@
           Vehicle
         </a>
       </li>
+      <li class="nav-item w-100">
+        <a class="nav-link" data-toggle="pill" role="tab" href="#requests">
+          Requests
+        </a>
+      </li>
+      <li class="nav-item w-100">
+        <a class="nav-link" data-toggle="pill" role="tab" href="#drivings">
+          Drives
+        </a>
+      </li>
     </ul>
   </div>
 
@@ -46,6 +56,19 @@
     <div class="tab-pane fade" id="vehicle" role="tabpanel">
       <%= render 'vehicle' %>
     </div>
+    <div class="tab-pane fade" id="requests" role="tabpanel">
+      <%= render 'request_index' %>
+    </div>
+    <div class="tab-pane fade" id="drivings" role="tabpanel">
+      <%= render 'driving_index' %>
+    </div>
   </div>
 </div>
 
+<div id="details-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>

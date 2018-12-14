@@ -7,7 +7,20 @@
       <input type="text" id='destination_input' class='form-control' placeholder="Where would you like to go?">
     </div>
     <div class="col-2">
-      <button type="button" id="ride_button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#ride-request-window">Go!</button>
+      <%= form_tag ride_new_path, method: :get, remote: true,
+                   style: "height: 100%" do %>
+        <%= hidden_field_tag 'starting_lat', "", class: 'starting_lat' %>
+        <%= hidden_field_tag 'destination_lat', "", class: 'destination_lat' %>
+        <%= hidden_field_tag 'starting_lng', "", class: 'starting_lng' %>
+        <%= hidden_field_tag 'destination_lng', "", class: 'destination_lng' %>
+        <%= hidden_field_tag 'starting_id', "", class: 'starting_id' %>
+        <%= hidden_field_tag 'destination_id', "", class: 'destination_id' %>
+        <%= hidden_field_tag 'starting_address', "", class: 'starting_address' %>
+        <%= hidden_field_tag 'destination_address', "", class: 'destination_address' %>
+        <%= hidden_field_tag 'duration' %>
+        <%= hidden_field_tag 'ride', 'request' %>
+        <%= submit_tag "GO!", id: "ride_button", class: "btn btn-primary btn-lg btn-block" %>
+      <% end %>
     </div>
   </div>
 
@@ -17,7 +30,7 @@
 <div id="ride-request-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= render request_form %>
+
     </div>
   </div>
 </div>
@@ -25,7 +38,7 @@
 <div id="drive-set-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <%= render drive_form %>
+
     </div>
   </div>
 </div>

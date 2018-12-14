@@ -1,11 +1,7 @@
 class RideCancelNotificationChannel < ApplicationCable::Channel
-  def subscribed(data)
+  def subscribed
     stop_all_streams
-    if data['role']=='driver'
-      stream_from "cancel_notice/#{data['ride_id']}/driver"
-    elsif data['role']=='rider'
-      stream_from "cancel_notice/#{data['ride_id']}/rider"
-    end
+    stream_from "cancel_notice/#{current_user.id}"
   end
 
   def unsubscribed

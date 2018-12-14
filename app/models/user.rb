@@ -20,7 +20,7 @@ class User < ApplicationRecord
   end
 
   def drivings
-    self.drives.where(finished: false)
+    self.drives.where(finished: false, canceled_by: nil)
   end
 
   # Returns the hash digest of the given string. by csy

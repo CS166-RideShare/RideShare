@@ -15,6 +15,19 @@ class Ride < ApplicationRecord
 
   attr_accessor :scheduled_time, :duration
 
+  def status
+    if driver_id.nil?
+      return :available
+    else
+      if !canceled_by.nil?
+        return :canceled
+      elsif finished
+        return :finished
+      end
+      return :accepted
+    end
+  end
+
   def validate_drive
     validate
     errors.delete(:rider)

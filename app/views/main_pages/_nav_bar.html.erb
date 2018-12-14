@@ -19,6 +19,8 @@
                      "data-confirm": "This will send a message to your emergency contact.\nAre you sure?"},
                     )
         %>
+        <%= link_to "Requests", "#", class: "text-light my-auto mx-2 align-middle" %>
+        <%= link_to "Drives", "#", class: "text-light my-auto mx-2 align-middle" %>
         <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>
         <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
       </div>
