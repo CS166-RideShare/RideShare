@@ -9,5 +9,4 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     # Called when there's incoming data on the websocket for this channel
     if $("[data-channel*='web_notifications']").data("request-id") == data['request_id']
       $("#ride-request-window").find(".modal-content").html(data['accepted'])
-      App.ride_cancel_notification.connected();
-      App.ride_finish_notification.connected();
+    $("#request_index").find("#"+data['request_id']).find("[name='details']").val('ride');

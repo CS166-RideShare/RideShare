@@ -1,13 +1,21 @@
 <div>
   <%= link_to "Post request", root_path %>
-  <ul>
+  <ul id="request_index">
     <% @user.requests.each do |request| %>
-      <li><%= request.starting_address + " " +
-              request.destination_address + " " +
-              request.pickup_start.to_s(:short) + " " +
-              request.pickup_end.to_s(:short) + " " +
-              request.status.to_s %>
-          <%= link_to "details", "#" %>
+      <% details = 'request' if request.status == :available %>
+      <% details = 'ride' if request.status == :accepted %>
+      <li id="<%= request.id %>">
+        <%= request.short_starting + " " +
+            request.short_destination + " " +
+            request.pickup_start.to_s(:short) + " " +
+            request.pickup_end.to_s(:short) + " " +
+            request.status.to_s %>
+        <%= button_to "details",
+                      ride_details_path(id: request.id),
+                      remote: true,
+                      method: :get,
+                      params: { details: details },
+                      class: "btn btn-primary" %>
       </li>
     <% end %>
   </ul>

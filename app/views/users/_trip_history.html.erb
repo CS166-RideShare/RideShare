@@ -3,8 +3,8 @@
 
     <div class="row">
       <div class="col-md-12 offset-md-2">
-        <% rides = @user.rides %>
-        <% if rides.size == 0 %>
+        <% trips = @user.trip_history %>
+        <% if trips.size == 0 %>
           <h1>
             No trip history.
           </h1>
@@ -14,17 +14,17 @@
             <thead>
             </thead>
             <tbody>
-              <% rides.each do |ride| %>
+              <% trips.each do |trip| %>
                 <tr>
-                  <%= ride.pickup_start.to_s[0..-10] %>
-                  <% if ride.canceled_by %>
+                  <%= trip.pickup_start.to_s[0..-10] %>
+                  <% if trip.canceled_by %>
                     Canceled
-                  <%else %>
-                    <%=ride.starting_address[0..-6]%>
-                    <%=ride.destination_address[0..-6] %>
-                  <%end %>
+                  <% else %>
+                    <%= trip.short_starting %>
+                    <%= trip.short_destination %>
+                  <% end %>
                 </tr>
-              <%end %>
+              <% end %>
             </tbody>
           </table>
         </div>
@@ -32,4 +32,3 @@
     </div>
   </div>
 </div>
-

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/request', to: 'rides#show_request'
   patch '/request', to: 'rides#take_request'
 
+  get '/ride/:id/details', to: 'rides#details', as: 'ride_details'
   delete '/ride', to: 'rides#cancel_ride'
   patch '/ride', to: 'rides#finish_ride'
   get 'ride/new', to: 'rides#new_ride'

@@ -16,9 +16,9 @@
         directionsDisplayer = new google.maps.DirectionsRenderer;
         directions = new google.maps.DirectionsService;
 
-        getLocation();
+        acdh = new AutocompleteDirectionsHandler(map, geocoder);
 
-        new AutocompleteDirectionsHandler(map, geocoder);
+        getLocation(acdh);
     }
 
     function AutocompleteDirectionsHandler(map, geocoder) {
@@ -137,7 +137,7 @@
         });
       };
 
-    function getLocation() {
+    function getLocation(acdh) {
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -155,7 +155,13 @@
                 if (status === 'OK') {
                   if (results[0]) {
                     map.setZoom(15);
+                    acdh.originCoordinate = pos;
+                    acdh.originPlaceId = results[0].place_id;
                     document.getElementById('starting_input').value=results[0].formatted_address;
+
+                    var infos = {id: results[0].place_id, address: results[0].formatted_address,
+                                 lat: pos.lat, lng: pos.lng};
+                    setFields('.starting', infos);
                   } else {
                     window.alert('No results found');
                   }
@@ -219,8 +225,13 @@
         $(this).val(infos.lng);
       });
     }
-</script>
 
-<script async defer
-        src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBB0imXtZ5Rr0x4A57NO4Un665BEQCpCoU&libraries=places&callback=initMap" >
+    if (window.google) {
+      initMap();
+    } else {
+      $.ajax('https://maps.googleapis.com/maps/api/js?key=AIzaSyBB0imXtZ5Rr0x4A57NO4Un665BEQCpCoU&libraries=places&callback=initMap', {
+        crossDomain: true,
+        dataType: 'script'
+      });
+    }
 </script>

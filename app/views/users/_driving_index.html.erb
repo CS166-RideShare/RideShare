@@ -1,12 +1,16 @@
 <div>
   <%= link_to "Set drive", root_path %>
-  <ul>
+  <ul id="driving_index">
     <% @user.drivings.each do |driving| %>
-      <li><%= driving.starting_address + " " +
-              driving.destination_address + " " +
-              driving.pickup_start.to_s(:short) + " " +
-              driving.pickup_end.to_s(:short) %>
-          <%= link_to "status", "#" %>
+      <li id="<%= driving.id %>">
+        <%= driving.short_starting + " " +
+            driving.short_destination + " " +
+            driving.pickup_start.to_s(:short) + " " +
+            driving.pickup_end.to_s(:short) %>
+        <%= link_to "details",
+                    ride_details_path(id: driving.id, details: 'driving'),
+                    remote: true,
+                    class: "btn btn-primary" %>
       </li>
     <% end %>
   </ul>

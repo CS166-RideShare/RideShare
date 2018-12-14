@@ -1,2 +1,4 @@
 $("#ride-request-window").find(".modal-content").html("<%= j (render 'main_pages/request_form') %>");
-$("#ride-request-window").modal('show')
+$("#ride-request-window").modal('show');
+$("#details-window").modal('hide');
+$("#request_index").find("#<%= @ride.id %>").remove();

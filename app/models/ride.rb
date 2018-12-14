@@ -28,6 +28,18 @@ class Ride < ApplicationRecord
     end
   end
 
+  def short_starting
+    unless starting_address.nil?
+      return starting_address.split(/,\s*/)[0]
+    end
+  end
+
+  def short_destination
+    unless destination_address.nil?
+      return destination_address.split(/,\s*/)[0]
+    end
+  end
+
   def validate_drive
     validate
     errors.delete(:rider)

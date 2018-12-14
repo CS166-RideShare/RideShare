@@ -14,9 +14,8 @@ class RidesController < ApplicationController
 
   def cancel_request
     @timezone = cookies['browser.timezone']
-    riderequest = Ride.find(params[:rid])
-    @riderequest = riderequest.dup
-    riderequest.destroy
+    @riderequest = Ride.find(params[:rid])
+    @ride = @riderequest.destroy
   end
 
   def show_request
@@ -56,7 +55,7 @@ class RidesController < ApplicationController
       @driver = current_user
       ActionCable.server.broadcast "request_channel/#{@rider.id}",
                                    request_id: @ride.id,
-                                   accepted: ApplicationController.render(partial: 'rides/request_accepted',
+                                   accepted: ApplicationController.render(partial: 'rides/accepted_request',
                                                                           locals: { driver: @driver, ride: @ride })
       render 'take_request'
     else
@@ -85,6 +84,7 @@ class RidesController < ApplicationController
   def new_ride
     ride = Ride.new(ride_params)
     if params[:ride]=='request'
+      @ride = ride
       @riderequest = ride
       render 'cancel_request'
     else
@@ -102,7 +102,7 @@ class RidesController < ApplicationController
                                  ride_id: @ride.id,
                                  accepted: ApplicationController.render(partial: 'rides/review_drive',
                                                                         locals: { driver: @driver, ride: @ride })
-    render 'review_ride'
+    render 'finish_drive'
   end
 
   def review_ride
@@ -122,6 +122,12 @@ class RidesController < ApplicationController
       @review.update(review_params)
     end
     render to_render
+  end
+
+  def details
+    details = 'details_' + params[:details]
+    @ride = Ride.find(params[:id])
+    render 'details', locals: { content: details }
   end
 
   private

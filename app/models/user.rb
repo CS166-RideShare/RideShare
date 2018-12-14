@@ -15,6 +15,13 @@ class User < ApplicationRecord
   has_many :rides, class_name: "Ride", foreign_key: :rider_id
   has_many :drives, class_name: "Ride", foreign_key: :driver_id
 
+  def trip_history
+    self.rides.where(finished: true)
+              .or(self.rides.where(canceled_by: [0, 1])) +
+    self.drives.where(finished: true)
+               .or(self.drives.where(canceled_by: [0, 1]))
+  end
+
   def requests
     self.rides.where(finished: false, canceled_by: nil)
   end
