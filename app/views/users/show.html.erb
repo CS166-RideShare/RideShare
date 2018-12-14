@@ -7,9 +7,11 @@
     <a class="" href="/">
       <%= image_tag("logo.png", width: "165", height: "70", class: "d-inline-block align-top", alt: "") %>
     </a>
-    <ul class="nav flex-column nav-pills" id="pills-tab" role="tablist">
+
+    <!-- Please ensure the structure and class and id of ul are not changed -->
+    <ul class="nav flex-column nav-pills" id="pills-left" role="tablist">
       <li class="nav-item w-100">
-        <a class="nav-link active" data-toggle="pill"  role="tab" href="#profile">
+        <a class="nav-link <%= show_profile %>" data-toggle="pill"  role="tab" href="#profile">
           <%=image_tag("user.png", width: "25", height: "25", class: "my-auto ml-2") %>
           Profile
         </a>
@@ -26,41 +28,56 @@
           Vehicle
         </a>
       </li>
-      <li class="nav-item w-100">
-        <a class="nav-link" data-toggle="pill" role="tab" href="#requests">
-          Requests
-        </a>
-      </li>
-      <li class="nav-item w-100">
-        <a class="nav-link" data-toggle="pill" role="tab" href="#drivings">
-          Drives
-        </a>
-      </li>
     </ul>
+
   </div>
 
-  <div class="col-md tab-content" id="myTabContent">
+  <div class="col-md">
     <div class="top-menu mb-3">
       <div class="nav-right" style="background-color: #065279; height: 70px">
-        <div class="row align-middle w-100" style="height: 100%">
+
+        <!-- Please ensure the structure and class and id of ul are not changed -->
+        <ul class="nav nav-pills" id="pills-top" role="tablist">
+          <li class="nav-item w-100">
+            <a class="nav-link <%= show_requests %>" data-toggle="pill" role="tab" href="#requests">
+              <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
+                Requests
+                <span class="request_notice" hidden></span>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item w-100">
+            <a class="nav-link <%= show_drivings %>" data-toggle="pill" role="tab" href="#drivings">
+              <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
+                Drives
+                <span class="driving_notice" hidden></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+
+        <div class="align-middle w-100" style="height: 100%">
           <%= link_to "Log out", logout_path, class: "text-light  ml-auto my-auto mr-2", method: :delete %>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade show active" id="profile" role="tabpanel">
-      <%= render 'profile' %>
-    </div>
-    <div class="tab-pane fade" id="trips" role="tabpanel">
-      <%= render 'trip_history' %>
-    </div>
-    <div class="tab-pane fade" id="vehicle" role="tabpanel">
-      <%= render 'vehicle' %>
-    </div>
-    <div class="tab-pane fade" id="requests" role="tabpanel">
-      <%= render 'request_index' %>
-    </div>
-    <div class="tab-pane fade" id="drivings" role="tabpanel">
-      <%= render 'driving_index' %>
+    <div class="col-md tab-content">
+      <div class="tab-pane fade <%= show_profile %>" id="profile" role="tabpanel">
+        <%= render 'profile' %>
+      </div>
+      <div class="tab-pane fade" id="trips" role="tabpanel">
+        <%= render 'trip_history' %>
+      </div>
+      <div class="tab-pane fade" id="vehicle" role="tabpanel">
+        <%= render 'vehicle' %>
+      </div>
+      <div class="tab-pane fade <%= show_requests %>" id="requests" role="tabpanel">
+        <%= render 'request_index' %>
+      </div>
+      <div class="tab-pane fade <%= show_drivings %>" id="drivings" role="tabpanel">
+        <%= render 'driving_index' %>
+      </div>
     </div>
   </div>
 </div>
@@ -72,3 +89,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  $("#pills-left").children().click(function(e){
+    $("#pills-top").children().children().each(function(f){
+      $(this).removeClass("active");
+    });
+  });
+
+  $("#pills-top").children().click(function(e){
+    $("#pills-left").children().children().each(function(f){
+      $(this).removeClass("active");
+    });
+  });
+</script>

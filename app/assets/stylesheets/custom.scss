@@ -124,3 +124,13 @@ a:hover {
 .user_avatar {
   border-radius: 50%;
 }
+
+.request_notice, .driving_notice {
+  border-radius: 50%;
+  background-color: #ff461f;
+  height: 0.75rem;
+  width: 0.75rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
