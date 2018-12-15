@@ -19,11 +19,41 @@
     <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
 
     <% f.extend CustomTimeSelectHelper %>
-    <%= f.label :pickup_start %>
+    <%= f.label :start_time, "From" %>
     <%= f.custom_time_select @riderequest, :pickup_start, 15, @timezone %>
-
-    <%= f.label :pickup_end %>
+    <div class="form-group">
+      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+        <%= f.text_field :start_time, class:'form-control datetimepicker-input', :data => {:target => '#datetimepicker1'} %>
+        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+        </div>
+      </div>
+    </div>
+    <%= f.label :end_time, "To" %>
     <%= f.custom_time_select @riderequest, :pickup_end, 15, @timezone %>
+    <div class="form-group">
+      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+        <%= f.text_field :end_time, class:'form-control datetimepicker-input', :data => {:target => '#datetimepicker2'} %>
+        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                format: 'LT'
+            });
+            $('#datetimepicker2').datetimepicker({
+                format: 'LT'
+            });
+        });
+    </script>
+
+
+
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">Edit locations</button>

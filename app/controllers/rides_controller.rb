@@ -182,13 +182,18 @@ class RidesController < ApplicationController
                                   :destination_lng,
                                   :starting_lat,
                                   :starting_lng,
+                                  :start_time,
+                                  :end_time,
                                   pickup_start: [:day, :hour, :minute],
                                   pickup_end: [:day, :hour, :minute])
-
       temp_params[:rider_id] = current_user.id
+
       temp_params[:pickup_start] = read_time temp_params[:pickup_start]
       temp_params[:pickup_end] = read_time temp_params[:pickup_end]
-
+      puts temp_params[:pickup_start]#2018-12-14T20:30:00-05:00
+      puts temp_params[:start_time]#8:30 PM
+      puts temp_params[:pickup_end]#2018-12-14T21:30:00-05:00
+      puts temp_params[:end_time]#9:30 PM
       temp_params
     end
 
