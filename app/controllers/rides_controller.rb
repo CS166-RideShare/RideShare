@@ -145,13 +145,10 @@ class RidesController < ApplicationController
       end
     end
 
-    def read_time time_hash
+    def read_time time_string
       begin
         time = Time.find_zone(cookies['browser.timezone'])
-                   .parse(time_hash[:hour]+":"+time_hash[:minute])
-        if time_hash[:day]=="1"
-          time += 1.days
-        end
+                   .strptime(time_string, '%m/%d/%Y %H:%M %p')
         return DateTime.parse(time.to_s)
       rescue
         return nil
@@ -182,16 +179,13 @@ class RidesController < ApplicationController
                                   :starting_lng,
                                   :start_time,
                                   :end_time,
-                                  pickup_start: [:day, :hour, :minute],
-                                  pickup_end: [:day, :hour, :minute])
+                                  :pickup_start,
+                                  :pickup_end)
       temp_params[:rider_id] = current_user.id
 
       temp_params[:pickup_start] = read_time temp_params[:pickup_start]
       temp_params[:pickup_end] = read_time temp_params[:pickup_end]
-      puts temp_params[:pickup_start]#2018-12-14T20:30:00-05:00
-      puts temp_params[:start_time]#8:30 PM
-      puts temp_params[:pickup_end]#2018-12-14T21:30:00-05:00
-      puts temp_params[:end_time]#9:30 PM
+
       temp_params
     end
 
@@ -206,7 +200,7 @@ class RidesController < ApplicationController
                                   :starting_lat,
                                   :starting_lng,
                                   :duration,
-                                  scheduled_time: [:day, :hour, :minute])
+                                  :scheduled_time)
 
       temp_params[:scheduled_time] = read_time temp_params[:scheduled_time]
       temp_params[:duration] = temp_params[:duration].to_i

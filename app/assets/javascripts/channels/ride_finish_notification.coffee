@@ -10,6 +10,7 @@ App.ride_finish_notification = App.cable.subscriptions.create "RideFinishNotific
     if $("[data-channel*='finish_notifications']").data("ride-id") == data['ride_id']
       $("#ride-request-window").find(".modal-content").html(data['accepted'])
       $("#ride-request-window").modal('show');
+      $("#details-window").find(".modal-content").html(data['accepted'])
 
     $(".request_notice").prop("hidden", false);
     $("#request_notice_items").prop("hidden", false);
