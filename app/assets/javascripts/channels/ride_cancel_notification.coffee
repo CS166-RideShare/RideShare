@@ -6,6 +6,7 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    #w hen someone cancel ride
     # Called when there's incoming data on the websocket for this channel
     if $("[data-channel*='cancel_notifications'][data-role='driver']").data("ride-id") == data['ride_id']
       $("#drive-set-window").find(".modal-content").html(data['accepted'])
