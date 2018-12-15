@@ -7,7 +7,7 @@
   <div class="modal-body">
     <div id="review_error_explanation">
     </div>
-    <%= f.hidden_area :target, 0 %>
+    <%= f.hidden_field :target, value: 0 %>
     <%= f.label :review %>
     <%= f.text_area :review, rows: 3, class: 'form-control starting_address' %>
     <%= f.collection_select :review_level,

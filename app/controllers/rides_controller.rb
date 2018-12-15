@@ -113,7 +113,9 @@ class RidesController < ApplicationController
     else
       to_render = 'cancel_request'
     end
-    if @review.save(review_params)
+    @ride = Ride.find(params[:id])
+    @review = Review.new(review_params)
+    if @review.save
       render to_render
     else
       return
