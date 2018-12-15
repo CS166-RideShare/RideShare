@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload your favourite image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if @user.vehicle_image.attached? %>
+          <%= image_tag(@user.vehicle_image, style: 'width:400px') %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <%= form_with(model:@user, local:true) do |form|%>
+          <div class = "field">
+            <%=form.label :vehicle_image %>
+            <%=form.file_field :vehicle_image %>
+          </div>
+          <div class = "action">
+            <%=form.submit "upload", class: "btn btn-primary-sm"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
