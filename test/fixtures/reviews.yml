@@ -1,17 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  ride_id: 1
-  rider_review_level: 1
-  rider_review: MyText
-  driver_review_level: 1
-  driver_review: MyText
-  review_handled: false
-
-two:
-  ride_id: 1
-  rider_review_level: 1
-  rider_review: MyText
-  driver_review_level: 1
-  driver_review: MyText
-  review_handled: false
+# one:
+#   ride_id: 1
+#   target: 0
+#   review_level: 1
+#   review: MyText
+#   review_handled: false
+#
+# two:
+#   ride_id: 1
+#   target: 0
+#   review_level: 1
+#   review: MyText
+#   review_handled: false
