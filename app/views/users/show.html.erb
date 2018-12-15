@@ -32,7 +32,7 @@
 
   </div>
 
-  <div class="col-md">
+  <div class="col-md" id="right_down_panel">
     <div class="top-menu mb-3">
       <nav class="navbar navbar-dark navbar-fixed-top">
         <div class="container">
@@ -80,24 +80,29 @@
       </div>
       -->
     </div>
-    <div class="col-md tab-content">
-      <div class="tab-pane fade <%= show_profile %>" id="profile" role="tabpanel">
-        <%= render 'profile' %>
-      </div>
-      <div class="tab-pane fade" id="trips" role="tabpanel">
-        <%= render 'trip_history' %>
-      </div>
-      <div class="tab-pane fade" id="vehicle" role="tabpanel">
-        <%= render 'vehicle' %>
-      </div>
-      <div class="tab-pane fade <%= show_requests %>" id="requests" role="tabpanel">
-        <%= render 'request_index' %>
-      </div>
-      <div class="tab-pane fade <%= show_drivings %>" id="drivings" role="tabpanel">
-        <%= render 'driving_index' %>
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md tab-content">
+          <div class="tab-pane fade <%= show_profile %>" id="profile" role="tabpanel">
+            <%= render 'profile' %>
+          </div>
+          <div class="tab-pane fade" id="trips" role="tabpanel">
+            <%= render 'trip_history' %>
+          </div>
+          <div class="tab-pane fade" id="vehicle" role="tabpanel">
+            <%= render 'vehicle' %>
+          </div>
+          <div class="tab-pane fade <%= show_requests %>" id="requests" role="tabpanel">
+            <%= render 'request_index' %>
+          </div>
+          <div class="tab-pane fade <%= show_drivings %>" id="drivings" role="tabpanel">
+            <%= render 'driving_index' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
 </div>
 
 <div id="details-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
