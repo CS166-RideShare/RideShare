@@ -68,12 +68,14 @@ class RidesController < ApplicationController
     @ride.update(canceled_by: params[:canceled_by].to_i)
     if params[:canceled_by].to_i==0
       ActionCable.server.broadcast "cancel_notice/#{@ride.driver.id}",
+                                   target: 'driver',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
                                                                           locals: { rider: @ride.rider })
       render 'cancel_request'
     else
       ActionCable.server.broadcast "cancel_notice/#{@ride.rider.id}",
+                                   target: 'rider',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
                                                                           locals: { driver: @ride.driver })
@@ -111,17 +113,11 @@ class RidesController < ApplicationController
     else
       to_render = 'cancel_request'
     end
-    puts review_params
-    success = Review.transaction do
-      @review = Ride.find(params[:id]).review
-      raise ActiveRecord::Rollback unless @review.nil?
-      @review = Review.new(review_params)
-      @review.save!
+    if @review.save(review_params)
+      render to_render
+    else
+      return
     end
-    if !success
-      @review.update(review_params)
-    end
-    render to_render
   end
 
   def details
@@ -212,11 +208,7 @@ class RidesController < ApplicationController
     end
 
     def review_params
-      if params[:role]=='driver'
-        temp = params.require(:review).permit(:rider_review, :rider_review_level)
-      else
-        temp = params.require(:review).permit(:driver_review, :driver_review_level)
-      end
+      temp = params.require(:review).permit(:target, :review, :review_level)
       temp[:ride_id] = params[:id].to_i
       temp
     end
