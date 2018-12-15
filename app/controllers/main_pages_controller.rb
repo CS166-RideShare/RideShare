@@ -2,7 +2,7 @@ class MainPagesController < ApplicationController
   skip_before_action :check_login, only: [:front]
 
   def home
-    
+    @user = current_user
   end
 
   def emergency

@@ -3,14 +3,29 @@ class UsersController < ApplicationController
 
   def driving_index
     @user = current_user
+    render 'show', locals: {
+      show_profile: nil,
+      show_requests: nil,
+      show_drivings: "show active"
+    }
   end
 
   def request_index
     @user = current_user
+    render 'show', locals: {
+      show_profile: nil,
+      show_requests: "show active",
+      show_drivings: nil
+    }
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    render 'show', locals: {
+      show_profile: "show active",
+      show_requests: nil,
+      show_drivings: nil
+    }
   end
 
   def edit

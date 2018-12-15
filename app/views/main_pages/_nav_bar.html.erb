@@ -19,8 +19,14 @@
                      "data-confirm": "This will send a message to your emergency contact.\nAre you sure?"},
                     )
         %>
-        <%= link_to "Requests", "#", class: "text-light my-auto mx-2 align-middle" %>
-        <%= link_to "Drives", "#", class: "text-light my-auto mx-2 align-middle" %>
+        <span class="text-light my-auto mx-2 align-middle position-relative">
+          <%= link_to "Requests", user_request_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
+          <span class="request_notice" hidden></span>
+        </span>
+        <span class="text-light my-auto mx-2 align-middle position-relative">
+          <%= link_to "Drives", user_driving_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
+          <span class="driving_notice" hidden></span>
+        </span>
         <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>
         <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
       </div>
