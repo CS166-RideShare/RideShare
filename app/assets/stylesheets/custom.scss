@@ -140,5 +140,23 @@ a:hover {
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block;
+  display: block;
+}
+
+input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+input[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+input[type=radio]:checked + img {
+  border: 2px solid #2f89ff;
+  border-radius: 50%;
 }

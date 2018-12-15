@@ -26,7 +26,7 @@
 //= require browser_timezone_rails/set_time_zone
 //= require moment
 //= require tempusdominus-bootstrap-4.js
-
+//= require pnotify.custom.js
 
 $(document).on('turbolinks:load', function() {
   /* Activating Best In Place */

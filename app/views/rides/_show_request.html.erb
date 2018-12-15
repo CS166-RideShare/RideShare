@@ -5,6 +5,7 @@
 <%= form_tag request_path, method: :get, remote: true,
              html: { class: "form-group" } do %>
   <div class="modal-body">
+
     <%= hidden_field_tag 'drive[starting_lat]', @drive.starting_lat %>
     <%= hidden_field_tag 'drive[destination_lat]', @drive.destination_lat %>
     <%= hidden_field_tag 'drive[starting_lng]', @drive.starting_lng %>
