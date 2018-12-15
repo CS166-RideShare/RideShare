@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <div class="row profile">
   <%= render 'upload_button' %>
-  <div class="col-md-6 offset-md-3">
+  <div class="col-md-8 offset-md-3">
     <div class="row">
-      <div class="col-md-4 offset-md-2">
+      <div class="col-md-8">
         <% if @user.profile_image.attached? %>
           <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
             <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
@@ -14,40 +14,44 @@
           </button>
         <% end %>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <p class="my-3 font-weight-bold" style="font-size: 200%">
-          <%= best_in_place @user, :name, :as => :input%>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 offset-md-2">
-        <p class="mt-1">Email</p>
-      </div>
-      <div class="col-md-4">
-        <p class="bg-secondary text-white my-1 rounded text-center"><%= best_in_place @user, :email, :as => :input%></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 offset-md-2">
-        <p class="mt-1">Phone</p>
-      </div>
-      <div class="col-md-4">
-        <p class="bg-secondary text-white my-1 rounded text-center">
-          <%= best_in_place( @user, :phone_number, :as => :input, :place_holder => "Click to add!")%>
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 offset-md-2">
-        <p class="mt-1">Emergency Contact</p>
-      </div>
-      <div class="col-md-4">
-        <p class="bg-secondary text-white my-1 rounded text-center">
-          <%= best_in_place @user, :emergency_contact, :as => :input, :place_holder => "Click to add!"%>
-        </p>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Email</th>
+                <th scope="col"><%= best_in_place @user, :email, :as => :input%></th>
+              </tr>
+            </table>
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Phone</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="col"><%= best_in_place( @user, :phone_number, :as => :input, :place_holder => "Click to add!")%></th>
+              </tr>
+              </tbody>
+            </table>
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Emergency Contact</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="col"><%= best_in_place @user, :emergency_contact, :as => :input, :place_holder => "Click to add!"%></th>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
