@@ -41,19 +41,28 @@
     </div>
 
     <script type="text/javascript">
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        };
+        function stringDate(date){
+            return date.getMonth()+1+'/'+date.getDate()+'/'+date.getFullYear();
+        }
         $(function () {
+            var date = new Date();
             $('#datetimepicker1').datetimepicker({
-                format: 'LT'
+                defaultDate: stringDate(new Date()),
+                minDate: stringDate(new Date()),
+                maxDate: stringDate(new Date().addDays(6))
             });
             $('#datetimepicker2').datetimepicker({
-                format: 'LT'
+                defaultDate: stringDate(new Date()),
+                minDate: stringDate(new Date()),
+                maxDate: stringDate(new Date().addDays(6))
             });
         });
     </script>
-
-
-
-
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">Edit locations</button>
