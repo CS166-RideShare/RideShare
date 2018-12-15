@@ -10,19 +10,20 @@
     <%= f.label :review %>
     <%= f.text_area :rider_review, rows: 3, class: 'form-control starting_address mb-3' %>
 
-    <label class="mx-4">
-      <%= f.radio_button :rider_review_level, 2 %>
-      <%= image_tag("good.png", width: "50", height: "50") %>
-    </label>
-    <label class="mx-4">
-      <%= f.radio_button :rider_review_level, 1 %>
-      <%= image_tag("ok.png", width: "50", height: "50") %>
-    </label>
-    <label class="mx-4">
-      <%= f.radio_button :rider_review_level, 0 %>
-      <%= image_tag("poor.png", width: "50", height: "50") %>
-    </label>
-
+    <div class="center">
+      <label class="mx-4">
+        <%= f.radio_button :rider_review_level, 2 %>
+        <%= image_tag("good.png", width: "50", height: "50") %>
+      </label>
+      <label class="mx-4">
+        <%= f.radio_button :rider_review_level, 1 %>
+        <%= image_tag("ok.png", width: "50", height: "50") %>
+      </label>
+      <label class="mx-4">
+        <%= f.radio_button :rider_review_level, 0 %>
+        <%= image_tag("poor.png", width: "50", height: "50") %>
+      </label>
+    </div>
   </div>
 
   <div class="modal-footer">
