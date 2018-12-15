@@ -34,24 +34,6 @@
 
   <div class="col-md" id="right_down_panel">
     <div class="top-menu mb-3">
-      <nav class="navbar navbar-dark navbar-fixed-top">
-        <div class="container">
-          <form class="form-inline">
-            <input class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-1 my-sm-0" type="submit">Search</button>
-          </form>
-          <li class="nav-item">
-
-          </li>
-          <li class="nav-item">
-          </li>
-          <li class="nav-item">
-            <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
-          </li>
-
-        </div>
-      </nav>
-
         <!-- Please ensure the structure and class and id of ul are not changed -->
         <ul class="nav nav-pills h-100" id="pills-top" role="tablist">
           <li class="nav-item ml-auto">
@@ -79,7 +61,6 @@
           </div>
         </ul>
       </div>
-      -->
     </div>
         <div class="col-md tab-content">
           <div class="tab-pane fade <%= show_profile %>" id="profile" role="tabpanel">
