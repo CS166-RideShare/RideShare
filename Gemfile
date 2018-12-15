@@ -48,7 +48,8 @@ gem 'json'
 gem 'twilio-ruby'
 
 gem 'best_in_place'
-
+gem 'momentjs-rails'
+gem 'bootstrap4-datetime-picker-rails'
 # Get user's timezone
 gem 'browser-timezone-rails'
 

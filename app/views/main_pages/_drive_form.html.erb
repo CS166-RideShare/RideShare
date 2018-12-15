@@ -20,12 +20,38 @@
     <%= f.label :destination_address %>
     <%= f.text_field :destination_address, class: 'form-control destination_address', readonly: true %>
 
-    <% f.extend CustomTimeSelectHelper %>
-    <%= f.label :scheduled_time %>
-    <%= f.custom_time_select @drive, :scheduled_time, 5, @timezone  %>
+    <%= f.label :scheduled_time, "Departure time" %>
+    <div class="form-group">
+      <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+        <%= f.text_field :scheduled_time, class:'form-control datetimepicker-input', :data => {:target => '#datetimepicker'} %>
+        <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+          <div class="input-group-text"><i class="fa fa-clock-o"></i></div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drive-set-window">Edit locations</button>
     <%= f.submit value:"Confirm Drive", class: "btn btn-primary" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    };
+    function stringDate(date){
+        return date.getMonth()+1+'/'+date.getDate()+'/'+date.getFullYear();
+    }
+    $(function () {
+        var date = new Date();
+        $('#datetimepicker').datetimepicker({
+            defaultDate: stringDate(new Date()),
+            minDate: stringDate(new Date()),
+            maxDate: stringDate(new Date().addDays(6))
+        });
+    });
+</script>

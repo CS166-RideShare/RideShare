@@ -5,6 +5,7 @@
 <%= form_tag request_path, method: :get, remote: true,
              html: { class: "form-group" } do %>
   <div class="modal-body">
+
     <%= hidden_field_tag 'drive[starting_lat]', @drive.starting_lat %>
     <%= hidden_field_tag 'drive[destination_lat]', @drive.destination_lat %>
     <%= hidden_field_tag 'drive[starting_lng]', @drive.starting_lng %>
@@ -18,8 +19,9 @@
     <%= label_tag "Your destination" %>
     <%= text_field_tag 'drive[destination_address]', @drive.destination_address,
                        class: 'form-control', readonly: true %>
-    <%= label_tag "Your drive start at" %>
-    <%= custom_time_show @drive, :drive, :scheduled_time, @timezone %>
+    <%= label_tag "Your depart at" %>
+    <%= text_field_tag 'drive[scheduled_time]', @drive.scheduled_time.strftime("%m/%d/%Y %H:%M %p"),
+                       class: 'form-control', readonly: true %>
 
     <%= hidden_field_tag 'request[starting_lat]', @riderequest.starting_lat %>
     <%= hidden_field_tag 'request[destination_lat]', @riderequest.destination_lat %>
@@ -35,9 +37,11 @@
     <%= text_field_tag 'request[destination_address]', @riderequest.destination_address,
                        class: 'form-control', readonly: true %>
     <%= label_tag "Rider asked to be pick up between" %>
-    <%= custom_time_show @riderequest, :request, :pickup_start, @timezone %>
+    <%= text_field_tag 'request[pickup_start]', @riderequest.pickup_start.strftime("%m/%d/%Y %H:%M %p"),
+                       class: 'form-control', readonly: true %>
     <%= label_tag "and" %>
-    <%= custom_time_show @riderequest, :request, :pickup_end, @timezone %>
+    <%= text_field_tag 'request[pickup_end]', @riderequest.pickup_end.strftime("%m/%d/%Y %H:%M %p"),
+                       class: 'form-control', readonly: true %>
   </div>
   <div class="modal-footer">
     <%= submit_tag "Cancel Drive" %>

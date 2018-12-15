@@ -68,12 +68,14 @@ class RidesController < ApplicationController
     @ride.update(canceled_by: params[:canceled_by].to_i)
     if params[:canceled_by].to_i==0
       ActionCable.server.broadcast "cancel_notice/#{@ride.driver.id}",
+                                   target: 'driver',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
                                                                           locals: { rider: @ride.rider })
       render 'cancel_request'
     else
       ActionCable.server.broadcast "cancel_notice/#{@ride.rider.id}",
+                                   target: 'rider',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
                                                                           locals: { driver: @ride.driver })
@@ -111,17 +113,13 @@ class RidesController < ApplicationController
     else
       to_render = 'cancel_request'
     end
-    puts review_params
-    success = Review.transaction do
-      @review = Ride.find(params[:id]).review
-      raise ActiveRecord::Rollback unless @review.nil?
-      @review = Review.new(review_params)
-      @review.save!
+    @ride = Ride.find(params[:id])
+    @review = Review.new(review_params)
+    if @review.save
+      render to_render
+    else
+      return
     end
-    if !success
-      @review.update(review_params)
-    end
-    render to_render
   end
 
   def details
@@ -147,13 +145,10 @@ class RidesController < ApplicationController
       end
     end
 
-    def read_time time_hash
+    def read_time time_string
       begin
         time = Time.find_zone(cookies['browser.timezone'])
-                   .parse(time_hash[:hour]+":"+time_hash[:minute])
-        if time_hash[:day]=="1"
-          time += 1.days
-        end
+                   .strptime(time_string, '%m/%d/%Y %H:%M %p')
         return DateTime.parse(time.to_s)
       rescue
         return nil
@@ -182,10 +177,12 @@ class RidesController < ApplicationController
                                   :destination_lng,
                                   :starting_lat,
                                   :starting_lng,
-                                  pickup_start: [:day, :hour, :minute],
-                                  pickup_end: [:day, :hour, :minute])
-
+                                  :start_time,
+                                  :end_time,
+                                  :pickup_start,
+                                  :pickup_end)
       temp_params[:rider_id] = current_user.id
+
       temp_params[:pickup_start] = read_time temp_params[:pickup_start]
       temp_params[:pickup_end] = read_time temp_params[:pickup_end]
 
@@ -203,7 +200,7 @@ class RidesController < ApplicationController
                                   :starting_lat,
                                   :starting_lng,
                                   :duration,
-                                  scheduled_time: [:day, :hour, :minute])
+                                  :scheduled_time)
 
       temp_params[:scheduled_time] = read_time temp_params[:scheduled_time]
       temp_params[:duration] = temp_params[:duration].to_i
@@ -212,11 +209,7 @@ class RidesController < ApplicationController
     end
 
     def review_params
-      if params[:role]=='driver'
-        temp = params.require(:review).permit(:rider_review, :rider_review_level)
-      else
-        temp = params.require(:review).permit(:driver_review, :driver_review_level)
-      end
+      temp = params.require(:review).permit(:target, :review, :review_level)
       temp[:ride_id] = params[:id].to_i
       temp
     end

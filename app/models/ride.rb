@@ -2,7 +2,7 @@ class Ride < ApplicationRecord
 
   belongs_to :rider, class_name: "User", foreign_key: :rider_id
   belongs_to :driver, class_name: "User", foreign_key: :driver_id, optional: true
-  has_one :review
+  has_many :reviews
 
   validates_presence_of :starting_id, :starting_address,
                         :starting_lat, :starting_lng,
@@ -38,6 +38,14 @@ class Ride < ApplicationRecord
     unless destination_address.nil?
       return destination_address.split(/,\s*/)[0]
     end
+  end
+
+  def rider_review
+    self.reviews.find_by(target: 0)
+  end
+
+  def drvier_review
+    self.reviews.find_by(target: 1)
   end
 
   def validate_drive

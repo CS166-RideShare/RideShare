@@ -29,8 +29,8 @@
 #   review_handled: false
 
 
-one:
-  rider_id: 1
-  driver_id: 1
-  canceled_by: 1
-  finished: false
+# one:
+#   rider_id: 1
+#   driver_id: 1
+#   canceled_by: 1
+#   finished: false
