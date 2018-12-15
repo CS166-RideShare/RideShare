@@ -5,6 +5,13 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
+  notice: (content) ->
+    new PNotify({
+      title: 'Sorry!',
+      text: content,
+      type: 'error'
+    });
+
   received: (data) ->
     #w hen someone cancel ride
     # Called when there's incoming data on the websocket for this channel
@@ -15,12 +22,18 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
       $("#ride-request-window").find(".modal-content").html(data['accepted'])
       $("#details-window").find(".modal-content").html(data['accepted'])
 
+
+
     if data['target'] == 'rider'
       $(".request_notice").prop("hidden", false);
       $("#request_notice_items").prop("hidden", false);
+      $("#request_notice_items").append(data['notice']);
       $("#request_index").find("#"+data['ride_id']).remove();
+      $(@notice(data['notice_content']));
 
     if data['target'] == 'driver'
       $(".driving_notice").prop("hidden", false);
       $("#driving_notice_items").prop("hidden", false);
+      $("#driving_notice_items").append(data['notice']);
       $("#driving_index").find("#"+data['ride_id']).remove();
+      $(@notice(data['notice_content']));

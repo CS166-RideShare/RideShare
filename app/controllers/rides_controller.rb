@@ -56,7 +56,10 @@ class RidesController < ApplicationController
       ActionCable.server.broadcast "request_channel/#{@rider.id}",
                                    request_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/accepted_request',
-                                                                          locals: { driver: @driver, ride: @ride })
+                                                                          locals: { driver: @driver, ride: @ride }),
+                                   notice_content: accepted_request_notice,
+                                   notice: ApplicationController.render(partial: 'notices/accepted_request',
+                                                                        locals: { content: accepted_request_notice })
       render 'take_request'
     else
       redirect_to request_path, format: :js
@@ -71,14 +74,20 @@ class RidesController < ApplicationController
                                    target: 'driver',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
-                                                                          locals: { rider: @ride.rider })
+                                                                          locals: { rider: @ride.rider }),
+                                   notice_content: canceled_drive_notice,
+                                   notice: ApplicationController.render(partial: 'notices/canceled_drive',
+                                                                        locals: { content: canceled_drive_notice })
       render 'cancel_request'
     else
       ActionCable.server.broadcast "cancel_notice/#{@ride.rider.id}",
                                    target: 'rider',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
-                                                                          locals: { driver: @ride.driver })
+                                                                          locals: { driver: @ride.driver }),
+                                   notice_content: canceled_ride_notice,
+                                   notice: ApplicationController.render(partial: 'notices/canceled_ride',
+                                                                        locals: { content: canceled_ride_notice })
       render 'cancel_drive'
     end
   end
@@ -103,7 +112,10 @@ class RidesController < ApplicationController
     ActionCable.server.broadcast "finish_notice/#{@rider.id}",
                                  ride_id: @ride.id,
                                  accepted: ApplicationController.render(partial: 'rides/review_drive',
-                                                                        locals: { driver: @driver, ride: @ride })
+                                                                        locals: { driver: @driver, ride: @ride }),
+                                 notice_content: finished_ride_notice,
+                                 notice: ApplicationController.render(partial: 'notices/finished_ride',
+                                                                      locals: { content: finished_ride_notice })
     render 'finish_drive'
   end
 
@@ -212,5 +224,36 @@ class RidesController < ApplicationController
       temp = params.require(:review).permit(:target, :review, :review_level)
       temp[:ride_id] = params[:id].to_i
       temp
+    end
+
+    def accepted_request_notice
+      %Q{
+        Your ride from #{@ride.short_starting} to #{@ride.short_destination}
+        between #{@ride.pickup_start.to_s(:short)} and #{@ride.pickup_end.to_s(:short)}
+        has been accepted by #{@ride.driver.name}
+      }
+    end
+
+    def canceled_ride_notice
+      %Q{
+        Your ride from #{@ride.short_starting} to #{@ride.short_destination}
+        between #{@ride.pickup_start.to_s(:short)} and #{@ride.pickup_end.to_s(:short)}
+        has been canceled by #{@ride.driver.name}
+      }
+    end
+
+    def canceled_drive_notice
+      %Q{
+        The ride from #{@ride.short_starting} to #{@ride.short_destination}
+        between #{@ride.pickup_start.to_s(:short)} and #{@ride.pickup_end.to_s(:short)}
+        has been canceled by #{@ride.rider.name}
+      }
+    end
+
+    def finished_ride_notice
+      %Q{
+        Your ride from #{@ride.short_starting} to #{@ride.short_destination}
+        has finished on #{@ride.updated_at.to_s(:short)}
+      }
     end
 end
