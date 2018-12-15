@@ -34,9 +34,30 @@
 
   <div class="col-md">
     <div class="top-menu mb-3">
-      <div class="nav-right" style="background-color: #065279; height: 70px">
+      <nav class="navbar navbar-dark navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">现代浏览器博物馆</a>
+          </div>
+          <li class="nav-item">
+            <a class="nav-link" href=logout_path>Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
 
-        <!-- Please ensure the structure and class and id of ul are not changed -->
+        </div>
+      </nav>
+
+      <!--
+      <div class="nav-right" style="background-color: #065279; height: 70px">
         <ul class="nav nav-pills" id="pills-top" role="tablist">
           <li class="nav-item w-100">
             <a class="nav-link <%= show_requests %>" data-toggle="pill" role="tab" href="#requests">
@@ -61,6 +82,7 @@
           <%= link_to "Log out", logout_path, class: "text-light  ml-auto my-auto mr-2", method: :delete %>
         </div>
       </div>
+      -->
     </div>
     <div class="col-md tab-content">
       <div class="tab-pane fade <%= show_profile %>" id="profile" role="tabpanel">
