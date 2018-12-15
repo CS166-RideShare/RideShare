@@ -11,5 +11,13 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
       $("#drive-set-window").find(".modal-content").html(data['accepted'])
     if $("[data-channel*='cancel_notifications'][data-role='rider']").data("ride-id") == data['ride_id']
       $("#ride-request-window").find(".modal-content").html(data['accepted'])
-    $("#request_index").find("#"+data['ride_id']).remove();
-    $("#driving_index").find("#"+data['ride_id']).remove();
+
+    if data['target'] == 'rider'
+      $(".request_notice").prop("hidden", false);
+      $("#request_notice_items").prop("hidden", false);
+      $("#request_index").find("#"+data['ride_id']).remove();
+      
+    if data['target'] == 'driver'
+      $(".driving_notice").prop("hidden", false);
+      $("#driving_notice_items").prop("hidden", false);
+      $("#driving_index").find("#"+data['ride_id']).remove();

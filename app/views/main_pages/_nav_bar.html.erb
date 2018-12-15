@@ -13,22 +13,32 @@
     </div>
     <div class="col-md-6  nav-right">
       <div class="row align-middle" style="height: 100%">
-        <%= link_to("Emergency",
-                    {controller: "main_pages", action: "emergency"},
-                    {class: "my-auto ml-auto mr-2", style: "color: #ff461f", "data-remote" => true,
-                     "data-confirm": "This will send a message to your emergency contact.\nAre you sure?"},
-                    )
+        <%= link_to "Emergency",
+                    emergency_path,
+                    remote: true,
+                    class: "btn my-auto ml-auto mr-2",
+                    style: "color: #fff; background-color: #cc0400;",
+                    data: {
+                      confirm: "This will send a message to your emergency contact.\nAre you sure?"
+                    }
         %>
-        <%= link_to "Requests", "#", class: "text-light my-auto mx-2 align-middle" %>
-        <%= link_to "Drives", "#", class: "text-light my-auto mx-2 align-middle" %>
+        <span class="dropdown text-light my-auto mx-2 align-middle position-relative">
+          <%= link_to "Requests", user_request_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
+          <span class="request_notice" hidden></span>
+          <ul class="dropdown-menu" id="request_notice_items" hidden>
+          </ul>
+        </span>
+        <span class="dropdown text-light my-auto mx-2 align-middle position-relative">
+          <%= link_to "Drives", user_driving_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
+          <span class="driving_notice" hidden></span>
+          <ul class="dropdown-menu" id="driving_notice_items" hidden>
+          </ul>
+        </span>
         <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>
         <%= link_to "Log out", logout_path, class: "text-light my-auto mx-2", method: :delete %>
       </div>
 
     </div>
   </div>
-
-</div>
-<div class="collapse col-md-auto menu" id="collapseMenu" style="width: 8.3%">
 
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_180847) do
+ActiveRecord::Schema.define(version: 2018_12_15_163049) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -35,13 +35,12 @@ ActiveRecord::Schema.define(version: 2018_12_05_180847) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "ride_id"
-    t.integer "rider_review_level"
-    t.text "rider_review"
-    t.integer "driver_review_level"
-    t.text "driver_review"
-    t.boolean "review_handled"
+    t.boolean "review_handled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "target"
+    t.integer "review_level"
+    t.text "review"
   end
 
   create_table "rides", force: :cascade do |t|
@@ -51,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_12_05_180847) do
     t.string "destination_id"
     t.string "starting_address"
     t.string "destination_address"
+    t.datetime "pickup_start"
     t.integer "canceled_by"
     t.boolean "finished", default: false
     t.datetime "created_at", null: false
@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 2018_12_05_180847) do
     t.string "starting_lng"
     t.string "destination_lat"
     t.string "destination_lng"
-    t.datetime "pickup_start"
     t.datetime "pickup_end"
   end
 

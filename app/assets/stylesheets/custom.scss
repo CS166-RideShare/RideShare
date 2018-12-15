@@ -124,3 +124,21 @@ a:hover {
 .user_avatar {
   border-radius: 50%;
 }
+
+.request_notice, .driving_notice {
+  border-radius: 50%;
+  background-color: #ff261f;
+  height: 0.75rem;
+  width: 0.75rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#request_notice_items, #driving_notice_items {
+  position: absolute;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
