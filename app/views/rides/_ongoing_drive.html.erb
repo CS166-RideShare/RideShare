@@ -7,12 +7,24 @@
 </div>
 <div class="modal-body">
   <%= @rider.name %> would wait you at <%= @drive.starting_address %>!
-  <%= link_to "Send a reminder!", user_message_path(id: @rider.id), method: :post %> to tell <%= @rider.name %> that you're here!
 </div>
 <div class="modal-footer">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Send a message
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <%= form_tag user_message_path(id: @rider.id), method: :post,
+                   html: { class: "form-group" } do %>
+        <%= text_area_tag "content", nil, rows: 3, class: "form-control" %>
+        <%= submit_tag "Send", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
   <%= link_to "Finish Ride",
               ride_path(rid: @drive.id),
-              method: :patch, remote: true %>
+              method: :patch, remote: true,
+              class: "btn btn-primary" %>
   <%= link_to "Cancel Ride",
               ride_path(rid: @drive.id, canceled_by: 1),
               method: :delete, remote: true,

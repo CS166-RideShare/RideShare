@@ -69,8 +69,23 @@ class UsersController < ApplicationController
   end
 
   def send_message
-    @user = User.find(params[:id])
-    puts @user.name+"+++++++++++++++++++++++++++++++++++++++"
+    begin
+      @user = User.find(params[:id])
+      account_sid = 'ACd1c65c57e8de3b621a79f1634bfb2653'
+      auth_token = 'f2358b3632de41a566141ddd81428814'
+      client = Twilio::REST::Client.new(account_sid, auth_token)
+
+      from = '+13519998634' # Your Twilio number
+      to = '+1' + @user.phone_number # Your mobile phone number
+
+      client.messages.create(
+        from: from,
+        to: to,
+        body: params[:content]
+      )
+    rescue StandardError => e
+      puts e
+    end
   end
 
   def clear_notices
