@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 2018_12_16_021936) do
     t.string "destination_id"
     t.string "starting_address"
     t.string "destination_address"
-    t.datetime "pickup_start"
     t.integer "canceled_by"
     t.boolean "finished", default: false
     t.datetime "created_at", null: false
@@ -69,6 +68,7 @@ ActiveRecord::Schema.define(version: 2018_12_16_021936) do
     t.string "starting_lng"
     t.string "destination_lat"
     t.string "destination_lng"
+    t.datetime "pickup_start"
     t.datetime "pickup_end"
   end
 

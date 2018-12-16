@@ -1,22 +1,43 @@
 <div>
-  <%= link_to "Post request", root_path %>
-  <ul id="request_index">
-    <% @user.requests.each do |request| %>
-      <% details = 'request' if request.status == :available %>
-      <% details = 'ride' if request.status == :accepted %>
-      <li id="<%= request.id %>">
-        <%= request.short_starting + " " +
-            request.short_destination + " " +
-            request.pickup_start.to_s(:short) + " " +
-            request.pickup_end.to_s(:short) + " " +
-            request.status.to_s %>
-        <%= button_to "details",
-                      ride_details_path(id: request.id),
-                      remote: true,
-                      method: :get,
-                      params: { details: details },
-                      class: "btn btn-primary" %>
-      </li>
-    <% end %>
-  </ul>
+  <div class="col-md-8 offset-md-2">
+    <div class="row">
+      <div class="col">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Starting</th>
+            <th scope="col">Ending</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @user.requests.each do |request| %>
+              <% details = 'request' if request.status == :available %>
+              <% details = 'ride' if request.status == :accepted %>
+              <tr>
+                <th scope="row"><%=request.id %></th>
+                <td><%=request.short_starting %></td>
+                <td><%=request.short_destination %></td>
+                <td><%=request.pickup_start.to_s(:short) %></td>
+                <td><%=request.pickup_end.to_s(:short) %></td>
+                <td><%=request.status.to_s %></td>
+                <td>
+                  <%= button_to "details",
+                                ride_details_path(id: request.id),
+                                remote: true,
+                                method: :get,
+                                params: { details: details },
+                                class: "btn btn-primary" %>
+                </td>
+              </tr>
+            <%end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

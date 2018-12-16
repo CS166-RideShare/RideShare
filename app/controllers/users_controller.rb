@@ -105,10 +105,10 @@ class UsersController < ApplicationController
     end
 
     def user_info_params
-      params.require(:user).permit(:name, :email, :is_driver, :profile_image)
+      params.require(:user).permit(:name, :email, :is_driver, :profile_image, :vehicle_image)
     end
 
     def user_update_params
-      params.require(:user).permit(:name, :phone_number, :email, :emergency_contact, :profile_image, :vehicle_make, :license_number, :vehicle_model, :vehicle_plate)
+      params.require(:user).permit(:name, :phone_number, :email, :emergency_scontact, :profile_image, :vehicle_make, :license_number, :vehicle_model, :vehicle_plate, :vehicle_image)
     end
 end
