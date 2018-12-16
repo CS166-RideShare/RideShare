@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 
 <div class="col-md-10 offset-md-1">
-  <%= render 'upload_button' %>
     <div class="card">
       <div class="card-body">
         <div class="row">
           <div class="col-7">
-            <% if @user.profile_image.attached? %>
-              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
-                <%= image_tag(@user.profile_image, :size => "400x400", :class => "user_avatar") %>
+            <% if @user.vehicle_image.attached? %>
+              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#vehicle-window">
+                <%= image_tag(@user.vehicle_image, :size => "400x400", :class => "user_avatar") %>
               </button>
             <% else %>
-              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
+              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#vehicle-window">
                 <%= image_tag('user_default.png', :size => "400x400", :class => "user_avatar") %>
               </button>
             <% end %>
