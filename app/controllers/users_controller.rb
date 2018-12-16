@@ -40,7 +40,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    puts user_update_params
     respond_to do |format|
       if @user.update_attributes(user_update_params)
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }

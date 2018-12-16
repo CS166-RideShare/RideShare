@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Upload your favourite image</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Uploading</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -14,8 +14,9 @@
         <% end %>
       </div>
       <div class="modal-footer">
-        <%= form_with(model:@user, local:true) do |form|%>
+        <%= form_with(model:@user, scope: :user, local:true) do |form|%>
           <div class = "field">
+            <%=form.hidden_field :id, value: @user.id %>
             <%=form.label :profile_image %>
             <%=form.file_field :profile_image %>
           </div>
