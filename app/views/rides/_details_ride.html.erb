@@ -9,6 +9,16 @@
   <%= @ride.driver.name %> has accepted your request!
 </div>
 <div class="modal-footer">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Send a message
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= form_tag user_message_path(id: @ride.driver.id), method: :post,
+                 html: { class: "form-group" } do %>
+      <%= text_area_tag "content", nil, rows: 3, class: "form-control" %>
+      <%= submit_tag "Send", class: "btn btn-primary" %>
+    <% end %>
+  </div>
   <%= link_to "Cancel Ride",
               ride_path(rid: @ride.id, canceled_by: 0),
               method: :delete, remote: true,

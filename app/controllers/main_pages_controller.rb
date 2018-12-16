@@ -3,6 +3,8 @@ class MainPagesController < ApplicationController
 
   def home
     @user = current_user
+    @r_notices = current_user.notices.for_request
+    @d_notices = current_user.notices.for_driving
   end
 
   def emergency

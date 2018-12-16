@@ -22,16 +22,20 @@
                       confirm: "This will send a message to your emergency contact.\nAre you sure?"
                     }
         %>
-        <span class="dropdown text-light my-auto mx-2 align-middle position-relative">
+        <span class="text-light my-auto mx-2 align-middle position-relative" id="request_notice_dropdown">
           <%= link_to "Requests", user_request_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
           <span class="request_notice" hidden></span>
           <ul class="dropdown-menu" id="request_notice_items" hidden>
+            <li class="dropdown-item accepted"><%= "You have #{@r_notices.where(kind: "accepted").size} requests accepted!" if @r_notices.where(kind: "accepted").size>0 %></li>
+            <li class="dropdown-item canceled"><%= "You have #{@r_notices.where(kind: "canceled").size} requests canceled." if @r_notices.where(kind: "canceled").size>0 %></li>
+            <li class="dropdown-item finished"><%= "You have #{@r_notices.where(kind: "finished").size} requests finished!" if @r_notices.where(kind: "finished").size>0 %></li>
           </ul>
         </span>
-        <span class="dropdown text-light my-auto mx-2 align-middle position-relative">
+        <span class="text-light my-auto mx-2 align-middle position-relative" id="driving_notice_dropdown">
           <%= link_to "Drives", user_driving_path(id: @user.id), class: "text-light my-auto mx-2 align-middle" %>
           <span class="driving_notice" hidden></span>
           <ul class="dropdown-menu" id="driving_notice_items" hidden>
+            <li class="dropdown-item canceled"><%= "You have #{@d_notices.where(kind: "canceled").size} drives canceled." if @d_notices.where(kind: "canceled").size>0 %></li>
           </ul>
         </span>
         <%= link_to "Profile", user_path(current_user.id), class: "text-light my-auto mx-2 align-middle" %>

@@ -38,7 +38,7 @@
 
         <!-- Please ensure the structure and class and id of ul are not changed -->
         <ul class="nav nav-pills h-100" id="pills-top" role="tablist">
-          <li class="nav-item ml-auto">
+          <li class="nav-item ml-auto" id="request_link">
             <a class="nav-link <%= show_requests %> h-100" data-toggle="pill" role="tab" href="#requests" style="display: table;">
               <div class="my-auto" style="display: table-cell; vertical-align: middle;">
                 <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
@@ -48,7 +48,7 @@
               </div>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="driving_link">
             <a class="nav-link my-auto <%= show_drivings %> h-100" data-toggle="pill" role="tab" href="#drivings" style="display: table;">
               <div class="my-auto" style="display: table-cell; vertical-align: middle;">
                 <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
@@ -93,14 +93,47 @@
 </div>
 
 <script>
-    $("#pills-left").children().click(function(e){
-        $("#pills-top").children().children().each(function(f){
-            $(this).removeClass("active");
-        });
+  <% unless @r_notices.size == 0 %>
+    $(".request_notice").prop("hidden", false);
+  <% end %>
+
+  <% unless @d_notices.size == 0 %>
+    $(".driving_notice").prop("hidden", false);
+  <% end %>
+</script>
+
+<script>
+  $("#pills-left").children().click(function(e) {
+      $("#pills-top").children().children().each(function (f) {
+          $(this).removeClass("active");
+      });
+  });
+
+  $("#pills-top").children().click(function(e){
+      $("#pills-left").children().children().each(function(f){
+          $(this).removeClass("active");
+      });
+  });
+
+  $("#request_link").click(function(){
+    $(".request_notice").prop('hidden', true);
+    $.ajax({
+        url: '/user/<%= @user.id %>/notices',
+        data: {
+            target: 'request'
+        },
+        method : 'DELETE'
     });
-    $("#pills-top").children().click(function(e){
-        $("#pills-left").children().children().each(function(f){
-            $(this).removeClass("active");
-        });
+  });
+
+  $("#driving_link").click(function(e){
+    $(".driving_notice").prop('hidden', true);
+    $.ajax({
+        url: '/user/<%= @user.id %>/notices',
+        data: {
+            target: 'driving'
+        },
+        method : 'DELETE'
     });
+  });
 </script>

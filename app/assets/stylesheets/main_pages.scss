@@ -45,6 +45,19 @@
     border-radius: 0;
   }
 }
+
 .signUpForm{
   margin-bottom: 10px;
+}
+
+#request_notice_items, #driving_notice_items {
+  width: 20rem;
+  position: absolute;
+}
+
+#request_notice_dropdown:hover, #driving_notice_dropdown:hover {
+
+  .dropdown-menu {
+    display: block;
+  }
 }
