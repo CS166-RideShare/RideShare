@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<div class="row profile">
+<div class="row profile" id="profile_background">
   <%= render 'upload_button' %>
-  <div class="col-md-8 offset-md-2">
+  <div class="col-md-9 offset-md-2">
       <div class="card">
         <div class="card-body">
             <h2>Hi, <%=@user.name %></h2>
@@ -14,7 +14,7 @@
                 </button>
               <% else %>
                 <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
-                  <%= image_tag('user_default.png', :size => "200x200", :class => "user_avatar") %>
+                  <%= image_tag('user_default.png', :size => "400x400", :class => "user_avatar") %>
                 </button>
               <% end %>
             </div>
