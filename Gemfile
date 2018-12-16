@@ -42,6 +42,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'formtastic', '~> 3.0'
 gem 'simple_form'
 
+
 # Read JSON
 gem 'json'
 
@@ -50,6 +51,8 @@ gem 'twilio-ruby'
 gem 'best_in_place'
 # Get user's timezone
 gem 'browser-timezone-rails'
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
