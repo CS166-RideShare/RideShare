@@ -2,6 +2,10 @@ class MainPagesController < ApplicationController
   skip_before_action :check_login, only: [:front]
 
   def home
+    @role = 'rider'
+    if params[:role]=='driver'
+      @role = 'driver'
+    end
     @user = current_user
     @r_notices = current_user.notices.for_request
     @d_notices = current_user.notices.for_driving

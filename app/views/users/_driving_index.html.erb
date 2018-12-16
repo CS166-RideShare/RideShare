@@ -1,37 +1,53 @@
-<div>
-  <div class="col-md-8 offset-md-2">
-    <%= link_to "Set drive", root_path %>
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Start</th>
-            <th scope="col">End</th>
-            <th scope="col">Starting</th>
-            <th scope="col">Ending</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody id="driving_index">
-          <% @user.drivings.each do |driving| %>
-            <tr id="<%= driving.id %>">
-              <th scope="row"></th>
-              <td><%=driving.short_starting %></td>
-              <td><%=driving.short_destination %></td>
-              <td><%=driving.pickup_start.to_s(:short) %></td>
-              <td><%=driving.pickup_end.to_s(:short) %></td>
-              <td>
-                <%= link_to "details",
-                            ride_details_path(id: driving.id, details: 'driving'),
-                            remote: true,
-                            class: "btn btn-primary" %>
-              </td>
+<div class="col-md-8 offset-md-2">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <% if @d_notices.size > 0 %>
+          <ul>
+            <% @d_notices.each do |notice| %>
+              <li><%= notice.content %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Start</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Departure Start</th>
+              <th scope="col">Departure End</th>
+              <th scope="col"></th>
             </tr>
-          <%end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody id="driving_index">
+            <% @user.drivings.each do |driving| %>
+              <tr id="<%= driving.id %>">
+                <th scope="row"></th>
+                <td><%=driving.short_starting %></td>
+                <td><%=driving.short_destination %></td>
+                <td><%=driving.pickup_start.to_s(:short) %></td>
+                <td><%=driving.pickup_end.to_s(:short) %></td>
+                <td>
+                  <%= link_to "details",
+                              ride_details_path(id: driving.id, details: 'driving'),
+                              remote: true,
+                              class: "btn btn-primary" %>
+                </td>
+              </tr>
+            <%end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row justify-content-end">
+        <%= link_to "Set another drive", root_path(role: 'driver'),
+                    class: "btn btn-primary" %>
       </div>
     </div>
   </div>

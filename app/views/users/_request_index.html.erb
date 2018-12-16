@@ -1,42 +1,59 @@
-<div>
-  <div class="col-md-8 offset-md-2">
-    <div class="row">
-      <div class="col">
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Start</th>
-            <th scope="col">Destination</th>
-            <th scope="col">Departure Start</th>
-            <th scope="col">Departure End</th>
-            <th scope="col">Status</th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
-          <tbody id="request_index">
-            <% @user.requests.each do |request| %>
-              <% details = 'request' if request.status == :available %>
-              <% details = 'ride' if request.status == :accepted %>
-              <tr id="<%=request.id %>">
-                <th scope="row"><%=request.id %></th>
-                <td><%=request.short_starting %></td>
-                <td><%=request.short_destination %></td>
-                <td><%=request.pickup_start.to_s(:short) %></td>
-                <td><%=request.pickup_end.to_s(:short) %></td>
-                <td class="request_status"><%=request.status.to_s %></td>
-                <td>
-                  <%= button_to "details",
-                                ride_details_path(id: request.id),
-                                remote: true,
-                                method: :get,
-                                params: { details: details },
-                                class: "btn btn-primary" %>
-                </td>
-              </tr>
-            <%end %>
-          </tbody>
-        </table>
+<div class="col-md-8 offset-md-2">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <% if @r_notices.size > 0 %>
+          <ul class="jumbotron notice_box">
+            <% @r_notices.each do |notice| %>
+              <li><%= notice.content %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Start</th>
+              <th scope="col">Destination</th>
+              <th scope="col">Departure Start</th>
+              <th scope="col">Departure End</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody id="request_index">
+              <% @user.requests.each do |request| %>
+                <% details = 'request' if request.status == :available %>
+                <% details = 'ride' if request.status == :accepted %>
+                <tr id="<%=request.id %>">
+                  <th scope="row"><%=request.id %></th>
+                  <td><%=request.short_starting %></td>
+                  <td><%=request.short_destination %></td>
+                  <td><%=request.pickup_start.to_s(:short) %></td>
+                  <td><%=request.pickup_end.to_s(:short) %></td>
+                  <td class="request_status"><%=request.status.to_s %></td>
+                  <td>
+                    <%= button_to "details",
+                                  ride_details_path(id: request.id),
+                                  remote: true,
+                                  method: :get,
+                                  params: { details: details },
+                                  class: "btn btn-primary" %>
+                  </td>
+                </tr>
+              <%end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <div class="row justify-content-end">
+        <%= link_to "Post another request", root_path(role: 'rider'),
+                    class: "btn btn-primary" %>
       </div>
     </div>
   </div>
