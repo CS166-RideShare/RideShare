@@ -2,3 +2,4 @@ $("#ride-request-window").find(".modal-content").html("<%= j (render 'main_pages
 $("#ride-request-window").modal('show');
 $("#details-window").modal('hide');
 $("#request_index").find("#<%= @ride.id %>").remove();
+$("[href*='/trip/<%= @ride.id %>/review']").remove();

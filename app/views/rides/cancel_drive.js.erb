@@ -1,4 +1,5 @@
 $("#drive-set-window").find(".modal-content").html("<%= j (render 'main_pages/drive_form') %>");
 $("#drive-set-window").modal('show')
 $("#details-window").modal('hide')
-$("#driving_index").find("#<%= @drive.id %>").remove();
+$("#driving_index").find("#<%= @ride.id %>").remove();
+$("[href*='/trip/<%= @ride.id %>/review']").remove();

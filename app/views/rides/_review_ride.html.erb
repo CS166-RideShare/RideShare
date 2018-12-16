@@ -1,8 +1,8 @@
 <div class="modal-header">
-  Hope you've enjoyed your drive! How's your experience with <%= @rider.name %>?
+  Hope you've enjoyed your drive! How's your experience with <%= ride.rider.name %>?
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
-<%= form_with model: Review.new, url: ride_review_path(id: @ride.id, role: 'driver'), method: :post,
+<%= form_with model: Review.new, url: ride_review_path(rid: ride.id, role: 'driver'), method: :post,
               html: { class: "form-group" } do |f| %>
   <div class="modal-body">
     <div id="review_error_explanation">
@@ -10,7 +10,6 @@
     <%= f.hidden_field :target, value: 0 %>
     <%= f.label :review %>
     <%= f.text_area :review, rows: 3, class: 'form-control starting_address mb-3' %>
-
     <div class="center">
       <label class="mx-4">
         <%= f.radio_button :review_level, 2 %>

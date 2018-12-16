@@ -7,24 +7,24 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Start</th>
-            <th scope="col">End</th>
-            <th scope="col">Starting</th>
-            <th scope="col">Ending</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Departure Start</th>
+            <th scope="col">Departure End</th>
             <th scope="col">Status</th>
             <th scope="col"></th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="request_index">
             <% @user.requests.each do |request| %>
               <% details = 'request' if request.status == :available %>
               <% details = 'ride' if request.status == :accepted %>
-              <tr>
+              <tr id="<%=request.id %>">
                 <th scope="row"><%=request.id %></th>
                 <td><%=request.short_starting %></td>
                 <td><%=request.short_destination %></td>
                 <td><%=request.pickup_start.to_s(:short) %></td>
                 <td><%=request.pickup_end.to_s(:short) %></td>
-                <td><%=request.status.to_s %></td>
+                <td class="request_status"><%=request.status.to_s %></td>
                 <td>
                   <%= button_to "details",
                                 ride_details_path(id: request.id),

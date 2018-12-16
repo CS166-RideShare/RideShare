@@ -45,7 +45,7 @@ class Ride < ApplicationRecord
     self.reviews.find_by(target: 0)
   end
 
-  def drvier_review
+  def driver_review
     self.reviews.find_by(target: 1)
   end
 

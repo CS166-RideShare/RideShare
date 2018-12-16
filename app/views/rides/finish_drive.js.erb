@@ -1,5 +1,5 @@
-$("#drive-set-window").find(".modal-content").html("<%= j (render 'review_ride') %>");
+$("#drive-set-window").find(".modal-content").html("<%= j (render partial: 'review_ride', locals: { ride: @ride }) %>");
 $("#drive-set-window").modal('show');
-$("#details-window").find(".modal-content").html("<%= j (render 'review_ride') %>");
+$("#details-window").find(".modal-content").html("<%= j (render partial: 'review_ride', locals: { ride: @ride }) %>");
 $("#details-window").modal('show');
 $("#driving_index").find("#<%= @ride.id %>").remove();

@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   delete '/ride', to: 'rides#cancel_ride'
   patch '/ride', to: 'rides#finish_ride'
   get 'ride/new', to: 'rides#new_ride'
-  post 'ride/:id/review/:role', to: 'rides#review_ride', as: 'ride_review'
+
+  post 'ride/:rid/review/:role', to: 'rides#review_ride', as: 'ride_review'
+  get 'trip/:rid/review/:target', to: 'rides#review_trip', as: 'trip_review'
 
   resources :users
 

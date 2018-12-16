@@ -24,4 +24,5 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     $("#request_notice_items").prop("hidden", false);
     $("#request_notice_items").find(".accepted").html(data['notice']);
     $("#request_index").find("#"+data['request_id']).find("[name='details']").val('ride');
+    $("#request_index").find("#"+data['request_id']).find(".request_status").html('accepted');
     $(@notice(data['notice_content'], data['notice_id']));

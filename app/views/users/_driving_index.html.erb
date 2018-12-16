@@ -14,10 +14,10 @@
             <th scope="col"></th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="driving_index">
           <% @user.drivings.each do |driving| %>
-            <tr>
-              <th scope="row">#</th>
+            <tr id="<%= driving.id %>">
+              <th scope="row"></th>
               <td><%=driving.short_starting %></td>
               <td><%=driving.short_destination %></td>
               <td><%=driving.pickup_start.to_s(:short) %></td>
@@ -36,4 +36,3 @@
     </div>
   </div>
 </div>
-

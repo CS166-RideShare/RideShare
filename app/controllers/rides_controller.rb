@@ -120,6 +120,7 @@ class RidesController < ApplicationController
       @riderequest = ride
       render 'cancel_request'
     else
+      @ride = ride
       @drive = ride
       render 'cancel_drive'
     end
@@ -153,13 +154,23 @@ class RidesController < ApplicationController
     else
       to_render = 'cancel_request'
     end
-    @ride = Ride.find(params[:id])
+    @ride = Ride.find(params[:rid])
     @review = Review.new(review_params)
     if @review.save
       render to_render
     else
       return
     end
+  end
+
+  def review_trip
+    if params[:target]=='driver'
+      to_render = 'review_drive'
+    else
+      to_render = 'review_ride'
+    end
+    @ride = Ride.find(params[:rid])
+    render 'review_trip', locals: { to_render: to_render }
   end
 
   def details
@@ -250,7 +261,7 @@ class RidesController < ApplicationController
 
     def review_params
       temp = params.require(:review).permit(:target, :review, :review_level)
-      temp[:ride_id] = params[:id].to_i
+      temp[:ride_id] = params[:rid].to_i
       temp
     end
 
