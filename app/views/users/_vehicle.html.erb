@@ -1,44 +1,50 @@
 <!DOCTYPE html>
-<div class="col-md-6 offset-md-3">
-  <div class="card">
-    <%= render 'upload_button' %>
-    <% if @user.profile_image.attached? %>
-      <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
-        <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
-      </button>
-    <% else %>
-      <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
-        <%= image_tag('user_default.png', :size => "200x200", :class => "user_avatar") %>
-      </button>
-    <% end %>
-    <div class="card-body">
-      <table class="table">
 
-        <thead>
-          <tr>
-            <th scope="col">License Number</th>
-            <th scope="col">Make</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><%= best_in_place @user, :license_number, :as => :input, :place_holder => "Click to add!"%></th>
-            <td><%= best_in_place @user, :vehicle_make, :as => :input, :place_holder => "Click to add!"%></td>
-          </tr>
-        </tbody>
-        <thead>
-          <tr>
-            <th scope="col">Model</th>
-            <th scope="col">Plate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-              <th scope="row"><%= best_in_place @user, :vehicle_model, :as => :input, :place_holder => "Click to add!"%></th>
-              <td><%= best_in_place @user, :vehicle_plate, :as => :input, :place_holder => "Click to add!"%></td>
-            </tr>
-        </tbody>
-      </table>
+<div class="col-md-10 offset-md-1">
+  <%= render 'upload_button' %>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-7">
+            <% if @user.profile_image.attached? %>
+              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
+                <%= image_tag(@user.profile_image, :size => "400x400", :class => "user_avatar") %>
+              </button>
+            <% else %>
+              <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
+                <%= image_tag('user_default.png', :size => "400x400", :class => "user_avatar") %>
+              </button>
+            <% end %>
+          </div>
+          <div class="col-5">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">License Number</th>
+                <th scope="col">Make</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row"><%= best_in_place @user, :license_number, :as => :input, :place_holder => "Click to add!"%></th>
+                <td><%= best_in_place @user, :vehicle_make, :as => :input, :place_holder => "Click to add!"%></td>
+              </tr>
+              </tbody>
+              <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Plate</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row"><%= best_in_place @user, :vehicle_model, :as => :input, :place_holder => "Click to add!"%></th>
+                <td><%= best_in_place @user, :vehicle_plate, :as => :input, :place_holder => "Click to add!"%></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 </div>

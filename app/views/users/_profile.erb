@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <div class="row profile" id="profile_background">
   <%= render 'upload_button' %>
-  <div class="col-md-9 offset-md-2">
+  <div class="col-md-8 offset-md-2">
       <div class="card">
         <div class="card-body">
-            <h2>Hi, <%=@user.name %></h2>
-            <hr>
+          <h2>Hi, <%=@user.name %></h2>
+          <hr>
           <div class="row">
             <div class="col-7">
               <% if @user.profile_image.attached? %>
                 <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
-                  <%= image_tag(@user.profile_image, :size => "200x200", :class => "user_avatar") %>
+                  <%= image_tag(@user.profile_image, :size => "400x400", :class => "user_avatar") %>
                 </button>
               <% else %>
                 <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
