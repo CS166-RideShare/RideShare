@@ -43,6 +43,18 @@
   </div>
 </div>
 
+<script>
+  <% unless @r_notices.size == 0 %>
+    $(".request_notice").prop("hidden", false);
+    $("#request_notice_items").prop("hidden", false);
+  <% end %>
+
+  <% unless @d_notices.size == 0 %>
+    $(".driving_notice").prop("hidden", false);
+    $("#driving_notice_items").prop("hidden", false);
+  <% end %>
+</script>
+
 <%= render 'map_scripts' %>
 
 <%= render 'role_scripts' %>

@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :rides, class_name: "Ride", foreign_key: :rider_id
   has_many :drives, class_name: "Ride", foreign_key: :driver_id
+  has_many :notices
 
   def trip_history
     self.rides.where(finished: true)

@@ -53,13 +53,20 @@ class RidesController < ApplicationController
       @drive = @ride
       @rider = @drive.rider
       @driver = current_user
+      notice = Notice.create!(
+        ride_id: @ride.id,
+        user_id: @ride.rider.id,
+        target: 'request',
+        kind: 'accepted',
+        content: accepted_request_notice
+        )
       ActionCable.server.broadcast "request_channel/#{@rider.id}",
                                    request_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/accepted_request',
                                                                           locals: { driver: @driver, ride: @ride }),
-                                   notice_content: accepted_request_notice,
-                                   notice: ApplicationController.render(partial: 'notices/accepted_request',
-                                                                        locals: { content: accepted_request_notice })
+                                   notice_id: notice.id,
+                                   notice_content: notice.content,
+                                   notice: "You have #{@ride.rider.notices.for_request.where(kind: "accepted").size} requests accepted!"
       render 'take_request'
     else
       redirect_to request_path, format: :js
@@ -70,24 +77,38 @@ class RidesController < ApplicationController
     @ride = Ride.find(params[:rid])
     @ride.update(canceled_by: params[:canceled_by].to_i)
     if params[:canceled_by].to_i==0
+      notice = Notice.create!(
+        ride_id: @ride.id,
+        user_id: @ride.driver.id,
+        target: 'driving',
+        kind: 'canceled',
+        content: canceled_drive_notice
+        )
       ActionCable.server.broadcast "cancel_notice/#{@ride.driver.id}",
                                    target: 'driver',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_drive',
                                                                           locals: { rider: @ride.rider }),
-                                   notice_content: canceled_drive_notice,
-                                   notice: ApplicationController.render(partial: 'notices/canceled_drive',
-                                                                        locals: { content: canceled_drive_notice })
+                                   notice_id: notice.id,
+                                   notice_content: notice.content,
+                                   notice: "You have #{@ride.driver.notices.for_driving.where(kind: "canceled").size} drives canceled."
       render 'cancel_request'
     else
+      notice = Notice.create!(
+        ride_id: @ride.id,
+        user_id: @ride.rider.id,
+        target: 'request',
+        kind: 'canceled',
+        content: canceled_ride_notice
+        )
       ActionCable.server.broadcast "cancel_notice/#{@ride.rider.id}",
                                    target: 'rider',
                                    ride_id: @ride.id,
                                    accepted: ApplicationController.render(partial: 'rides/canceled_ride',
                                                                           locals: { driver: @ride.driver }),
-                                   notice_content: canceled_ride_notice,
-                                   notice: ApplicationController.render(partial: 'notices/canceled_ride',
-                                                                        locals: { content: canceled_ride_notice })
+                                   notice_id: notice.id,
+                                   notice_content: notice.content,
+                                   notice: "You have #{@ride.rider.notices.for_request.where(kind: "canceled").size} requests canceled."
       render 'cancel_drive'
     end
   end
@@ -109,13 +130,20 @@ class RidesController < ApplicationController
     @ride.update(finished: true)
     @rider = @ride.rider
     @driver = @ride.driver
+    notice = Notice.create!(
+      ride_id: @ride.id,
+      user_id: @ride.rider.id,
+      target: 'request',
+      kind: 'finished',
+      content: finished_ride_notice
+      )
     ActionCable.server.broadcast "finish_notice/#{@rider.id}",
                                  ride_id: @ride.id,
                                  accepted: ApplicationController.render(partial: 'rides/review_drive',
                                                                         locals: { driver: @driver, ride: @ride }),
-                                 notice_content: finished_ride_notice,
-                                 notice: ApplicationController.render(partial: 'notices/finished_ride',
-                                                                      locals: { content: finished_ride_notice })
+                                 notice_id: notice.id,
+                                 notice_content: notice.content,
+                                 notice: "You have #{@ride.rider.notices.for_request.where(kind: "finished").size} requests finished!"
     render 'finish_drive'
   end
 

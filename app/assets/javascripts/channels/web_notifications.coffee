@@ -5,12 +5,13 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
-  notice: (content) ->
+  notice: (content, id) ->
     new PNotify({
       title: 'Accepted!',
       text: content,
       type: 'success'
     });
+    @perform 'destroy_notice', notice_id: id
 
   received: (data) ->
     #rider request accepted
@@ -21,6 +22,6 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
 
     $(".request_notice").prop("hidden", false);
     $("#request_notice_items").prop("hidden", false);
-    $("#request_notice_items").append(data['notice']);
+    $("#request_notice_items").find(".accepted").html(data['notice']);
     $("#request_index").find("#"+data['request_id']).find("[name='details']").val('ride');
-    $(@notice(data['notice_content']));
+    $(@notice(data['notice_content'], data['notice_id']));

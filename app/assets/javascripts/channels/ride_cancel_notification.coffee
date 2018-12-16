@@ -5,12 +5,13 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
-  notice: (content) ->
+  notice: (content, id) ->
     new PNotify({
       title: 'Sorry!',
       text: content,
       type: 'error'
     });
+    @perform 'destroy_notice', notice_id: id
 
   received: (data) ->
     #w hen someone cancel ride
@@ -27,13 +28,13 @@ App.ride_cancel_notification = App.cable.subscriptions.create "RideCancelNotific
     if data['target'] == 'rider'
       $(".request_notice").prop("hidden", false);
       $("#request_notice_items").prop("hidden", false);
-      $("#request_notice_items").append(data['notice']);
+      $("#request_notice_items").find(".canceled").html(data['notice']);
       $("#request_index").find("#"+data['ride_id']).remove();
-      $(@notice(data['notice_content']));
+      $(@notice(data['notice_content'], data['notice_id']));
 
     if data['target'] == 'driver'
       $(".driving_notice").prop("hidden", false);
       $("#driving_notice_items").prop("hidden", false);
-      $("#driving_notice_items").append(data['notice']);
+      $("#driving_notice_items").find(".canceled").html(data['notice']);
       $("#driving_index").find("#"+data['ride_id']).remove();
-      $(@notice(data['notice_content']));
+      $(@notice(data['notice_content'], data['notice_id']));

@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def driving_index
     @user = current_user
+    @r_notices = current_user.notices.for_request
+    @d_notices = current_user.notices.for_driving.destroy_all
     render 'show', locals: {
       show_profile: nil,
       show_requests: nil,
@@ -12,6 +14,8 @@ class UsersController < ApplicationController
 
   def request_index
     @user = current_user
+    @r_notices = current_user.notices.for_request.destroy_all
+    @d_notices = current_user.notices.for_driving
     render 'show', locals: {
       show_profile: nil,
       show_requests: "show active",
@@ -21,6 +25,8 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @r_notices = current_user.notices.for_request
+    @d_notices = current_user.notices.for_driving
     render 'show', locals: {
       show_profile: "show active",
       show_requests: nil,
@@ -65,6 +71,15 @@ class UsersController < ApplicationController
   def send_message
     @user = User.find(params[:id])
     puts @user.name+"+++++++++++++++++++++++++++++++++++++++"
+  end
+
+  def clear_notices
+    @user = current_user
+    if params[:target] == 'driving'
+      @user.notices.for_driving.destroy_all
+    elsif params[:target] == 'request'
+      @user.notices.for_request.destroy_all
+    end
   end
 
   private
