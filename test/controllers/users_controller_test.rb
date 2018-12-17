@@ -5,10 +5,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert true
   end
 
-  test "should get new" do
-    get signup_url
-    assert_response :success
-  end
 
   def setup
     @user = User.new(name:"fake", email:"fake@fake.com", password:"12345678", password_confirmation:"12345678", phone_number:"6177633765", emergency_contact:"6177633765")
