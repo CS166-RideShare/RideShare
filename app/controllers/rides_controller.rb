@@ -21,6 +21,7 @@ class RidesController < ApplicationController
   def show_request
     @timezone = cookies['browser.timezone']
     @drive = Ride.new(drive_params)
+    @ride = @drive
 
     if params[:commit] == "Cancel Drive"
       render 'cancel_drive' and return
