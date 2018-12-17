@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   skip_before_action :check_login, only: [:new, :create]
 
+  def trips
+    @user = current_user
+    @trips = @user.trip_history(params[:trips][:page].to_i)
+  end
+
   def driving_index
     @user = current_user
     @r_notices = current_user.notices.for_request

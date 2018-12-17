@@ -17,11 +17,15 @@ class User < ApplicationRecord
   has_many :drives, class_name: "Ride", foreign_key: :driver_id
   has_many :notices
 
-  def trip_history
-    self.rides.where(finished: true)
-              .or(self.rides.where(canceled_by: [0, 1])) +
-    self.drives.where(finished: true)
-               .or(self.drives.where(canceled_by: [0, 1]))
+  def trip_history page=0
+    if page==0
+      return Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
+                 .where(finished: true).or(Ride.where(canceled_by: [0, 1]))
+    else
+      return Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
+                 .where(finished: true).or(Ride.where(canceled_by: [0, 1]))
+                 .limit(10).offset((page-1)*10)
+    end
   end
 
   def requests

@@ -1,0 +1,32 @@
+<% count = 0 %>
+<% @trips.each do |trip| %>
+  <tr>
+    <% count = count + 1%>
+    <th scope="row"> <%=count%></th>
+    <td><%= trip.updated_at.to_formatted_s(:short) %></td>
+    <td><%= trip.short_starting %></td>
+    <td><%= trip.short_destination %></td>
+    <% if trip.canceled_by %>
+      <td>
+        <%= "Canceled by rider" if trip.canceled_by==0 %>
+        <%= "Canceled by driver" if trip.canceled_by==1 %>
+      </td>
+      <td></td>
+    <% else %>
+      <td>finished</td>
+      <% if trip.rider_id==@user.id && trip.driver_review.nil? %>
+        <td><%= link_to "Review",
+                        trip_review_path(rid: trip.id, target: 'driver'),
+                        method: :get, remote: true,
+                        class: "btn btn-primary" %></td>
+      <% elsif trip.driver_id==@user.id && trip.rider_review.nil? %>
+        <td><%= link_to "Review",
+                        trip_review_path(rid: trip.id, target: 'rider'),
+                        method: :get, remote: true,
+                        class: "btn btn-primary" %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+    <% end %>
+  </tr>
+<% end %>

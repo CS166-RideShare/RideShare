@@ -157,3 +157,9 @@ input[type=radio]:checked + img {
   background-color: #065279;
   border-color: #065279;
 }
+
+table {
+  .btn-primary {
+    padding: 0.25rem 0.5rem;
+  }
+}

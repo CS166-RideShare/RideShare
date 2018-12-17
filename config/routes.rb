@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/users/:id/drivings', to: 'users#driving_index', as: 'user_driving'
   get '/users/:id/requests', to: 'users#request_index', as: 'user_request'
   delete '/user/:id/notices', to: 'users#clear_notices', as: 'user_notice'
+  get '/users/:id/trips', to: 'users#trips', as: 'user_trip'
 
   post '/request/new', to: 'rides#create_request'
   delete '/request', to: 'rides#cancel_request'

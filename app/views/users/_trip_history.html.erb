@@ -1,60 +1,74 @@
- <div class="col-md-8 offset-md-2">
-     <div class="card">
-       <div class="card-body">
-         <div class="col">
-           <% trips = @user.trip_history %>
-           <% if trips.size == 0 %>
-             <h1>
-               No trip history.
-             </h1>
-           <% end %>
-           <table class="table" id="trip_history_table">
-             <thead>
-             <tr>
-               <th scope="col">#</th>
-               <th scope="col">Time</th>
-               <th scope="col">Start</th>
-               <th scope="col">Destination</th>
-               <th scope="col">Status</th>
-               <th scope="col"></th>
-             </tr>
-             </thead>
-             <tbody>
-             <% count = 0 %>
-             <% trips.each do |trip| %>
-               <tr>
-                 <% count = count + 1%>
-                 <th scope="row"> <%=count%></th>
-                 <td><%= trip.updated_at.to_formatted_s(:short) %></td>
-                 <td><%= trip.short_starting %></td>
-                 <td><%= trip.short_destination %></td>
-                 <% if trip.canceled_by %>
-                   <td>
-                     <%= "Canceled by rider" if trip.canceled_by==0 %>
-                     <%= "Canceled by driver" if trip.canceled_by==1 %>
-                   </td>
-                   <td></td>
-                 <% else %>
-                   <td>finished</td>
-                   <% if trip.rider_id==@user.id && trip.driver_review.nil? %>
-                     <td><%= link_to "Review",
-                                     trip_review_path(rid: trip.id, target: 'driver'),
-                                     method: :get, remote: true,
-                                     class: "btn btn-primary" %></td>
-                   <% elsif trip.driver_id==@user.id && trip.rider_review.nil? %>
-                     <td><%= link_to "Review",
-                                     trip_review_path(rid: trip.id, target: 'rider'),
-                                     method: :get, remote: true,
-                                     class: "btn btn-primary" %></td>
-                   <% else %>
-                     <td></td>
-                   <% end %>
-                 <% end %>
-               </tr>
-             <% end %>
-             </tbody>
-           </table>
-         </div>
-       </div>
-     </div>
+<div class="col-md-10 offset-md-1">
+  <div class="card">
+    <div class="card-body">
+      <div class="col">
+        <% trips = @user.trip_history 1 %>
+        <% if trips.size == 0 %>
+          <h1>
+            No trip history.
+          </h1>
+        <% end %>
+        <table class="table" id="trip_history_table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time</th>
+            <th scope="col">Start</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+            <% count = 0 %>
+            <% trips.each do |trip| %>
+              <tr>
+                <% count = count + 1%>
+                <th scope="row"> <%=count%></th>
+                <td><%= trip.updated_at.to_formatted_s(:short) %></td>
+                <td><%= trip.short_starting %></td>
+                <td><%= trip.short_destination %></td>
+                <% if trip.canceled_by %>
+                  <td>
+                    <%= "Canceled by rider" if trip.canceled_by==0 %>
+                    <%= "Canceled by driver" if trip.canceled_by==1 %>
+                  </td>
+                  <td></td>
+                <% else %>
+                  <td>finished</td>
+                  <% if trip.rider_id==@user.id && trip.driver_review.nil? %>
+                    <td><%= link_to "Review",
+                                    trip_review_path(rid: trip.id, target: 'driver'),
+                                    method: :get, remote: true,
+                                    class: "btn btn-primary" %></td>
+                  <% elsif trip.driver_id==@user.id && trip.rider_review.nil? %>
+                    <td><%= link_to "Review",
+                                    trip_review_path(rid: trip.id, target: 'rider'),
+                                    method: :get, remote: true,
+                                    class: "btn btn-primary" %></td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <% if trips.size > 0 %>
+        <%= form_tag user_trip_path, method: :get, remote: true do %>
+          <%= collection_select :trips,
+                                :page,
+                                (1..(@user.trip_history.count-1)/10+1).to_a,
+                                :to_i,
+                                :to_s,
+                                {},
+                                class: "custom-select",
+                                onchange: "Rails.fire(this.form, 'submit')" %>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+</div>
