@@ -7,7 +7,7 @@
           <h2>Hi, <%=@user.name %></h2>
           <hr>
           <div class="row">
-            <div class="col-7">
+            <div class="col-auto mx-3">
               <% if @user.profile_image.attached? %>
                 <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#exampleModalCenter">
                   <%= image_tag(@user.profile_image, :size => "400x400", :class => "user_avatar") %>
@@ -18,7 +18,7 @@
                 </button>
               <% end %>
             </div>
-            <div class="col-5">
+            <div class="col">
               <table class="table">
                 <tr>
                   <thead>
