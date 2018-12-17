@@ -1,15 +1,14 @@
 <div class="text-light" id="navbar" style="height: 70px">
   <div class="row w-100 mx-0">
     <div class="col-md-6">
-      <a class="" href="/">
-        <%= image_tag("logo.png", width: "165", height: "70") %>
-      </a>
-      <a class="align-middle" id="toggle-text">Rider</a>
-      <label class="switch align-middle">
-        <input id="user-role" type="checkbox", onclick="changeUserRole();">
-        <span class="slider round"></span>
-      </label>
-      <a class="align-middle" id="toggle-text">Driver</a>
+      <div class="row mx-0">
+        <a class="" href="/">
+          <%= image_tag("logo.png", width: "165", height: "70") %>
+        </a>
+        <input class="tgl tgl-skewed" id="user-role" type="checkbox" onclick="changeUserRole();"/>
+        <label class="tgl-btn mx-3 center" style="height: 70px; width: 200px;" data-tg-off="Rider" data-tg-on="Driver" for="user-role"></label>
+      </div>
+
     </div>
     <div class="col-md-6  nav-right">
       <div class="row align-middle mx-0" style="height: 100%">
