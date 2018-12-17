@@ -16,7 +16,6 @@
           <table class="table">
             <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Start</th>
               <th scope="col">Destination</th>
               <th scope="col">Departure Start</th>
@@ -25,21 +24,21 @@
             </tr>
             </thead>
             <tbody id="driving_index">
-            <% @user.drivings.each do |driving| %>
-              <tr id="<%= driving.id %>">
-                <th scope="row"></th>
-                <td><%=driving.short_starting %></td>
-                <td><%=driving.short_destination %></td>
-                <td><%=driving.pickup_start.to_s(:short) %></td>
-                <td><%=driving.pickup_end.to_s(:short) %></td>
-                <td>
-                  <%= link_to "details",
-                              ride_details_path(id: driving.id, details: 'driving'),
-                              remote: true,
-                              class: "btn btn-primary" %>
-                </td>
-              </tr>
-            <%end %>
+              <% @user.drivings.each do |driving| %>
+                <tr id="<%= driving.id %>">
+                  <th scope="row"></th>
+                  <td><%=driving.short_starting %></td>
+                  <td><%=driving.short_destination %></td>
+                  <td><%=driving.pickup_start.to_s(:short) %></td>
+                  <td><%=driving.pickup_end.to_s(:short) %></td>
+                  <td>
+                    <%= link_to "details",
+                                ride_details_path(id: driving.id, details: 'driving'),
+                                remote: true,
+                                class: "btn btn-primary" %>
+                  </td>
+                </tr>
+              <%end %>
             </tbody>
           </table>
         </div>

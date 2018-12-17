@@ -16,7 +16,6 @@
           <table class="table">
             <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Start</th>
               <th scope="col">Destination</th>
               <th scope="col">Departure Start</th>
@@ -30,7 +29,6 @@
                 <% details = 'request' if request.status == :available %>
                 <% details = 'ride' if request.status == :accepted %>
                 <tr id="<%=request.id %>">
-                  <th scope="row"><%=request.id %></th>
                   <td><%=request.short_starting %></td>
                   <td><%=request.short_destination %></td>
                   <td><%=request.pickup_start.to_s(:short) %></td>
