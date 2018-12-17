@@ -11,7 +11,7 @@
               </button>
             <% else %>
               <button type="button" class="btn btn-outline-light user_avatar" data-toggle="modal" data-target="#vehicle-window">
-                <%= image_tag('user_default.png', :size => "400x400", :class => "user_avatar") %>
+                <%= image_tag('car_default.jpg', :size => "400x400", :class => "user_avatar") %>
               </button>
             <% end %>
           </div>
@@ -25,7 +25,7 @@
               </thead>
               <tbody>
               <tr>
-                <th scope="row"><%= best_in_place @user, :license_number, :as => :input, :place_holder => "Click to add!"%></th>
+                <td scope="row"><%= best_in_place @user, :license_number, :as => :input, :place_holder => "Click to add!"%></td>
                 <td><%= best_in_place @user, :vehicle_make, :as => :input, :place_holder => "Click to add!"%></td>
               </tr>
               </tbody>
@@ -37,7 +37,7 @@
               </thead>
               <tbody>
               <tr>
-                <th scope="row"><%= best_in_place @user, :vehicle_model, :as => :input, :place_holder => "Click to add!"%></th>
+                <td scope="row"><%= best_in_place @user, :vehicle_model, :as => :input, :place_holder => "Click to add!"%></td>
                 <td><%= best_in_place @user, :vehicle_plate, :as => :input, :place_holder => "Click to add!"%></td>
               </tr>
               </tbody>
