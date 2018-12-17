@@ -11,6 +11,7 @@
   border-radius: 50%
 }
 #navbar {
+  background-color: #2e7872;
   position: relative;
 }
 .navbar{
@@ -45,9 +46,7 @@
 }
 .nav-right{
   a {
-    font-size: 150%;
-    font-weight: 500;
-    font-family: 'Lora', serif;
+    font-size: 130%;
   }
 }
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
