@@ -61,7 +61,7 @@
         <%= form_tag user_trip_path, method: :get, remote: true do %>
           <%= collection_select :trips,
                                 :page,
-                                (1..(@user.trip_history.count-1)/10+1).to_a,
+                                (1..(@user.trip_history.count-1)/8+1).to_a,
                                 :to_i,
                                 :to_s,
                                 {},

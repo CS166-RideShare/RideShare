@@ -24,7 +24,7 @@ class User < ApplicationRecord
     else
       return Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
                  .where(finished: true).or(Ride.where(canceled_by: [0, 1]))
-                 .limit(10).offset((page-1)*10)
+                 .limit(8).offset((page-1)*8)
     end
   end
 
