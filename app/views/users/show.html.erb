@@ -2,12 +2,11 @@
 <% provide(:title, @user.name) %>
 
 
-<div class="row w-100 mx-0" style="height:100%;">
-  <div class="col-md-auto side-menu" style="height:100%;">
+<div class="row w-100 mx-0 h-100">
+  <div class="col-md-auto side-menu h-100">
     <a class="" href="/">
       <%= image_tag("logo.png", width: "165", height: "70", class: "d-inline-block align-top", alt: "") %>
     </a>
-
     <!-- Please ensure the structure and class and id of ul are not changed -->
     <ul class="nav flex-column nav-pills" id="pills-left" role="tablist">
       <li class="nav-item w-100">
@@ -37,7 +36,7 @@
       <div class="nav-right" style="height: 70px">
         <!-- Please ensure the structure and class and id of ul are not changed -->
         <ul class="nav nav-pills h-100" id="pills-top" role="tablist">
-          <li class="nav-item ml-auto" id="request_link">
+          <li class="nav-item ml-auto mr-2" id="request_link">
             <a class="nav-link <%= show_requests %> h-100" data-toggle="pill" role="tab" href="#requests" style="display: table;">
               <div class="my-auto" style="display: table-cell; vertical-align: middle;">
                 <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
@@ -47,7 +46,7 @@
               </div>
             </a>
           </li>
-          <li class="nav-item" id="driving_link">
+          <li class="nav-item mx-2" id="driving_link">
             <a class="nav-link my-auto <%= show_drivings %> h-100" data-toggle="pill" role="tab" href="#drivings" style="display: table;">
               <div class="my-auto" style="display: table-cell; vertical-align: middle;">
                 <span class="position-relative" style="padding-top: 0.25rem; padding-right: 0.5rem;">
@@ -57,7 +56,7 @@
               </div>
             </a>
           </li>
-          <div class="my-auto mx-3">
+          <div class="my-auto mx-2">
             <%= link_to "Log out", logout_path, class: "text-light mx-2", method: :delete %>
           </div>
         </ul>
