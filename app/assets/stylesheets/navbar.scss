@@ -45,6 +45,7 @@
   }
 }
 .nav-right{
+  background-color: #2e7872;
   a {
     font-size: 130%;
   }
@@ -53,10 +54,15 @@
   color: #000000;
   background-color: #ffffff;
   border-radius: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
-
+.nav-link {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
 .side-menu {
+  background-color: #25605c;
+  width: 165px;
   font-size: 125%;
-  font-weight: 500;
-  font-family: 'Lora', serif;
 }
