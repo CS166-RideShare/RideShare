@@ -9,15 +9,17 @@
   <%= @rider.name %> would wait you at <%= @drive.starting_address %>!
 </div>
 <div class="modal-footer">
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Send a message
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Send a message
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="container">
       <%= form_tag user_message_path(id: @rider.id), method: :post,
                    html: { class: "form-group" } do %>
         <%= text_area_tag "content", nil, rows: 3, class: "form-control" %>
-        <%= submit_tag "Send", class: "btn btn-primary" %>
+        <div class="row justify-content-end" style="margin-right: 0; margin-top: 0.5rem;">
+          <%= submit_tag "Send", class: "btn btn-primary" %>
+        </div>
       <% end %>
     </div>
   </div>

@@ -6,12 +6,12 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     # Called when the subscription has been terminated by the server
 
   notice: (content, id) ->
+    @perform 'destroy_notice', notice_id: id;
     new PNotify({
       title: 'Accepted!',
       text: content,
       type: 'success'
     });
-    @perform 'destroy_notice', notice_id: id
 
   received: (data) ->
     #rider request accepted
@@ -25,4 +25,4 @@ App.web_notifications = App.cable.subscriptions.create "WebNotificationsChannel"
     $("#request_notice_items").find(".accepted").html(data['notice']);
     $("#request_index").find("#"+data['request_id']).find("[name='details']").val('ride');
     $("#request_index").find("#"+data['request_id']).find(".request_status").html('accepted');
-    $(@notice(data['notice_content'], data['notice_id']));
+    @notice(data['notice_content'], data['notice_id']);

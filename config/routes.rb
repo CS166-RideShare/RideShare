@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   post '/user/:id/message', to: 'users#send_message', as: 'user_message'
-  get '/user/:id/drivings', to: 'users#driving_index', as: 'user_driving'
-  get '/user/:id/requests', to: 'users#request_index', as: 'user_request'
+  get '/users/:id/drivings', to: 'users#driving_index', as: 'user_driving'
+  get '/users/:id/requests', to: 'users#request_index', as: 'user_request'
   delete '/user/:id/notices', to: 'users#clear_notices', as: 'user_notice'
 
   post '/request/new', to: 'rides#create_request'

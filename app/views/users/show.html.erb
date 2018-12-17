@@ -155,7 +155,7 @@
     });
   });
 
-  $("#driving_link").click(function(e){
+  $("#driving_link").click(function(){
     $(".driving_notice").prop('hidden', true);
     $.ajax({
         url: '/user/<%= @user.id %>/notices',
@@ -164,5 +164,10 @@
         },
         method : 'DELETE'
     });
+  });
+
+  $('a[data-toggle="pill"]').on('hide.bs.tab', function (e) {
+    $(e.target).find(".driving_notice").prop("hidden", true);
+    $(e.target).find(".request_notice").prop("hidden", true);
   });
 </script>
