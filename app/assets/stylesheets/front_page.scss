@@ -2,7 +2,6 @@
   .nav-link {
     color: #ffffff;
     font-size: 150%;
-    font-family: 'Lora', serif;
   }
 }
 
@@ -30,10 +29,10 @@
 
   color: white;
   text-shadow:
-   -5px -5px 0 #065279,
-    5px -5px 0 #065279,
-    -5px 5px 0 #065279,
-     5px 5px 0 #065279;
+   -5px -5px 0 #25605c,
+    5px -5px 0 #25605c,
+    -5px 5px 0 #25605c,
+     5px 5px 0 #25605c;
 }
 
 /* forms */
@@ -50,11 +49,10 @@
   .btn {
     width: 100%;
     font-size: 125%;
-    background-color: #065279;
   }
 
   label {
-    color: #065279;
+    color: #25605c;
     font-size: 125%;
     font-weight: 600;
     margin-bottom: 0;

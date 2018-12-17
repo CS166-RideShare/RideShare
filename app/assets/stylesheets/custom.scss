@@ -1,7 +1,7 @@
 /* universal */
 
 nav {
-  background-color: #065279;
+  background-color: #2e7872;
 }
 
 html,
@@ -156,6 +156,18 @@ input[type=radio]:checked + img {
 .btn-primary {
   background-color: #25605c;
   border-color: #25605c;
+}
+.btn-primary:hover {
+  background-color: #2e7872;
+  border-color: #2e7872;
+}
+.btn-primary:focus {
+  background-color: #2e7872;
+  border-color: #2e7872;
+}
+.btn-primary:active:focus {
+  background-color: #2e7872 !important;
+  border-color: #2e7872 !important;
 }
 
 table {
