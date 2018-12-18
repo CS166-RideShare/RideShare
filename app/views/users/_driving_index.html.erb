@@ -26,7 +26,6 @@
             <tbody id="driving_index">
               <% @user.drivings.each do |driving| %>
                 <tr id="<%= driving.id %>">
-                  <th scope="row"></th>
                   <td><%=driving.short_starting %></td>
                   <td><%=driving.short_destination %></td>
                   <td><%=driving.pickup_start.to_s(:short) %></td>
