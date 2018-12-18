@@ -1,5 +1,5 @@
 <% provide(:title, 'Share Your Ride!') %>
-<div style="width: 100%; height: 100%">
+<div style="width: 100%; height: 100%; position: relative;">
   <%= render 'nav_bar' %>
   <div class="row w-100 address_input">
     <div class="col-10">
@@ -24,13 +24,26 @@
     </div>
   </div>
 
+  <div class="main_modal_buttons">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ride-request-window">
+      Current Ride
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drive-set-window">
+      Current Drive
+    </button>
+  </div>
+
   <div id="map"></div>
+
 </div>
 
 <div id="ride-request-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-
+      <div class="modal-header">
+        You haven't post request currently.
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
     </div>
   </div>
 </div>
@@ -38,7 +51,10 @@
 <div id="drive-set-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-
+      <div class="modal-header">
+        You haven't set drive currently.
+        <button type="button" class="close" data-dismiss="modal">x</button>
+      </div>
     </div>
   </div>
 </div>

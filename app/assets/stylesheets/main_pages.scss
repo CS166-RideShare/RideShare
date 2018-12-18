@@ -59,3 +59,12 @@
     display: block;
   }
 }
+
+.main_modal_buttons {
+  margin-left: calc(50% - 8rem);
+  position: absolute;
+  bottom: 1rem;
+  z-index: 10;
+
+  font-size: 1rem;
+}
