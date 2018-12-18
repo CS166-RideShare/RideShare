@@ -44,7 +44,7 @@
                        class: 'form-control', readonly: true %>
   </div>
   <div class="modal-footer">
-    <%= submit_tag "Cancel Drive" %>
+    <%= submit_tag "Cancel Drive", class: "btn btn-secondary" %>
     <%= link_to "Accept", request_path(rid: @riderequest.id), method: :patch, remote: true, class: "btn btn-primary" %>
     <%= submit_tag "Pass", class: "btn btn-primary" %>
   </div>

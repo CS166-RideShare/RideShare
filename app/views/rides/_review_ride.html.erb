@@ -1,5 +1,5 @@
 <div class="modal-header">
-  Hope you've enjoyed your drive! How's your experience with <%= ride.rider.name %>?
+  Hope you've enjoyed your drive! How's your experience with <b><%= ride.rider.name %></b>?
   <button type="button" class="close" data-dismiss="modal">x</button>
 </div>
 <%= form_with model: Review.new, url: ride_review_path(rid: ride.id, role: 'driver'), method: :post,
