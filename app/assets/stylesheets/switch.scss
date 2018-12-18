@@ -197,7 +197,7 @@ h4 {
     backface-visibility: hidden;
     transition: all .2s ease;
     font-family: sans-serif;
-    background: #888;
+    background: #25605c;
     &:after,
     &:before {
       transform: skew(10deg);
@@ -209,16 +209,17 @@ h4 {
       line-height: 2em;
       font-weight: bold;
       font-size: 155%;
-      color: #fff;
       text-shadow: 0 1px 0 rgba(0,0,0,.4);
     }
 
     &:after {
+      color: #25605c;
       left: 100%;
       content: attr(data-tg-on);
     }
 
     &:before {
+      color: #fff;
       left: 0;
       content: attr(data-tg-off);
     }
@@ -232,7 +233,7 @@ h4 {
   }
 
   &:checked + .tgl-btn {
-    background: #86d993;
+    background: #fff;
     &:before {
       left: -100%;
     }
