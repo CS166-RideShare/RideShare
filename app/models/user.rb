@@ -19,12 +19,12 @@ class User < ApplicationRecord
 
   def trip_history page=0
     if page==0
-      return Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
-                 .where(finished: true).or(Ride.where(canceled_by: [0, 1]))
+      all =  Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
+      return all.where(finished: true).or(all.where(canceled_by: [0, 1]))
     else
-      return Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
-                 .where(finished: true).or(Ride.where(canceled_by: [0, 1]))
-                 .limit(8).offset((page-1)*8)
+      all =  Ride.where(rider_id: self.id).or(Ride.where(driver_id: self.id))
+      return all.where(finished: true).or(all.where(canceled_by: [0, 1]))
+                .limit(8).offset((page-1)*8)
     end
   end
 
